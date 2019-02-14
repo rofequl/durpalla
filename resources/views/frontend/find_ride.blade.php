@@ -6,11 +6,18 @@
 
     <hr class="mt-0">
     <section class="mb-5 overlay">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-12 col-lg-5 px-0 mt-5 mt-lg-0">
-                    <div class="card rounded-0 mb-3 bg-light">
-                        <div class="card-header bg-success text-white">0 people asking for and offering ride near you
+        <div class="container">
+            <div class="row mt-3">
+                <div class="text-center mx-auto">
+                    <h2>Pick a Rider</h2>
+                    <p>After booking you can chat with your Tasker, agree on a exact time.</p>
+                </div>
+            </div>
+            <div class="row justify-content-center mt-3">
+                <div class="col-12 col-lg-7 px-0 mt-5 mt-lg-0 border p-3 radius fbf7f7">
+                    <div class="card rounded mb-3 bg-light">
+                        <div class="card-header bg-paste text-white py-1">
+                            0 people asking for and offering ride near you
                         </div>
                         <div class="card-body px-2">
 
@@ -72,8 +79,12 @@
                     </div>
 
                 </div>
-                <div id="map" class="col-12 col-lg-7 px-0 overlay border-light">
+                <div class="col-12 col-lg-5">
+                    <div class="card p-3 fbf7f7">
+                        <div id="map" style="width: 100%; height: 500px;">
 
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

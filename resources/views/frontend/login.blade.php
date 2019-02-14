@@ -2,10 +2,11 @@
 @section('content')
 
 
-    <section class="bg-light mb-5 py-4" id="section1">
+    <section class="pb-5 py-4" id="section1">
         <div class="container">
             <div class="row">
-                <div class="col-lg-8 mx-auto">
+                <div class="col-lg-8 mx-auto fbf7f7 p-3 border radius">
+                    <h2 class="text-center">You want to Log in?</h2>
                     <form class="login100-form validate-form contact_form">
                         <div class="wrap-input100 validate-input m-b-26" data-validate="Username is required">
                             <span class="label-input100">Phone No.</span>

@@ -13,7 +13,7 @@
             <div class="row">
                 <div class="col-lg-7">
                     <div class="card">
-                        <div class="card-header bg-white">
+                        <div class="card-header bg-paste text-white py-1">
                             Price per Co-traveller
                         </div>
                         <div class="card-body bg-light">
@@ -76,7 +76,7 @@
                     </div>
 
                     <div class="card mt-3">
-                        <div class="card-header bg-white">
+                        <div class="card-header bg-paste text-white py-1">
                             Options
                         </div>
                         <div class="card-body bg-light">
@@ -85,7 +85,7 @@
                         </div>
                     </div>
                     <div class="card mt-3">
-                        <div class="card-header bg-white">
+                        <div class="card-header bg-paste text-white py-1">
                             Ride details
                         </div>
                         <div class="card-body bg-light">

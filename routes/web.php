@@ -19,6 +19,10 @@ Route::get('/registration', function () {
     return view('frontend.registration');
 })->name('sp.registration');
 
+Route::get('/registration1', function () {
+    return view('frontend.log_in.registration2');
+})->name('sp.registration1');
+
 Route::get('/login', function () {
     return view('frontend.login');
 })->name('sp.login');

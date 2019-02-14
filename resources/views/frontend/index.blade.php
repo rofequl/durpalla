@@ -13,29 +13,48 @@
     <!--================ End Home Banner Area =================-->
 
     <!--================ Start Features Area =================-->
-    <section class="mb-5 bg-blue" id="">
-        <div class="container p-3 mb-5">
-            <div class="row counter_wrapper">
-                <div class="col-lg-7 col-md-12">
-                    <div class="banner_content">
-                        <h3 class="typo-list text-white">
-                            Long Distance Ride Sharing<br>
-                        </h3>
-                        <form class="form-inline">
-                            <div class="input-group-icon mx-1 radius">
+    <section class="mb-5 row ml-0" id="StartFeaturesArea">
+        <div class="pageBanner col-12 col-lg-8 ml-lg-5 mt-0">
+            <div class="container-fluid">
+                <h3 class="text-white my-0 ml-md-5">
+                    Long Distance Ride Sharing
+                </h3>
+                <form class="pr-md-5">
+                    <div class="form-row">
+                        <div class="col-6 col-md">
+                            <div class="input-group-icon mt-10">
                                 <div class="icon"><i class="fa fa-thumb-tack" aria-hidden="true"></i></div>
-                                <input type="text" name="address" placeholder="Departure City" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Departure City'" required="" class="single-input radius">
+                                <input type="text" name="address" placeholder="Leaving from..."
+                                       onfocus="this.placeholder = ''"
+                                       onblur="this.placeholder = 'Leaving from...'" required=""
+                                       class="single-input circle">
                             </div>
-                            <i class="fa fa-2x fa-arrow-circle-right mx-2 text-white" aria-hidden="true"></i>
-                            <div class="input-group-icon mx-1 radius">
+                        </div>
+                        <div class="col-6 col-md">
+                            <div class="input-group-icon mt-10">
                                 <div class="icon"><i class="fa fa-thumb-tack" aria-hidden="true"></i></div>
-                                <input type="text" name="address" placeholder="Destination City" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Destination City'" required="" class="single-input radius">
+                                <input type="text" name="address" placeholder="Going to..."
+                                       onfocus="this.placeholder = ''"
+                                       onblur="this.placeholder = 'Going to...'" required=""
+                                       class="single-input circle">
                             </div>
-                            <a href="#" class="genric-btn primary mx-1 radius">Go</a>
-                        </form>
+                        </div>
+                        <div class="col-6 col-md">
+                            <div class="input-group-icon mt-10">
+                                <div class="icon"><i class="far fa-clock"></i></div>
+                                <input type="text" name="address" placeholder="Travel date"
+                                       onfocus="this.placeholder = ''"
+                                       onblur="this.placeholder = 'Travel date'" required=""
+                                       class="single-input circle">
+                            </div>
+                        </div>
+                        <div class="col-6 col-md">
+                            <a href="#" class="genric-btn info circle mt-2">Find a ride</a>
+                        </div>
                     </div>
-                </div>
+                </form>
             </div>
+
         </div>
     </section>
     <!--================ End Features Area =================-->
@@ -48,7 +67,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="single_feature">
                         <div class="info-content">
-                            <img src="img/features/11.png" alt="" width="60px" height="50px">
+                            <i class="fas fa-3x text-black fa-car-side"></i>
                             <h5>Sign up for free</h5>
                             <p>Qualified Drivers</p>
 
@@ -59,7 +78,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="single_feature">
                         <div class="info-content">
-                            <img src="img/features/22.png" alt="" width="60px" height="50px">
+                            <i class="fas fa-3x text-black fa-user-circle"></i>
                             <h5>Daily commute</h5>
                             <p>Service Provider</p>
                         </div>
@@ -69,7 +88,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="single_feature">
                         <div class="info-content">
-                            <img src="img/features/3.png" alt="" width="60px" height="50px">
+                            <i class="fas fa-3x text-black fa-map-marked-alt"></i>
                             <h5>Long distance ride</h5>
                             <p>Trusted Clients</p>
                         </div>
@@ -79,7 +98,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="single_feature">
                         <div class="info-content">
-                            <img src="img/features/4.png" alt="" width="60px" height="50px">
+                            <i class="fas fa-3x text-black fa-money-bill"></i>
                             <h5>Online payment</h5>
                             <p>Achievements</p>
                         </div>
@@ -95,14 +114,7 @@
     <section class="video-sec-area section_gap_top mb-5" id="about">
         <div class="container">
             <div class="row">
-                <div class="col-lg-6 video-left overlay">
-                    <div class="video-inner justify-content-center align-items-center d-flex">
-                        <a id="play-home-video" class="video-play-button"
-                           href="https://www.youtube.com/watch?time_continue=2&v=J9YzcEe29d0">
-                            <span></span>
-                        </a>
-                    </div>
-                </div>
+
                 <div class="col-lg-6 video-right mt-0">
                     <p class="driver-prompt">
                         <span>Driver?</span> <span><a href="#">Post your ride now!</a></span></p>
@@ -209,6 +221,14 @@
 
 
                 </div>
+                <div class="col-lg-6 video-left overlay">
+                    <div class="video-inner justify-content-center align-items-center d-flex">
+                        <a id="play-home-video" class="video-play-button"
+                           href="https://www.youtube.com/watch?time_continue=2&v=J9YzcEe29d0">
+                            <span></span>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -219,13 +239,13 @@
 
 
     <!--================ Start CTA Area =================-->
-    <div class="cta-area section_gap overlay">
+    <div class="cta-area section_gap overlay my-5">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-8">
                     <h1 class="mb-4">Going that way anyway</h1>
-                    <a href="#" class="genric-btn white-border circle mr-1">Download in Appstore</a>
-                    <a href="#" class="genric-btn white-border circle">Download in Google Play</a>
+                    <a href="#" class="genric-btn white-border circle m-1">Download in Appstore</a>
+                    <a href="#" class="genric-btn white-border circle my-2">Download in Google Play</a>
                 </div>
             </div>
         </div>
@@ -234,61 +254,123 @@
 
 
     <!--================ Real people section Start ================-->
-    <section class="bg-light" id="realPeople">
+    <section class="about-area mt-0 pb-5" id="realPeople">
         <div class="container pt-5">
-            <div class="row justify-content-center realPeople-image">
-                <div class="col-lg-5 col-md-12 m-2 my-4">
-                    <div class="media">
-                        <img src="img/people1.jpg" class="mr-3 w-25">
-                        <div class="media-body">
-                            Using TaskRabbit to have a new bookcase built was a great choice! Rick did wonderful work
-                            with a
-                            job that was much bigger than we anticipated.<br><br><br>
-                            <span>
-                    Biplab Banik,<br>
-                    Dhanmondi Dhaka
-                         </span>
+            <h2 class="text-center text-capitalize">Happy clint list</h2>
+            <div class="about-inner">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="single-success py-3">
+                            <div class="row text-center">
+                                <div class="col-4">
+                                    <aside class="single_sidebar_widget author_widget">
+                                        <img class="author_img rounded-circle" src="img/people1.jpg" alt=""><br>
+                                    </aside>
+                                </div>
+                                <div class="col-8">
+                                    <div class="blog_info">
+
+                                        <ul class="blog_meta list text-left">
+                                            <li><p class="text-justify">
+                                                    Using TaskRabbit to have a new bookcase built
+                                                    was a great choice! Rick did wonderful work with a job that was much
+                                                    bigger than we anticipated.
+                                                </p></li>
+                                            <li class="text-right">
+                                                <p class="font-weight-bold fs-16">Biplab Banik</p>
+                                                <p>Dhanmondi Dhaka</p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-5 col-md-12 m-2 my-4">
-                    <div class="media">
-                        <img src="img/people2.jpg" class="mr-3 w-25">
-                        <div class="media-body">
-                            I finally have expertly installed shelves and additional storage in my tiny apartment, all
-                            thanks to my Tasker.<br><br><br>
-                            <span>
-                    Lein Chang<br>
-                    Gulshan 2.. Dhaka
-                         </span>
+                    <!-- single success -->
+                    <div class="col-lg-6 col-md-6">
+                        <div class="single-success py-3">
+                            <div class="row text-center">
+                                <div class="col-4">
+                                    <aside class="single_sidebar_widget author_widget">
+                                        <img class="author_img rounded-circle" src="img/people2.jpg" alt=""><br>
+                                    </aside>
+                                </div>
+                                <div class="col-8">
+                                    <div class="blog_info">
+
+                                        <ul class="blog_meta list text-left">
+                                            <li><p class="text-justify">
+                                                    I finally have expertly installed shelves and additional storage in
+                                                    my tiny apartment, all thanks to my Tasker.
+                                                </p></li>
+                                            <li class="text-right">
+                                                <p class="font-weight-bold fs-16">Lein Chang</p>
+                                                <p>Gulshan 2.. Dhaka</p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-5 col-md-12 m-2 my-4">
-                    <div class="media">
-                        <img src="img/people3.jpg" class="mr-3 w-25">
-                        <div class="media-body">
-                            I'd been agonizing over how to get my new flat screen mounted to my wall. In comes Nick on
-                            the
-                            same day. He arrived with all the tools for the job and was just a super nice
-                            guy.<br><br><br>
-                            <span>
-                    Rea Joe<br>
-                    Gulshan 2.. Dhaka
-                         </span>
+                    <!-- single success -->
+                    <div class="col-lg-6 col-md-6">
+                        <div class="single-success py-3">
+                            <div class="row text-center">
+                                <div class="col-4">
+                                    <aside class="single_sidebar_widget author_widget">
+                                        <img class="author_img rounded-circle" src="img/people3.jpg" alt=""><br>
+                                    </aside>
+                                </div>
+                                <div class="col-8">
+                                    <div class="blog_info">
+
+                                        <ul class="blog_meta list text-left">
+                                            <li><p class="text-justify">
+                                                    I'd been agonizing over how to get my new flat screen mounted to my
+                                                    wall. In comes Nick on the same day. He arrived with all the tools
+                                                    for the job and was just a super nice guy.
+                                                </p></li>
+                                            <li class="text-right">
+                                                <p class="font-weight-bold fs-16">Rea Joe</p>
+                                                <p>Gulshan 2.. Dhaka</p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-5 col-md-12 m-2 my-4">
-                    <div class="media">
-                        <img src="img/people4.jpg" class="mr-3 w-25">
-                        <div class="media-body">
-                            TaskRabbit makes moving into your new apartment a 1 hr job instead of 1 day job! Moving my
-                            belongings from Manhattan to Queens was seamless.<br><br><br>
-                            <span>
-                    Riardo Pillar<br>
-                    Uttara 2.. Dhaka
-                         </span>
+                    <!-- single success -->
+                    <div class="col-lg-6 col-md-6">
+                        <div class="single-success py-3">
+                            <div class="row text-center">
+                                <div class="col-4">
+                                    <aside class="single_sidebar_widget author_widget">
+                                        <img class="author_img rounded-circle" src="img/people4.jpg" alt=""><br>
+                                    </aside>
+                                </div>
+                                <div class="col-8">
+                                    <div class="blog_info">
+
+                                        <ul class="blog_meta list text-left">
+                                            <li><p class="text-justify">
+                                                    TaskRabbit makes moving into your new apartment a 1 hr job instead
+                                                    of 1 day job! Moving my belongings from Manhattan to Queens was
+                                                    seamless.
+                                                </p></li>
+                                            <li class="text-right">
+                                                <p class="font-weight-bold fs-16">Riardo Pillar</p>
+                                                <p>Uttara 2.. Dhaka</p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>

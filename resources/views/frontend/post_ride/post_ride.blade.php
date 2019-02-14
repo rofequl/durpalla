@@ -6,14 +6,17 @@
     <section class="mb-5 overlay">
         <div class="container postRide-container">
 
-            <h1>Offer a ride on your next long journey</h1>
-
-
+            <div class="row mt-3">
+                <div class="text-center mx-auto">
+                    <h2>Offer a ride on your next long journey</h2>
+                    <p>After booking you can chat with your Tasker, agree on a exact time.</p>
+                </div>
+            </div>
             <br>
             <div class="row">
-                <div class="col-lg-7">
+                <div class="col-lg-7 border p-3 radius fbf7f7">
                     <div class="card">
-                        <div class="card-header bg-white">
+                        <div class="card-header bg-paste text-white py-1">
                             Pick-up and drop-off points
                         </div>
                         <div class="card-body bg-light">
@@ -52,7 +55,7 @@
                         </div>
                     </div>
                     <div class="card mt-5">
-                        <div class="card-header bg-white">
+                        <div class="card-header bg-paste text-white py-1">
                             Date and time
                         </div>
                         <div class="card-body bg-light">
@@ -94,12 +97,16 @@
                                     </select>
                                 </div>
                             </div>
-
+                        </div>
+                    </div>
+                    <div class="row mt-3 p-3">
+                        <div class="ml-auto">
+                            <a href="{{route('postRide2')}}" class="genric-btn info circle arrow">Next<span class="lnr lnr-arrow-right"></span></a>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-5">
-                    <div class="card p-3">
+                    <div class="card p-3 fbf7f7">
                         My ride summary
 
                         <div id="map" style="width: 100%; height: 500px;">
@@ -107,11 +114,6 @@
                         </div>
                     </div>
 
-                </div>
-            </div>
-            <div class="row mt-5">
-                <div class="mx-auto">
-                    <a href="{{route('postRide2')}}" class="genric-btn info circle arrow">Next<span class="lnr lnr-arrow-right"></span></a>
                 </div>
             </div>
 

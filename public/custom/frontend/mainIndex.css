@@ -21,11 +21,27 @@
     src: url('../../fonts/poppins/Poppins-SemiBold.ttf');
 }
 
+.bg-light {
+    background-color: #f0f0f0 !important;
+}
+
+.bg-paste {
+    background-color: #31c6ee !important;
+}
+
+.fbf7f7{
+    background-color: #fcfcfc;
+}
+
+.b3c9cb{
+    background-color: #e09cb5;
+}
+
 .news-feed-container {
     float: left;
     clear: left;
     width: 100%;
-    height: 300px;
+    height: 250px;
     font-size: 12px;
     overflow: hidden;
     border-top: 1px solid #ddd;
@@ -504,10 +520,39 @@ input.input100 {
     font-weight: bold;
 }
 
+#footerWrapper {
+    width: 100%;
+    background-image: url(../../img/icon/footerSlopesFlowers.png);
+    background-repeat: repeat-x;
+    background-color: #31c6ee;
+    clear: both;
+    display: block;
+    padding-top: 150px;
+    padding-bottom: 20px;
+}
 
+.mainmenu:hover .submenu {
+    display: block;
+    max-height: 200px;
+margin-top: 5px;
+}
 
+.submenu {
+    overflow: hidden;
+    max-height: 0;
+    -webkit-transition: all 0.5s ease-out;
 
+    border-radius: 4px;
+}
 
+.submenu li{
+    border-bottom: 0!important;
+    cursor: pointer;
+    padding: 4px;
+}
+.submenu li:hover{
+    background-color: #e4e4e4;
+}
 
 
 
