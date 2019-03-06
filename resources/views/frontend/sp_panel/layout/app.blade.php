@@ -13,6 +13,7 @@
     <link rel="apple-touch-icon" href="https://i.imgur.com/QRAUqs9.png">
     <link rel="shortcut icon" href="https://i.imgur.com/QRAUqs9.png">
 
+    <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
@@ -37,6 +38,7 @@
     <!-- Font Awesome Icons -->
     <link href="{{asset('framework/fontawesome/css/fontawesome-all.css')}}" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
     <!-- Theme style -->
     <link rel="stylesheet" href="{{asset('framework/elaAdmin/css/style.css')}}">
     <link rel="stylesheet" href="{{asset('framework/elaAdmin/css/cs-skin-elastic.css')}}">
@@ -89,6 +91,25 @@
     $(document).ready(function() {
         $('#DataTable').DataTable();
     });
+
+    $('.delete').click(function () {
+        swal({
+                title: "are u sure?",
+                text: "lorem lorem lorem",
+                type: "error",
+                showCancelButton: true,
+                confirmButtonClass: 'btn-danger waves-effect waves-light',
+                confirmButtonText: "Delete",
+                cancelButtonText: "Cancel",
+                closeOnConfirm: true,
+                closeOnCancel: true
+            },
+            function(){
+                window.location.href = "ok";
+            });
+    });
+
+
 </script>
 </body>
 </html>

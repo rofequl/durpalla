@@ -18,7 +18,7 @@
                                 <i class="fas fa-angle-right float-right fs-20 mt-1"></i>
                             </div>
                             <a href="{{route('sp.registration1')}}"><div class="single-success p-3 hov-pointer">
-                                Sign up with my email
+                                Sign up with my phone
                                 <i class="fas fa-angle-right float-right fs-20 mt-1"></i>
                             </div></a>
                         </div>

@@ -3,7 +3,7 @@
         <div id="main-menu" class="main-menu collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li class="active">
-                    <a href=""><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
+                    <a href="{{route('sp.home')}}"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
                 </li>
                 <li class="menu-title">Resource</li><!-- /.menu-title -->
                 <!---
@@ -25,7 +25,7 @@
                     <a href="{{route('sp.reference')}}"> <i class="menu-icon fas fa-hands-helping"></i>Reference</a>
                 </li>
                 <li class="">
-                    <a href="{{route('sp.addCar')}}"> <i class="menu-icon fas fa-hands-helping"></i>Add car</a>
+                    <a href="{{route('sp.car')}}"> <i class="menu-icon fas fa-hands-helping"></i>Add car</a>
                 </li>
                 <li class="menu-item-has-children dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fas fa-user-cog"></i>Rides offered</a>

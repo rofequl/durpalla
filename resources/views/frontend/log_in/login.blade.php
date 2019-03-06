@@ -7,16 +7,32 @@
             <div class="row">
                 <div class="col-lg-8 mx-auto fbf7f7 p-3 border radius">
                     <h2 class="text-center">You want to Log in?</h2>
-                    <form class="login100-form validate-form contact_form">
+                    @if ($errors->any())
+                        @foreach ($errors->all() as $error)
+                            <div class="alert alert-danger alert-dismissible">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                {{$error}}
+                            </div>
+                        @endforeach
+                    @endif
+                    @if(session()->has('message'))
+                        <div class="alert alert-success alert-dismissible">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            {{ session()->get('message') }}
+                        </div>
+                    @endif
+
+                    <form class="login100-form validate-form contact_form" method="post" action="{{route('sp.login')}}">
+                        {{csrf_field()}}
                         <div class="wrap-input100 validate-input m-b-26" data-validate="Username is required">
                             <span class="label-input100">Phone No.</span>
-                            <input class="input100" type="text" name="username" placeholder="Enter phone number">
+                            <input class="input100" type="text" name="phone" placeholder="Enter phone number">
                             <span class="focus-input100"></span>
                         </div>
 
                         <div class="wrap-input100 validate-input m-b-18" data-validate="Password is required">
                             <span class="label-input100">Password</span>
-                            <input class="input100" type="password" name="pass" placeholder="Enter password">
+                            <input class="input100" type="password" name="password" placeholder="Enter password">
                             <span class="focus-input100"></span>
                         </div>
 

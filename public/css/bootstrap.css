@@ -76,7 +76,7 @@ body {
     line-height: 1.5;
     color: #212529;
     text-align: left;
-    background-color: #fff
+    background-color: #f1f2f7;
 }
 
 [tabindex="-1"]:focus {
@@ -2250,7 +2250,7 @@ textarea.form-control {
 .form-control.is-invalid,
 .was-validated .custom-select:invalid,
 .was-validated .form-control:invalid {
-    border-color: #dc3545
+    border-color: #dc3545!important;
 }
 
 .custom-select.is-invalid:focus,

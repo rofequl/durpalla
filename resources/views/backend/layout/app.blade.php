@@ -12,7 +12,7 @@
 
     <link rel="apple-touch-icon" href="https://i.imgur.com/QRAUqs9.png">
     <link rel="shortcut icon" href="https://i.imgur.com/QRAUqs9.png">
-
+    <link rel="stylesheet" href="{{asset('css/util.css')}}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
@@ -38,12 +38,11 @@
     <link href="{{asset('framework/fontawesome/css/fontawesome-all.css')}}" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <!-- Theme style -->
-    <link rel="stylesheet" href="{{asset('framework/elaAdmin/css/style.css')}}">
     <link rel="stylesheet" href="{{asset('framework/elaAdmin/css/cs-skin-elastic.css')}}">
-    <link rel="stylesheet" href="{{asset('framework/adminLTE/css/adminlte.min.css')}}">
-
+    <link rel="stylesheet" href="{{asset('framework/elaAdmin/css/style.css')}}">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <script src="{{asset('framework/jquery/jquery.min.js')}}"></script>
 </head>
 <body class="hold-transition sidebar-mini">
 
@@ -61,15 +60,14 @@
 <!-- REQUIRED SCRIPTS -->
 
 <!-- jQuery -->
-<script src="{{asset('framework/jquery/jquery.min.js')}}"></script>
 <script src="{{asset('framework/jquery/jquery-migrate.min.js')}}"></script>
 <script src="{{asset('framework/jquery-easing/jquery.easing.min.js')}}"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="{{asset('custom/script.js')}}"></script>
-<script src="{{asset('custom/frontend/timeScript.js')}}"></script>
-<!-- Bootstrap 4 -->
 <script src="{{asset('js/bootstrap.min.js')}}"></script>
+
+<script src="{{asset('framework/elaAdmin/js/widgets.js')}}"></script>
+<!-- Bootstrap 4 -->
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 <!-- AdminLTE App -->
 <!--  Chart js -->
@@ -87,7 +85,7 @@
 
 <script>
     $(document).ready(function() {
-        $('#DataTable').DataTable();
+        $('.table').DataTable();
     });
 </script>
 </body>

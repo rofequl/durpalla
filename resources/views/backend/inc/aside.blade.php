@@ -16,10 +16,31 @@
                 </li>
                 --->
                 <li class="">
-                    <a href="{{route('admin.booking')}}"> <i class="menu-icon fas fa-hands-helping"></i>Booking</a>
+                    <a href="{{route('admin.ride.setting')}}"> <i class="menu-icon fas fa-hands-helping"></i>Ride Setting</a>
                 </li>
-                <li class="">
-                    <a href="{{route('admin.allRidePost')}}"> <i class="menu-icon fas fa-hands-helping"></i>All Ride Post</a>
+                <li class="menu-item-has-children dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fas fa-car"></i>Car management</a>
+                    <ul class="sub-menu children dropdown-menu">
+                        <li><i class="fas fa-check-circle"></i><a href="{{route('admin.approve.car')}}">Approve</a></li>
+                        <li><i class="fas fa-pause"></i><a href="{{route('admin.pending.car')}}">Pending</a></li>
+                    </ul>
+                </li>
+                <li class="menu-item-has-children dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fas fa-car"></i>Booking</a>
+                    <ul class="sub-menu children dropdown-menu">
+                        <li><i class="fas fa-check-circle"></i><a href="{{route('admin.approve.post')}}">Complete Book</a></li>
+                        <li><i class="fas fa-pause"></i><a href="{{route('admin.pending.post')}}">Not Book</a></li>
+                        <li><i class="fas fa-pause"></i><a href="{{route('admin.disapprove.post')}}">Ongoing Book</a></li>
+                        <li><i class="fas fa-check-circle"></i><a href="{{route('admin.disapprove.post')}}">Complete Ride</a></li>
+                    </ul>
+                </li>
+                <li class="menu-item-has-children dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fas fa-car"></i>All Ride Post</a>
+                    <ul class="sub-menu children dropdown-menu">
+                        <li><i class="fas fa-check-circle"></i><a href="{{route('admin.approve.post')}}">Approve</a></li>
+                        <li><i class="fas fa-pause"></i><a href="{{route('admin.pending.post')}}">Pending</a></li>
+                        <li><i class="fas fa-pause"></i><a href="{{route('admin.disapprove.post')}}">Disapprove</a></li>
+                    </ul>
                 </li>
                 <li class="">
                     <a href="{{route('admin.transection')}}"> <i class="menu-icon fas fa-hands-helping"></i>Transection</a>
@@ -27,8 +48,13 @@
                 <li class="">
                     <a href="{{route('admin.requestRide')}}"> <i class="menu-icon fas fa-hands-helping"></i>Request a Ride</a>
                 </li>
-                <li class="">
-                    <a href="{{route('admin.verification')}}"> <i class="menu-icon fas fa-hands-helping"></i>Verification</a>
+                <li class="menu-item-has-children dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fas fa-car"></i>Verification</a>
+                    <ul class="sub-menu children dropdown-menu">
+                        <li><i class="fas fa-check-circle"></i><a href="{{route('admin.approve.verification')}}">Approve</a></li>
+                        <li><i class="fas fa-pause"></i><a href="{{route('admin.pending.verification')}}">Pending</a></li>
+                        <li><i class="fas fa-pause"></i><a href="{{route('admin.disapprove.verification')}}">Disapprove</a></li>
+                    </ul>
                 </li>
                 <li class="">
                     <a href="{{route('admin.resourceList')}}"> <i class="menu-icon fas fa-hands-helping"></i>Resource List</a>

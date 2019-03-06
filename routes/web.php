@@ -11,41 +11,69 @@
 |
 */
 
-Route::get('/', function () {
-    return view('frontend.index');
-})->name('home');
+Route::get('/', function () {return view('frontend.index');})->name('home');
 
-Route::get('/registration', function () {
-    return view('frontend.registration');
-})->name('sp.registration');
+Route::get('/registration', function () {return view('frontend.log_in.registration');})->name('sp.registration');
 
-Route::get('/registration1', function () {
-    return view('frontend.log_in.registration2');
-})->name('sp.registration1');
+Route::get('/registration1', function () {return view('frontend.log_in.registration2');})->name('sp.registration1');
 
-Route::get('/login', function () {
-    return view('frontend.login');
-})->name('sp.login');
+Route::get('/login', function () {return view('frontend.log_in.login');})->name('sp.login');
 
-Route::get('/spPanel', function () {
-    return view('frontend.sp_panel.index');
+Route::post('/login', 'homeController@UserLogin')->name('sp.login');
+
+Route::post('/UserRegister', 'homeController@UserRegister');
+
+Route::get('/logout', 'homeController@LogoutUser')->name('sp.logout');
+
+Route::group(['middleware' => 'CheckUserLogin','namespace' => 'frontend'], function () {
+
+    Route::get('/sp-panel', 'SpController@index')->name('sp.home');
+
+    Route::get('/sp-car', 'SpController@Car')->name('sp.car');
+
+    Route::post('/sp-add-car', 'SpController@AddCar')->name('sp.addcar');
+
+    Route::get('/sp-delete-car', 'SpController@DeleteCar')->name('sp.deletecar');
+
+    Route::get('/sp-verification', 'VerificationController@SpVerification')->name('sp.verification');
+
+    Route::post('/sp-verification', 'VerificationController@SpVerificationPost')->name('sp.verification');
+
 });
 
-Route::get('/addCar', function () {
-    return view('frontend.sp_panel.add_car');
-})->name('sp.addCar');
+Route::get('/request', function () {return view('frontend.request');})->name('request.ride');
 
-Route::get('/verification', function () {
-    return view('frontend.sp_panel.verification');
-})->name('sp.verification');
+Route::get('/request-next', 'frontend\RequestController@RequestNext')->name('request.ride.next');
+
+Route::post('/request','frontend\RequestController@RequestPost')->name('request.ride.post');
+
+Route::get('/post-ride', function () {return view('frontend.post_ride.post_ride');})->name('post.ride');
+
+Route::post('/post-ride', 'frontend\PostController@RidePost')->name('post.ride');
+
+Route::get('/post-ride2/{data}', 'frontend\PostController@RidePost2')->name('post.ride2');
+
+Route::post('/post-ride2', 'frontend\PostController@RidePostPrice')->name('post.ride2');
+
+Route::get('/post-ride3/{data}', 'frontend\PostController@RidePost3')->name('post.ride3');
+
+Route::post('/post-ride3', 'frontend\PostController@RidePostCondition')->name('post.ride3');
+
+Route::get('/all-ride', 'frontend\RideController@Ride')->name('all.ride');
+
+Route::get('/find-ride', 'frontend\RideController@FindRide')->name('find.ride');
+
+Route::post('/find-ride', 'frontend\RideController@FindRideSearch')->name('find.ride');
+
+Route::get('/map', function () {
+    return view('frontend.map2');
+});
 
 Route::get('/reference', function () {
     return view('frontend.sp_panel.reference');
 })->name('sp.reference');
 
-Route::get('/admin', function () {
-    return view('backend.index');
-});
+
 
 Route::get('/transection', function () {
     return view('frontend.sp_panel.transection');
@@ -116,33 +144,71 @@ Route::get('/admin/resourceList', function () {
     return view('backend.resource_list');
 })->name('admin.resourceList');
 
-Route::get('/admin/verification', function () {
-    return view('backend.verification');
-})->name('admin.verification');
-
-Route::get('/findRide', function () {
-    return view('frontend.find_ride');
-})->name('findRide');
 
 
-Route::get('/pickarider', function () {
-    return view('frontend.pick_a_rider');
-})->name('pickArider');
 
 
-Route::get('/allRide', function () {
-    return view('frontend.all_ride');
-})->name('allRide');
 
-Route::get('/postRide', function () {
-    return view('frontend.post_ride.post_ride');
-})->name('postRide');
 
-Route::get('/postRide2', function () {
-    return view('frontend.post_ride.post_ride2');
-})->name('postRide2');
 
-Route::get('/postRide3', function () {
-    return view('frontend.post_ride.post_ride3');
-})->name('postRide3');
+
+
+
+
+
+
+
+
+
+/*
+|--------------------------------------------------------------------------
+| Admin Panel
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/admin','backend\adminController@home');
+
+Route::post('/AdminLoginCheck', 'backend\adminController@LoginCheck');
+
+Route::get('/AdminLogout', 'backend\adminController@Logout')->name('AdminLogout');
+
+Route::post('/AdminUserRegister', 'backend\adminController@AdminUserRegister');
+
+Route::group(['middleware' => 'CheckAdmin','namespace' => 'backend'], function () {
+
+    Route::get('/dashboard', 'AdminController@dashboard')->name('dashboard');
+
+    Route::get('/ride-setting', 'RideSettingController@RideSetting')->name('admin.ride.setting');
+    Route::post('/ride-setting', 'RideSettingController@RideSettingPost')->name('admin.ride.setting');
+
+    Route::get('/admin-pending-car/{data?}', 'CarController@PendingCar')->name('admin.pending.car');
+    Route::post('admin-pending-car-Approve', 'CarController@PendingCarApprove');
+    Route::get('/admin-approve-car/{data?}', 'CarController@ApproveCar')->name('admin.approve.car');
+    Route::get('/admin-approve-car-pending', 'CarController@ApproveCarPending');
+
+    Route::get('/admin-pending-verification', 'VerificationController@PendingVerification')->name('admin.pending.verification');
+    Route::get('/admin-pending-verification-change', 'VerificationController@PendingVerificationChange');
+    Route::get('/admin-approve-verification', 'VerificationController@ApproveVerification')->name('admin.approve.verification');
+    Route::get('/admin-disapprove-verification', 'VerificationController@DisapproveVerification')->name('admin.disapprove.verification');
+
+    Route::get('/admin-pending-post/{data?}', 'PostController@PendingPost')->name('admin.pending.post');
+    Route::get('/admin-approve-post', 'PostController@ApprovePost')->name('admin.approve.post');
+    Route::get('/admin-disapprove-post', 'PostController@DisapprovePost')->name('admin.disapprove.post');
+    Route::get('/admin-pending-post-change', 'PostController@PendingPostChange');
+
+    Route::post('admin-tracking', 'TrackingController@TrackingRide')->name('admin.tracking');
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
 

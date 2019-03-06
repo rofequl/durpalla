@@ -22,7 +22,7 @@
         <div class="backgroundWhite">
             <div class="container">
                 <div class="row">
-                    <div class="col-12 col-lg">
+                    <div class="col-12 col-md-6 col-lg">
                         <p class="text-uppercase m-0"><span style="font-size: 20px">P</span>assenger</p>
                         Ride Search<br>
                         Create Account<br>
@@ -33,7 +33,7 @@
                         Support<br>
                         FAQ<br>
                     </div>
-                    <div class="col-12 col-lg mt-5 mt-md-0">
+                    <div class="col-12 col-md-6 col-lg mt-5 mt-md-0">
                         <p class="text-uppercase m-0"><span style="font-size: 20px">D</span>river</p>
                         Post a Ride<br>
                         Create Account<br>
@@ -42,7 +42,7 @@
                         Support<br>
                         FAQ<br>
                     </div>
-                    <div class="col-12 col-lg mt-5 mt-md-0">
+                    <div class="col-12 col-md-6 col-lg mt-5 mt-md-5">
                         <p class="text-uppercase m-0"><span style="font-size: 20px">M</span>y Account</p>
                         Sign In<br>
                         My Profile<br>
@@ -54,12 +54,12 @@
                         Offer a free membership<br>
                         to your friends<br>
                     </div>
-                    <div class="col-12 col-lg mt-5 mt-md-0">
+                    <div class="col-12 col-md-6 col-lg mt-5 mt-md-0">
                         <p class="text-uppercase m-0"><span style="font-size: 20px">M</span>edia</p>
                         Facebook<br>
                         Twitter<br>
                     </div>
-                    <div class="col-12 col-lg mt-5 mt-md-0">
+                    <div class="col-12 col-md-6 col-lg mt-5 mt-md-0">
                         <p class="text-uppercase m-0"><span style="font-size: 20px">A</span>bout us</p>
                         Careers<br>
                         Contact Us<br>

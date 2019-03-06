@@ -8,7 +8,7 @@
     <div class="top-right">
         <div class="header-menu">
             <div class="header-left">
-                <a href="">LogOut</a>
+                <a href="{{route('sp.logout')}}">LogOut</a>
             </div>
         </div>
     </div>

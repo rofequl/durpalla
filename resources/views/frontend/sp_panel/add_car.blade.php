@@ -3,14 +3,30 @@
 @section('content')
 
     <div class="content">
+        @if ($errors->any())
+            @foreach ($errors->all() as $error)
+                <div class="alert alert-danger alert-dismissible">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    {{$error}}
+                </div>
+            @endforeach
+        @endif
+        @if(session()->has('message'))
+            <div class="alert alert-success alert-dismissible">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                {{ session()->get('message') }}
+            </div>
+        @endif
 
         <div class="card">
             <div class="card-header">
                 Sp Car list
-                <button class="btn btn-sm btn-primary pull-right" data-toggle="modal" data-target="#exampleModal">Add more car</button>
+                <button class="btn btn-sm btn-primary pull-right" data-toggle="modal" data-target="#exampleModal">Add
+                    more car
+                </button>
             </div>
             <div class="card-body">
-                <table class="table border">
+                <table class="table table-striped" cellspacing="0" id="DataTable">
                     <thead>
                     <tr>
                         <th>Sl.</th>
@@ -18,20 +34,37 @@
                         <th>Model</th>
                         <th>Fuel type</th>
                         <th>Kilometers run</th>
+                        <th>Car type</th>
+                        <th>Status</th>
                         <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>tata</td>
-                        <td>sr001</td>
-                        <td>Petrol</td>
-                        <td>150</td>
-                        <td>
-                            <button class="btn btn-sm btn-danger">Delete</button>
-                        </td>
-                    </tr>
+                    <?php $listNum = 1; ?>
+                    @foreach($car as $cars)
+                        <tr>
+                            <td>{{$listNum}}</td>
+                            <td>{{$cars->brand}}</td>
+                            <td>{{$cars->model}}</td>
+                            <td>{{$cars->fuel}}</td>
+                            <td>{{$cars->kilometers}}</td>
+                            <td>{{$cars->car_type}}</td>
+                            <td>
+                                @if($cars->status == 0)
+                                    <span class="badge badge-pill badge-danger">Pending</span>
+                                @else
+                                    <span class="badge badge-pill badge-success">Approve</span>
+                                @endif
+                            </td>
+                            <td>
+                                <a href="{{url('sp-delete-car?Delete='.$cars->id)}}"
+                                   class="btn btn-sm btn-danger delete">Delete</a>
+
+                            </td>
+                        </tr>
+                        <?php $listNum++; ?>
+                    @endforeach
+
                     </tbody>
                 </table>
             </div>
@@ -48,38 +81,43 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <form>
+                <form method="post" action="{{route('sp.addcar')}}">
+                    {{csrf_field()}}
+                    <div class="modal-body">
+
                         <div class="form-group row">
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Brand</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="staticEmail" placeholder="Enter Brand">
+                            <label for="staticEmail" class="col-md-3 col-form-label">Brand</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" name="brand" id="brand"
+                                       placeholder="Enter Brand">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="inputPassword" class="col-sm-2 col-form-label">Model</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="inputPassword" placeholder="Model">
+                            <label for="inputPassword" class="col-md-3 col-form-label">Model</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" name="modal" id="modal" placeholder="Model">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="inputPassword" class="col-sm-2 col-form-label">Fuel type</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="inputPassword" placeholder="Fuel type">
+                            <label for="inputPassword" class="col-md-3 col-form-label">Fuel type</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" name="fuel" id="fuel" placeholder="Fuel type">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="inputPassword" class="col-sm-2 col-form-label">kilometers run</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="inputPassword" placeholder="kilometers run">
+                            <label for="inputPassword" class="col-md-3 col-form-label">kilometers run</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" name="kilometers" id="kilometers"
+                                       placeholder="kilometers run">
                             </div>
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Add Car</button>
-                </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Add Car</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

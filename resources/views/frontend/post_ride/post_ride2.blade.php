@@ -7,140 +7,115 @@
         <div class="container postRide-container">
 
             <h1>Offer a ride</h1>
-
-
             <br>
-            <div class="row">
-                <div class="col-lg-7">
-                    <div class="card">
-                        <div class="card-header bg-paste text-white py-1">
-                            Price per Co-traveller
-                        </div>
-                        <div class="card-body bg-light">
-                            <div class="row">
-                                <div class="col-8">Dhaka <span class="lnr lnr-arrow-right"></span> Dhaka</div>
-                                <div class="col-4">
-                                    <div class="input-group input-group-sm mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1">$</span>
-                                        </div>
-                                        <input type="text" class="form-control" placeholder="00000"
-                                               aria-label="Username"
-                                               aria-describedby="basic-addon1">
-                                    </div>
+            <form method="post" action="{{route('post.ride2')}}">
+                {{csrf_field()}}
+                <input type="hidden" name="id" value="{{$post->id}}">
+                <div class="row">
+                    <div class="col-lg-6">
+                        @if ($errors->any())
+                            @foreach ($errors->all() as $error)
+                                <div class="alert alert-danger alert-dismissible">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                    {{$error}}
                                 </div>
+                            @endforeach
+                        @endif
+                        @if(session()->has('message'))
+                            <div class="alert alert-success alert-dismissible">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                {{ session()->get('message') }}
                             </div>
-                            <div class="row">
-                                <div class="col-8">Dhaka <span class="lnr lnr-arrow-right"></span> Comilla Cantonment
-                                </div>
-                                <div class="col-4">
-                                    <div class="input-group input-group-sm mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1">$</span>
-                                        </div>
-                                        <input type="text" class="form-control" placeholder="00000"
-                                               aria-label="Username"
-                                               aria-describedby="basic-addon1">
-                                    </div>
-                                </div>
+                        @endif
+                        <div class="card">
+                            <div class="card-header bg-paste text-white py-1">
+                                Price per Co-traveller
                             </div>
-                            <div class="row">
-                                <div class="col-8">Dhaka <span class="lnr lnr-arrow-right"></span> Chittaganj</div>
-                                <div class="col-4">
-                                    <div class="input-group input-group-sm mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon1">$</span>
+                            <div class="card-body bg-light">
+
+                                @foreach($stopover as $stopovers)
+                                    <div class="row">
+                                        <div class="col-8">{{$stopovers->s_location}} <span
+                                                    class="lnr lnr-arrow-right"></span> {{$stopovers->e_location}}</div>
+                                        <div class="col-4">
+
+                                            <div class="input-group input-group-sm mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="basic-addon1">$</span>
+                                                </div>
+                                                <input type="text" value=" <?php echo ride_price($stopovers->s_lat, $stopovers->s_lng, $stopovers->e_lat, $stopovers->e_lng); ?>" class="form-control" placeholder="00000"
+                                                       name="price[]" autofocus>
+                                            </div>
                                         </div>
-                                        <input type="text" class="form-control" placeholder="00000"
-                                               aria-label="Username"
-                                               aria-describedby="basic-addon1">
                                     </div>
-                                </div>
+                                @endforeach
+
                             </div>
                         </div>
-                    </div>
-                    <div class="card mt-3 p-0 bg-light">
-                        <div class="card-body row pb-1">
-                            <div class="col-8">Number of seat</div>
-                            <div class="col-4">
-                                <div class="input-group input-group-sm mb-3">
-                                    <div class="input-group-prepend">
+                        <div class="card mt-3 p-0 bg-light">
+                            <div class="card-body row pb-1">
+                                <div class="col-8">Number of seat</div>
+                                <div class="col-4">
+                                    <div class="input-group input-group-sm mb-3">
+                                        <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon1"><i class="fa fa-car"
                                                                                         aria-hidden="true"></i></span>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="00" name="seat">
                                     </div>
-                                    <input type="text" class="form-control" placeholder="00" aria-label="Username"
-                                           aria-describedby="basic-addon1">
                                 </div>
                             </div>
                         </div>
+
                     </div>
 
-                    <div class="card mt-3">
-                        <div class="card-header bg-paste text-white py-1">
-                            Options
-                        </div>
-                        <div class="card-body bg-light">
-                            <h5>Max. 2 in the back seats</h5>
-                            Guarantee max. 2 people in the back of the car (preferred by co-travellers)
-                        </div>
-                    </div>
-                    <div class="card mt-3">
-                        <div class="card-header bg-paste text-white py-1">
-                            Ride details
-                        </div>
-                        <div class="card-body bg-light">
-                            Anything to add about your ride?<br>
-                            <textarea rows="5" class="form-control"
-                                      placeholder="Flexible about where and when to meet? Not taking the motorway? Got limited space in your boot? Keep passengers in the loop."></textarea>
-                            Please do not add your contact details here. Interested co-travellers will receive your
-                            phone number individually (See our guidelines)
+                    <div class="col-lg-6">
+                        <div class="card p-3">
+                            My ride summary
+                            <div id="map" style="width: 100%; height: 500px;">
+                            </div>
                             <br>
-                            Publish the same ride comment for the departure and the return
+                            <h5>{{$post->s_location}} → {{$post->e_location}}</h5>
+
+                            Departure:
+                            {{date("l, F-d", strtotime($post->departure))}}  {{$post->d_time}}:00{{$post->d_time2}}<br>
+                            @if($post->return != "")
+                                Return ride:
+                                {{date("l, F-d", strtotime($post->return))}}  {{$post->r_time}}:00{{$post->r_time2}}<br>
+                            @endif
+                            Distance:
+                            <?php
+                            $dist = GetDrivingDistance($post->s_lat, $post->s_lng, $post->e_lat, $post->e_lng);
+                            echo $dist['distance'];
+                            ?><br>
+                            Driving time:
+                            {{$dist['time']}}<br>
                         </div>
                     </div>
-
                 </div>
 
-                <div class="col-lg-5">
-                    <div class="card p-3">
-                        My ride summary
-
-                        <div id="map" style="width: 100%; height: 500px;">
-
-                        </div>
-                        <br>
-                        <h5>Loddaputti → Kozhikode</h5>
-
-                        Departure:
-                        Wed 13 Feb - 15:00<br>
-                        Return ride:
-                        Fri 15 Feb - 15:00<br>
-
-
-                        Distance:
-                        1698 Km<br>
-                        Driving time:
-                        35h 10m<br>
-                        CO2 emissions:
-                        362 Kg<br>
+                <div class="row mt-5">
+                    <div class="mx-auto">
+                        <button type="submit" class="genric-btn info circle arrow">Next<span
+                                    class="lnr lnr-arrow-right"></span></button>
                     </div>
                 </div>
-            </div>
-
-            <div class="row mt-5">
-                <div class="mx-auto">
-                    <a href="#" class="mr-4"><span
-                                class="lnr lnr-arrow-left"></span> back </a><a href="{{route('postRide3')}}" class="genric-btn info circle arrow">Next<span
-                                class="lnr lnr-arrow-right"></span></a>
-                </div>
-            </div>
-
+            </form>
         </div>
     </section>
 
 
 
-
+    <script>
+        function initMap() {
+            var map = new google.maps.Map(document.getElementById('map'), {
+                center: {
+                    lat: 23.777, lng: 90.399
+                },
+                zoom: 6.5
+            });
+        }
+    </script>
 
 
 

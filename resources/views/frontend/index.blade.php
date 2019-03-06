@@ -113,11 +113,11 @@
     <!--================ Start Video Area =================-->
     <section class="video-sec-area section_gap_top mb-5" id="about">
         <div class="container">
-            <div class="row">
+            <div class="row justify-content-center">
 
                 <div class="col-lg-6 video-right mt-0">
-                    <p class="driver-prompt">
-                        <span>Driver?</span> <span><a href="#">Post your ride now!</a></span></p>
+                    <p class="driver-prompt ml-4">
+                        Driver?<span><a href="#"> Post your ride now!</a></span></p>
                     <div class="news-feed-container pb-2">
                         <ul class="list-unstyled">
                             <li>
@@ -221,12 +221,9 @@
 
 
                 </div>
-                <div class="col-lg-6 video-left overlay">
+                <div class="col-lg-4 video-left overlay">
                     <div class="video-inner justify-content-center align-items-center d-flex">
-                        <a id="play-home-video" class="video-play-button"
-                           href="https://www.youtube.com/watch?time_continue=2&v=J9YzcEe29d0">
-                            <span></span>
-                        </a>
+
                     </div>
                 </div>
             </div>
@@ -264,7 +261,7 @@
                             <div class="row text-center">
                                 <div class="col-4">
                                     <aside class="single_sidebar_widget author_widget">
-                                        <img class="author_img rounded-circle" src="img/people1.jpg" alt=""><br>
+                                        <img class="author_img img-fluid rounded-circle" src="img/people1.jpg" alt=""><br>
                                     </aside>
                                 </div>
                                 <div class="col-8">
@@ -293,7 +290,7 @@
                             <div class="row text-center">
                                 <div class="col-4">
                                     <aside class="single_sidebar_widget author_widget">
-                                        <img class="author_img rounded-circle" src="img/people2.jpg" alt=""><br>
+                                        <img class="author_img img-fluid rounded-circle" src="img/people2.jpg" alt=""><br>
                                     </aside>
                                 </div>
                                 <div class="col-8">
@@ -321,7 +318,7 @@
                             <div class="row text-center">
                                 <div class="col-4">
                                     <aside class="single_sidebar_widget author_widget">
-                                        <img class="author_img rounded-circle" src="img/people3.jpg" alt=""><br>
+                                        <img class="author_img img-fluid rounded-circle" src="img/people3.jpg" alt=""><br>
                                     </aside>
                                 </div>
                                 <div class="col-8">
@@ -350,7 +347,7 @@
                             <div class="row text-center">
                                 <div class="col-4">
                                     <aside class="single_sidebar_widget author_widget">
-                                        <img class="author_img rounded-circle" src="img/people4.jpg" alt=""><br>
+                                        <img class="author_img img-fluid rounded-circle" src="img/people4.jpg" alt=""><br>
                                     </aside>
                                 </div>
                                 <div class="col-8">
@@ -378,5 +375,16 @@
         </div>
     </section>
     <!--================ Real people section Start ================-->
+
+    <script>
+        function initMap() {
+            var map = new google.maps.Map(document.getElementById('map'), {
+                center: {
+                    lat: 23.777, lng: 90.399
+                },
+                zoom: 6.5
+            });
+        }
+    </script>
 
 @endsection
