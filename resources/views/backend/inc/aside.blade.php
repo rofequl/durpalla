@@ -43,6 +43,9 @@
                     </ul>
                 </li>
                 <li class="">
+                    <a href="{{route('promo_code.index')}}"> <i class="menu-icon fas fa-hands-helping"></i>Promo Code</a>
+                </li>
+                <li class="">
                     <a href="{{route('admin.transection')}}"> <i class="menu-icon fas fa-hands-helping"></i>Transection</a>
                 </li>
                 <li class="">

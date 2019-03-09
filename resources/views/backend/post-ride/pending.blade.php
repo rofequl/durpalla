@@ -32,7 +32,7 @@
                                         <p class="my-0 fs-12 lh-1-2">Duration: {{$dist['time']}}</p>
                                     </td>
                                     <td>
-                                        <h6>Departure</h6><h5 class="my-0">Charlie Barber</h5>
+                                        <h6>Departure</h6>
                                         <p class="fs-12 lh-1-2">{{$rides->s_location}}</p>
                                         <h6>Destination</h6>
                                         <p class="fs-12 lh-1-2">{{$rides->e_location}}</p>

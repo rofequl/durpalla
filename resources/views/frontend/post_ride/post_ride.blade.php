@@ -9,15 +9,7 @@
 
     <section class="mb-5 overlay">
         <div class="container postRide-container">
-
-            <div class="row mt-3">
-                <div class="text-center mx-auto">
-                    <h2>Offer a ride on your next long journey</h2>
-                    <p>After booking you can chat with your Tasker, agree on a exact time.</p>
-                </div>
-            </div>
-            <br>
-            <div class="row">
+            <div class="row mt-5">
                 <div class="col-lg-6 border p-3 radius fbf7f7">
                     @if ($errors->any())
                         @foreach ($errors->all() as $error)
@@ -33,6 +25,12 @@
                             {{ session()->get('message') }}
                         </div>
                     @endif
+                    <div class="row mt-3">
+                        <div class="text-center mx-auto">
+                            <h2>Offer a ride on your next long journey</h2>
+                            <p>After booking you can chat with your Tasker, agree on a exact time.</p>
+                        </div>
+                    </div>
                     <form method="post" id="upload_form" action="{{route('post.ride')}}">
                         {{csrf_field()}}
                         <div class="card">
@@ -70,6 +68,17 @@
                                         <select name="car">
                                             @foreach(car(Session::get('userId')) as $categorys)
                                                 <option value="{{$categorys->id}}">{{$categorys->model}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                @endif
+                                @if(Session::get('userId') != null && Session::get('phone') != null)
+                                    <label for="basic-url">Driver selection</label>
+                                    <div class="input-group mb-3">
+                                        <select name="driver">
+                                            <option value="SP">{{userInformation(Session::get('userId'),'name')}}</option>
+                                            @foreach(resource(Session::get('userId')) as $categorys)
+                                                <option value="{{$categorys->id}}">{{$categorys->name}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -318,7 +327,7 @@
 
                         <div class="row mt-3 p-3">
                             <div class="ml-auto">
-                                <button type="submit" class="genric-btn info circle arrow">Next<span
+                                <button type="submit" class="btn btn-primary fs-12 circle arrow">Post my request<span
                                             class="lnr lnr-arrow-right"></span></button>
                             </div>
                         </div>

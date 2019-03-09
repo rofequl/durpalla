@@ -30,16 +30,24 @@
                         <div class="news-feed-container pb-2">
                             <ul class="list-unstyled">
                                 @foreach($stopover as $stopovers)
+                                    <?php
+                                    $s_location = PostRideAddress($stopovers->post_id,$stopovers->going,'location');
+                                    $e_location = PostRideAddress($stopovers->post_id,$stopovers->target,'location');
+                                    $s_lat = PostRideAddress($stopovers->post_id,$stopovers->going,'lat');
+                                    $s_lng = PostRideAddress($stopovers->post_id,$stopovers->going,'lng');
+                                    $e_lat = PostRideAddress($stopovers->post_id,$stopovers->target,'lat');
+                                    $e_lng = PostRideAddress($stopovers->post_id,$stopovers->target,'lng');
+                                    ?>
                                     <li class="border-bottom">
                                         <div class="row text-center">
                                             <div class="col-12 col-sm-4 col-md-4 location text-left">
-                                                {{$stopovers->s_location}}
+                                                {{$s_location}}
                                             </div>
                                             <div class="col-12 col-sm-4 col-md-4 location text-left">
-                                                {{$stopovers->e_location}}
+                                                {{$e_location}}
                                             </div>
                                             <div class="col-12 col-sm-4 col-md-2 p-0">
-                                                <?php echo distance($stopovers->s_lat, $stopovers->s_lng, $stopovers->e_lat, $stopovers->e_lng, "K") . " Km"; ?>
+                                                <?php echo distance($s_lat, $s_lng, $e_lat, $e_lng, "K") . " Km"; ?>
                                             </div>
                                             <div class="col-12 col-sm-4 col-md-2 reviewStar my-auto">
                                                 <div class="price">{{$stopovers->price}}$</div>

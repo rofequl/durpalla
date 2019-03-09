@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateStopoversTable extends Migration
+class CreatePostRideAddressesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,13 @@ class CreateStopoversTable extends Migration
      */
     public function up()
     {
-        Schema::create('stopovers', function (Blueprint $table) {
+        Schema::create('post_ride_addresses', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('going');
-            $table->integer('target');
-            $table->integer('price')->nullable();
-            $table->integer('seat')->nullable();
-            $table->string('date');
-            $table->string('time');
-            $table->string('time2');
+            $table->string('lat');
+            $table->string('lng');
+            $table->string('location');
+            $table->integer('serial');
             $table->integer('post_id');
-            $table->string('tracking');
             $table->timestamps();
         });
     }
@@ -35,6 +31,6 @@ class CreateStopoversTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('stopovers');
+        Schema::dropIfExists('post_ride_addresses');
     }
 }

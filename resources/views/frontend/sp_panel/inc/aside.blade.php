@@ -22,6 +22,9 @@
                     <a href="{{route('sp.personalInformation')}}"> <i class="menu-icon fas fa-hands-helping"></i>Personal Information</a>
                 </li>
                 <li class="">
+                    <a href="{{route('resource.index')}}"> <i class="menu-icon fas fa-hands-helping"></i>Resource</a>
+                </li>
+                <li class="">
                     <a href="{{route('sp.reference')}}"> <i class="menu-icon fas fa-hands-helping"></i>Reference</a>
                 </li>
                 <li class="">

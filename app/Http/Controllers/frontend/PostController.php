@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\frontend;
 
 use App\post_ride;
+use App\post_ride_address;
 use App\stopover;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -11,6 +12,15 @@ use Session;
 class PostController extends Controller
 {
 
+    public function RidePostAddress($lat, $lng, $location, $serial, $post){
+        $insert = new post_ride_address;
+        $insert->lat = $lat;
+        $insert->lng = $lng;
+        $insert->location = $location;
+        $insert->serial = $serial;
+        $insert->post_id = $post;
+        $insert->save();
+    }
 
     public function RidePost(Request $request)
     {
@@ -28,79 +38,7 @@ class PostController extends Controller
             'car' => 'required',
         ]);
 
-        $location = [];
-        $lat = [];
-        $lng = [];
-
-        array_push($location, $request->location);
-        array_push($lat, $request->lat);
-        array_push($lng, $request->lng);
-
-
-        if ($request->alocation != null) {
-            array_push($location, $request->alocation);
-            array_push($lat, $request->alat);
-            array_push($lng, $request->alng);
-        }
-
-        if ($request->alocation1 != null) {
-            array_push($location, $request->alocation1);
-            array_push($lat, $request->alat1);
-            array_push($lng, $request->alng1);
-        }
-
-        if ($request->alocation2 != null) {
-            array_push($location, $request->alocation2);
-            array_push($lat, $request->alat2);
-            array_push($lng, $request->alng2);
-        }
-
-        if ($request->alocation3 != null) {
-            array_push($location, $request->alocation3);
-            array_push($lat, $request->alat3);
-            array_push($lng, $request->alng3);
-        }
-
-        if ($request->alocation4 != null) {
-            array_push($location, $request->alocation4);
-            array_push($lat, $request->alat4);
-            array_push($lng, $request->alng4);
-        }
-
-        if ($request->alocation5 != null) {
-            array_push($location, $request->alocation5);
-            array_push($lat, $request->alat5);
-            array_push($lng, $request->alng5);
-        }
-
-        if ($request->alocation6 != null) {
-            array_push($location, $request->alocation6);
-            array_push($lat, $request->alat6);
-            array_push($lng, $request->alng6);
-        }
-
-        if ($request->alocation7 != null) {
-            array_push($location, $request->alocation7);
-            array_push($lat, $request->alat7);
-            array_push($lng, $request->alng7);
-        }
-
-        if ($request->alocation8 != null) {
-            array_push($location, $request->alocation8);
-            array_push($lat, $request->alat8);
-            array_push($lng, $request->alng8);
-        }
-
-        if ($request->alocation9 != null) {
-            array_push($location, $request->alocation9);
-            array_push($lat, $request->alat9);
-            array_push($lng, $request->alng9);
-        }
-
-        array_push($location, $request->location2);
-        array_push($lat, $request->lat2);
-        array_push($lng, $request->lng2);
-
+        $serial = 1;
         $return = 0;
         $insert = new post_ride;
         $insert->s_lat = $request->lat;
@@ -119,10 +57,75 @@ class PostController extends Controller
             $return = 1;
         }
         $insert->car_id = $request->car;
+        $insert->driver = $request->driver;
         $insert->user_id = Session('userId');
         $insert->save();
 
-        $total = count($location);
+        $this->RidePostAddress($request->lat, $request->lng, $request->location, $serial, $insert->id);
+        $serial++;
+
+
+        if ($request->alocation != null) {
+            $this->RidePostAddress($request->alat, $request->alng, $request->alocation, $serial, $insert->id);
+            $serial++;
+        }
+
+        if ($request->alocation1 != null) {
+            $this->RidePostAddress($request->alat1, $request->alng1, $request->alocation1, $serial, $insert->id);
+            $serial++;
+        }
+
+        if ($request->alocation2 != null) {
+            $this->RidePostAddress($request->alat2, $request->alng2, $request->alocation2, $serial, $insert->id);
+            $serial++;
+        }
+
+        if ($request->alocation3 != null) {
+            $this->RidePostAddress($request->alat3, $request->alng3, $request->alocation3, $serial, $insert->id);
+            $serial++;
+        }
+
+        if ($request->alocation4 != null) {
+            $this->RidePostAddress($request->alat4, $request->alng4, $request->alocation4, $serial, $insert->id);
+            $serial++;
+        }
+
+        if ($request->alocation5 != null) {
+            $this->RidePostAddress($request->alat5, $request->alng5, $request->alocation5, $serial, $insert->id);
+            $serial++;
+        }
+
+        if ($request->alocation6 != null) {
+            $this->RidePostAddress($request->alat6, $request->alng6, $request->alocation6, $serial, $insert->id);
+            $serial++;
+        }
+
+        if ($request->alocation7 != null) {
+            $this->RidePostAddress($request->alat7, $request->alng7, $request->alocation7, $serial, $insert->id);
+            $serial++;
+        }
+
+        if ($request->alocation8 != null) {
+            $this->RidePostAddress($request->alat8, $request->alng8, $request->alocation8, $serial, $insert->id);
+            $serial++;
+        }
+
+        if ($request->alocation9 != null) {
+            $this->RidePostAddress($request->alat9, $request->alng9, $request->alocation9, $serial, $insert->id);
+            $serial++;
+        }
+
+        $this->RidePostAddress($request->lat2, $request->lng2, $request->location2, $serial, $insert->id);
+
+        $postCode = [];
+
+        $ride = post_ride_address::where('post_id',$insert->id)->get();
+        foreach ($ride as $rides){
+            array_push($postCode, $rides->serial);
+        }
+
+
+        $total = count($postCode);
         for ($i = 0; $i < $total; $i++) {
             if ($i == $total - 1) {
                 break;
@@ -130,13 +133,12 @@ class PostController extends Controller
             for ($l = $i + 1; $l < $total; $l++) {
 
                 $insert1 = new stopover;
-                $insert1->s_lat = $lat[$i];
-                $insert1->s_lng = $lng[$i];
-                $insert1->s_location = $location[$i];
-                $insert1->e_lat = $lat[$l];
-                $insert1->e_lng = $lng[$l];
-                $insert1->e_location = $location[$l];
+                $insert1->going = $postCode[$i];
+                $insert1->target = $postCode[$l];
                 $insert1->post_id = $insert->id;
+                $insert1->date = $request->departure;
+                $insert1->time = $request->d_time;
+                $insert1->time2 = $request->d_time2;
                 $ride_id = post_ride::all()->count();
                 $ride_id = "R". rand(100, 999) . str_pad($ride_id, 3, "0", STR_PAD_LEFT);
                 $insert1->tracking = $ride_id;
@@ -144,18 +146,16 @@ class PostController extends Controller
             }
         }
 
-
         if ($return == 1) {
             for ($i = $total - 1; $i >= 1; $i--) {
                 for ($l = $i - 1; $l >= 0; $l--) {
                     $insert1 = new stopover;
-                    $insert1->s_lat = $lat[$i];
-                    $insert1->s_lng = $lng[$i];
-                    $insert1->s_location = $location[$i];
-                    $insert1->e_lat = $lat[$l];
-                    $insert1->e_lng = $lng[$l];
-                    $insert1->e_location = $location[$l];
+                    $insert1->going = $postCode[$i];
+                    $insert1->target = $postCode[$l];
                     $insert1->post_id = $insert->id;
+                    $insert1->date = $request->return;
+                    $insert1->time = $request->r_time;
+                    $insert1->time2 = $request->r_time2;
                     $ride_id = post_ride::all()->count();
                     $ride_id = "R". rand(100, 999) . str_pad($ride_id, 3, "0", STR_PAD_LEFT);
                     $insert1->tracking = $ride_id;
@@ -165,8 +165,8 @@ class PostController extends Controller
 
         }
 
-        Session::flash('message', 'Request ride insert successfully');
-        return redirect('post-ride2/' . $insert->id);
+       Session::flash('message', 'Request ride insert successfully');
+       return redirect('post-ride2/' . $insert->id);
 
     }
 

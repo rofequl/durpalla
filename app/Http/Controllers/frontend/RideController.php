@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\frontend;
 
 use App\post_ride;
+use App\ride_setting;
+use App\stopover;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -29,38 +31,41 @@ class RideController extends Controller
     }
 
 
-
     public function Ride()
     {
 
-        $ride = post_ride::all();
+        $ride = stopover::all();
 
         $group = [];
-        foreach ($ride as $item)  {
-            if (!in_array($item->departure, $group)) {
-                array_push($group,$item->departure);
+        foreach ($ride as $item) {
+            if (!in_array($item->date, $group)) {
+                array_push($group, $item->date);
             }
 
         }
-        $date_sort = function ($a, $b) {return strtotime($a) - strtotime($b);};
+        $date_sort = function ($a, $b) {
+            return strtotime($a) - strtotime($b);
+        };
         usort($group, $date_sort);
 
-        return view('frontend.all_ride', compact('ride','group'));
+        return view('frontend.all_ride', compact('ride', 'group'));
     }
 
     public function FindRide()
     {
         $show = 3;
-        return view('frontend.find_ride',compact('show'));
+        return view('frontend.find_ride', compact('show'));
     }
 
     public function FindRideSearch(Request $request)
     {
 
-        $ride = post_ride::where('departure', '>=', date('m-d-Y'))->get();
-
-
-
+        $request->validate([
+            'location' => 'required',
+            'location2' => 'required',
+            'after' => 'required',
+            'before' => 'required',
+        ]);
 
         $userLat = $request->lat;
         $userLng = $request->lng;
@@ -72,20 +77,34 @@ class RideController extends Controller
         $before = $request->before;
         $seat = $request->seat;
         $count = 1;
-        foreach ($ride as $rides) {
-            if (distance($rides->s_lat, $rides->s_lng, $userLat, $userLng, "K") < 10 && strtotime($rides->departure) >= strtotime("now") && $rides->seat >= $seat) {
-                $count++;
+
+        $stopover = stopover::all();
+
+        $satting = ride_setting::first();
+
+        foreach ($stopover as $stopovers) {
+            $s_location = PostRideAddress($stopovers->post_id,$stopovers->going,'location');
+            $e_location = PostRideAddress($stopovers->post_id,$stopovers->target,'location');
+            $s_lat = PostRideAddress($stopovers->post_id,$stopovers->going,'lat');
+            $s_lng = PostRideAddress($stopovers->post_id,$stopovers->going,'lng');
+            $e_lat = PostRideAddress($stopovers->post_id,$stopovers->target,'lat');
+            $e_lng = PostRideAddress($stopovers->post_id,$stopovers->target,'lng');
+            if (strtotime($stopovers->date) >= strtotime($after) && strtotime($stopovers->date) <= strtotime($before)) {
+                if (distance($s_lat, $s_lng, $userLat, $userLng, "K") < $satting->search && distance($e_lat, $e_lng, $userLat2, $userLng2, "K") < $satting->search ) {
+                    $count++;
+                }
             }
         }
 
-        if ($count > 1){
+        if ($count > 1) {
             $show = 1;
-        }else{
+        } else {
             $show = 2;
         }
 
-        return view('frontend.find_ride', compact('ride', 'userLat', 'userLng', 'seat', 'userLat2', 'userLng2'
-            , 'userLoca', 'userLoca2', 'after', 'before','show'));
+
+        return view('frontend.find_ride', compact('stopover','satting', 'userLat', 'userLng', 'seat', 'userLat2', 'userLng2'
+            , 'userLoca', 'userLoca2', 'after', 'before', 'show'));
 
     }
 }

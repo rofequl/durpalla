@@ -39,6 +39,8 @@ Route::group(['middleware' => 'CheckUserLogin','namespace' => 'frontend'], funct
 
     Route::post('/sp-verification', 'VerificationController@SpVerificationPost')->name('sp.verification');
 
+    Route::resource('resource', 'ResourceController');
+
 });
 
 Route::get('/request', function () {return view('frontend.request');})->name('request.ride');
@@ -197,6 +199,12 @@ Route::group(['middleware' => 'CheckAdmin','namespace' => 'backend'], function (
     Route::get('/admin-pending-post-change', 'PostController@PendingPostChange');
 
     Route::post('admin-tracking', 'TrackingController@TrackingRide')->name('admin.tracking');
+
+    Route::get('/promo_code/{data?}', 'PromoCodeController@index')->name('promo_code.index');
+
+    Route::post('/promo_code', 'PromoCodeController@store')->name('promo_code.store');
+
+    Route::get('/promo_code/delete/{data}', 'PromoCodeController@destroy')->name('promo_code.destroy');
 
 });
 

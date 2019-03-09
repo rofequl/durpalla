@@ -5,19 +5,19 @@
     <hr class="mt-0">
     <section class="mb-5 overlay">
         <div class="container">
-            <div class="row mt-3">
-                <div class="text-center mx-auto">
-                    <h2>Post a Request. <span class="text-primary">Get Alerts.</span></h2>
-                    <p>We'll notify you via email of every long distance rideshare that passes by you and your
-                        destination. Post your information for drivers to see.<span
-                                class="font-weight-bold">Try it out!</span></p>
-                </div>
-            </div>
             <a href="{{route('request.ride.next')}}" type="button"
                class="btn bg-paste text-white font-weight-bold w-25 mx-auto">See your all request ride
             </a>
             <div class="row justify-content-center mt-3">
                 <div class="col-12 col-lg-6 px-0 mt-5 mt-lg-0 border p-3 radius fbf7f7">
+                    <div class="row mt-3">
+                        <div class="text-center mx-auto">
+                            <h2>Post a Request. <span class="text-primary">Get Alerts.</span></h2>
+                            <p>We'll notify you via email of every long distance rideshare that passes by you and your
+                                destination. Post your information for drivers to see.<span
+                                        class="font-weight-bold">Try it out!</span></p>
+                        </div>
+                    </div>
                     <div class="card rounded mb-3 bg-light">
                         <div class="card-header bg-paste text-white py-1">
                             Where are you headed to?
@@ -89,7 +89,7 @@
                                                placeholder="1+ seats">
                                     </div>
                                     <div class="w-100">
-                                        <button type="submit" class="btn btn-primary float-right">Submit</button>
+                                        <button type="submit" class="btn btn-primary float-right">Published My Ride</button>
                                     </div>
                                 </div>
                             </form>

@@ -34,16 +34,26 @@
                             <div class="card-body bg-light">
 
                                 @foreach($stopover as $stopovers)
+
+                                    <?php
+                                    $s_location = PostRideAddress($stopovers->post_id,$stopovers->going,'location');
+                                    $e_location = PostRideAddress($stopovers->post_id,$stopovers->target,'location');
+                                    $s_lat = PostRideAddress($stopovers->post_id,$stopovers->going,'lat');
+                                    $s_lng = PostRideAddress($stopovers->post_id,$stopovers->going,'lng');
+                                    $e_lat = PostRideAddress($stopovers->post_id,$stopovers->target,'lat');
+                                    $e_lng = PostRideAddress($stopovers->post_id,$stopovers->target,'lng');
+                                    ?>
+
                                     <div class="row">
-                                        <div class="col-8">{{$stopovers->s_location}} <span
-                                                    class="lnr lnr-arrow-right"></span> {{$stopovers->e_location}}</div>
+                                        <div class="col-8">{{$s_location}} <span
+                                                    class="lnr lnr-arrow-right"></span> {{$e_location}}</div>
                                         <div class="col-4">
 
                                             <div class="input-group input-group-sm mb-3">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text" id="basic-addon1">$</span>
                                                 </div>
-                                                <input type="text" value=" <?php echo ride_price($stopovers->s_lat, $stopovers->s_lng, $stopovers->e_lat, $stopovers->e_lng); ?>" class="form-control" placeholder="00000"
+                                                <input type="text" value=" <?php echo ride_price($s_lat, $s_lng, $e_lat, $e_lng, $post->car_id); ?>" class="form-control" placeholder="00000"
                                                        name="price[]" autofocus>
                                             </div>
                                         </div>
@@ -61,7 +71,13 @@
                                     <span class="input-group-text" id="basic-addon1"><i class="fa fa-car"
                                                                                         aria-hidden="true"></i></span>
                                         </div>
-                                        <input type="text" class="form-control" placeholder="00" name="seat">
+                                        <input type="text" class="form-control seat" value="01" name="seat">
+                                        <div class="input-group-append">
+                                    <span class="input-group-text plus" id="basic-addon1"><i class="fas fa-plus"></i></span>
+                                        </div>
+                                        <div class="input-group-append">
+                                    <span class="input-group-text minus" id="basic-addon1"><i class="fas fa-minus"></i></span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -115,6 +131,40 @@
                 zoom: 6.5
             });
         }
+
+        $(function(){
+            $(".plus").click(function(e) {
+                e.preventDefault();
+                var $this = $(this);
+                var $input = $(".seat");
+                var value = parseInt($input.val());
+
+                if (value < 12) {
+                    value = value + 1;
+                }
+                else {
+                    value =12;
+                }
+
+                $input.val(value);
+            });
+
+            $(".minus").click(function(e) {
+                e.preventDefault();
+                var $this = $(this);
+                var $input = $(".seat");
+                var value = parseInt($input.val());
+
+                if (value > 1) {
+                    value = value - 1;
+                }
+                else {
+                    value =1;
+                }
+
+                $input.val(value);
+            });
+        });
     </script>
 
 

@@ -38,6 +38,15 @@ function GetDrivingDistance($lat1, $long1, $lat2, $long2)
     return array('distance' => $dist, 'time' => $time);
 }
 
+function PostRideAddress($column,$column2,$column3){
+    $query = DB::table('post_ride_addresses')
+        ->where('post_id', '=', $column)
+        ->where('serial', '=', $column2)
+        ->pluck($column3)
+        ->first();
+    return $query;
+}
+
 function getRide($column)
 {
     $query = DB::table('post_rides')
@@ -58,7 +67,7 @@ function UserName($column)
 function getStopoverRide($column)
 {
     $query = DB::table('stopovers')
-        ->where('post_id', '=', $column)
+        ->where('date', '=', $column)
         ->get();
     return $query;
 }
@@ -67,28 +76,54 @@ function car($column)
 {
     $query = DB::table('cars')
         ->where('user_id', '=', $column)
+        ->where('status', '=', 1)
         ->get();
     return $query;
 }
 
-function ride_price($lat1, $lon1, $lat2, $lon2)
+function resource($column)
 {
-    $theta = $lon1 - $lon2;
-    $dist = sin(deg2rad($lat1)) * sin(deg2rad($lat2)) + cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta));
-    $dist = acos($dist);
-    $dist = rad2deg($dist);
-    $miles = $dist * 60 * 1.1515;
-    $km = $miles * 1.609344;
+    $query = DB::table('resources')
+        ->where('user_id', '=', $column)
+        ->get();
+    return $query;
+}
+
+function userInformation($column, $column2)
+{
+    $query = DB::table('users')
+        ->where('user_id', '=', $column)
+        ->pluck($column2)
+        ->first();
+    return $query;
+}
+
+function ride_price($lat1, $lon1, $lat2, $lon2, $car)
+{
+    $km = distance($lat1, $lon1, $lat2, $lon2, 'K');
 
     $query = DB::table('ride_settings')->first();
 
+    $query2 = DB::table('cars')
+        ->find($car);
+
     if ($query){
-        if ($km > $query->km_1st){
-            $price = (($km - $query->km_1st) * $query->price2) + ($query->km_1st * $query->price);
-            return number_format((float)$price, 2, '.', '');
+        if ($query2->car_type == "Standard"){
+            if ($km > $query->km_1st){
+                $price = (($km - $query->km_1st) * $query->price2) + ($query->km_1st * $query->price);
+                return ceil($price);
+            }else{
+                $price = $km * $query->price;
+                return ceil($price);
+            }
         }else{
-            $price = $km * $query->price;
-            return number_format((float)$price, 2, '.', '');
+            if ($km > $query->km_1st){
+                $price = (($km - $query->pkm_1st) * $query->pprice2) + ($query->pkm_1st * $query->pprice);
+                return ceil($price);
+            }else{
+                $price = $km * $query->price;
+                return ceil($price);
+            }
         }
     }else{
         return 00;
