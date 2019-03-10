@@ -50,8 +50,8 @@ function PostRideAddress($column,$column2,$column3){
 function getRide($column)
 {
     $query = DB::table('post_rides')
-        ->where('departure', '=', $column)
-        ->get();
+        ->where('id', '=', $column)
+        ->first();
     return $query;
 }
 
@@ -96,6 +96,22 @@ function userInformation($column, $column2)
         ->pluck($column2)
         ->first();
     return $query;
+}
+
+function seat($going,$target,$post){
+    $query = DB::table('post_ride_addresses')->where('post_id', $post)->get();
+    $seat = DB::table('post_rides')->where('id', $post)->pluck('seat')->first();
+
+    foreach ($query as $querys){
+        if ($querys->serial < $going){
+            $seat -= DB::table('stopovers')->where('post_id', $post)->where('going', $querys->serial)->where('target','>',$going)->sum('stopovers.seat');
+        }elseif ($querys->serial == $going){
+            $seat -= DB::table('stopovers')->where('post_id', $post)->where('going', $going)->where('target','>=',$target)->sum('stopovers.seat');
+        }else{
+            $seat -= DB::table('stopovers')->where('post_id', $post)->where('going','>=', $querys->serial)->where('target','<=',$target)->sum('stopovers.seat');
+        }
+    }
+   return $seat;
 }
 
 function ride_price($lat1, $lon1, $lat2, $lon2, $car)

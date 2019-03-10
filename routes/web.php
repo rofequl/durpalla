@@ -30,13 +30,10 @@ Route::group(['middleware' => 'CheckUserLogin','namespace' => 'frontend'], funct
     Route::get('/sp-panel', 'SpController@index')->name('sp.home');
 
     Route::get('/sp-car', 'SpController@Car')->name('sp.car');
-
     Route::post('/sp-add-car', 'SpController@AddCar')->name('sp.addcar');
-
     Route::get('/sp-delete-car', 'SpController@DeleteCar')->name('sp.deletecar');
 
     Route::get('/sp-verification', 'VerificationController@SpVerification')->name('sp.verification');
-
     Route::post('/sp-verification', 'VerificationController@SpVerificationPost')->name('sp.verification');
 
     Route::resource('resource', 'ResourceController');
@@ -44,28 +41,27 @@ Route::group(['middleware' => 'CheckUserLogin','namespace' => 'frontend'], funct
 });
 
 Route::get('/request', function () {return view('frontend.request');})->name('request.ride');
-
 Route::get('/request-next', 'frontend\RequestController@RequestNext')->name('request.ride.next');
-
 Route::post('/request','frontend\RequestController@RequestPost')->name('request.ride.post');
 
 Route::get('/post-ride', function () {return view('frontend.post_ride.post_ride');})->name('post.ride');
-
 Route::post('/post-ride', 'frontend\PostController@RidePost')->name('post.ride');
-
 Route::get('/post-ride2/{data}', 'frontend\PostController@RidePost2')->name('post.ride2');
-
 Route::post('/post-ride2', 'frontend\PostController@RidePostPrice')->name('post.ride2');
-
 Route::get('/post-ride3/{data}', 'frontend\PostController@RidePost3')->name('post.ride3');
-
 Route::post('/post-ride3', 'frontend\PostController@RidePostCondition')->name('post.ride3');
 
 Route::get('/all-ride', 'frontend\RideController@Ride')->name('all.ride');
 
 Route::get('/find-ride', 'frontend\RideController@FindRide')->name('find.ride');
-
 Route::post('/find-ride', 'frontend\RideController@FindRideSearch')->name('find.ride');
+
+Route::get('/booking/{data}/{data2?}', 'frontend\BookingController@Index')->name('booking.index');
+
+Route::post('/booking', 'frontend\BookingController@Store')->name('booking.store');
+
+Route::get('/preview', 'frontend\BookingController@PreviewIndex')->name('preview.index');
+
 
 Route::get('/map', function () {
     return view('frontend.map2');
@@ -201,9 +197,7 @@ Route::group(['middleware' => 'CheckAdmin','namespace' => 'backend'], function (
     Route::post('admin-tracking', 'TrackingController@TrackingRide')->name('admin.tracking');
 
     Route::get('/promo_code/{data?}', 'PromoCodeController@index')->name('promo_code.index');
-
     Route::post('/promo_code', 'PromoCodeController@store')->name('promo_code.store');
-
     Route::get('/promo_code/delete/{data}', 'PromoCodeController@destroy')->name('promo_code.destroy');
 
 });
