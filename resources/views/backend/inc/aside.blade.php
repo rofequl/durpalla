@@ -16,7 +16,7 @@
                 </li>
                 --->
                 <li class="">
-                    <a href="{{route('admin.ride.setting')}}"> <i class="menu-icon fas fa-hands-helping"></i>Ride Setting</a>
+                    <a href="{{route('admin.ride.setting')}}"> <i class="menu-icon fas fa-sliders-h"></i> Ride Setting</a>
                 </li>
                 <li class="menu-item-has-children dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fas fa-car"></i>Car management</a>
@@ -26,10 +26,11 @@
                     </ul>
                 </li>
                 <li class="menu-item-has-children dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fas fa-car"></i>Booking</a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="menu-icon fas fa-bookmark"></i> Booking</a>
                     <ul class="sub-menu children dropdown-menu">
                         <li><i class="fas fa-check-circle"></i><a href="{{route('admin.complete.book')}}">Complete Book</a></li>
-                        <li><i class="fas fa-pause"></i><a href="{{route('admin.not.book')}}">Not Book</a></li>
+                        <li><i class="fas fa-check-circle"></i><a href="{{route('admin.partial.book')}}">Partial Book</a></li>
+                        <li><i class="fas fa-ban"></i><a href="{{route('admin.not.book')}}">Not Book</a></li>
                         <li><i class="fas fa-pause"></i><a href="{{route('admin.ongoing.book')}}">Ongoing Book</a></li>
                         <li><i class="fas fa-check-circle"></i><a href="{{route('admin.complete.ride')}}">Complete Ride</a></li>
                     </ul>
@@ -53,13 +54,13 @@
                     </ul>
                 </li>
                 <li class="">
-                    <a href="{{route('admin.transection')}}"> <i class="menu-icon fas fa-hands-helping"></i>Transection</a>
+                    <a href="{{route('admin.transection')}}"> <i class="menu-icon fas fa-money-bill-wave"></i> Transection</a>
                 </li>
                 <li class="">
                     <a href="{{route('admin.requestRide')}}"> <i class="menu-icon fas fa-hands-helping"></i>Request a Ride</a>
                 </li>
                 <li class="menu-item-has-children dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fas fa-car"></i>Verification</a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fas fa-cog"></i>Verification</a>
                     <ul class="sub-menu children dropdown-menu">
                         <li><i class="fas fa-check-circle"></i><a href="{{route('admin.approve.verification')}}">Approve</a></li>
                         <li><i class="fas fa-pause"></i><a href="{{route('admin.pending.verification')}}">Pending</a></li>
@@ -67,10 +68,10 @@
                     </ul>
                 </li>
                 <li class="">
-                    <a href="{{route('admin.resourceList')}}"> <i class="menu-icon fas fa-hands-helping"></i>Resource List</a>
+                    <a href="{{route('admin.resourceList')}}"> <i class="menu-icon fas fa-user"></i>Resource List</a>
                 </li>
                 <li class="">
-                    <a href="{{route('admin.complain')}}"> <i class="menu-icon fas fa-hands-helping"></i>Complain</a>
+                    <a href="{{route('admin.complain')}}"> <i class="menu-icon fas fa-exclamation-circle"></i>Complain</a>
                 </li>
             </ul>
         </div>

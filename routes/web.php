@@ -203,7 +203,8 @@ Route::group(['middleware' => 'CheckAdmin','namespace' => 'backend'], function (
     Route::post('/corporate-group', 'CorporateController@StoreGroup')->name('corporate.group.Store');
 
     Route::get('/admin-complete-book/{data?}', 'BookingController@CompleteBook')->name('admin.complete.book');
-    Route::get('/admin-not-book', 'BookingController@NotBook')->name('admin.not.book');
+    Route::get('/admin-partial-book/{data?}', 'BookingController@PartialBook')->name('admin.partial.book');
+    Route::get('/admin-not-book/{data?}', 'BookingController@NotBook')->name('admin.not.book');
     Route::get('/admin-ongoing-book', 'BookingController@OngoingBook')->name('admin.ongoing.book');
     Route::get('/admin-complete-ride', 'BookingController@CompleteRide')->name('admin.complete.ride');
 });
