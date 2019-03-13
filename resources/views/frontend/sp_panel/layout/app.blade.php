@@ -47,6 +47,13 @@
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
+
+<style>
+    body{
+        background-color: #eee8e8;
+    }
+</style>
+
 <body class="hold-transition sidebar-mini">
 
 @include('frontend.sp_panel.inc.aside')
@@ -70,6 +77,8 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="{{asset('custom/script.js')}}"></script>
 <script src="{{asset('custom/frontend/timeScript.js')}}"></script>
+<script src="{{asset('framework/elaAdmin/js/dashboard.js')}}"></script>
+<script src="{{asset('framework/elaAdmin/js/main.js')}}"></script>
 <!-- Bootstrap 4 -->
 <script src="{{asset('js/bootstrap.min.js')}}"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>

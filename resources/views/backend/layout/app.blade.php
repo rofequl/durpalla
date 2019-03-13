@@ -41,10 +41,17 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="{{asset('framework/elaAdmin/css/cs-skin-elastic.css')}}">
     <link rel="stylesheet" href="{{asset('framework/elaAdmin/css/style.css')}}">
+    <link rel="stylesheet" href="{{asset('framework/adminLTE/css/adminlte.min.css')}}">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <script src="{{asset('framework/jquery/jquery.min.js')}}"></script>
 </head>
+
+<style>
+    body{
+        background-color: #eee8e8;
+    }
+</style>
 <body class="hold-transition sidebar-mini">
 
 @include('backend.inc.aside')
@@ -67,7 +74,6 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="{{asset('js/bootstrap.min.js')}}"></script>
 
-<script src="{{asset('framework/elaAdmin/js/widgets.js')}}"></script>
 <!-- Bootstrap 4 -->
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 <!-- AdminLTE App -->
@@ -83,7 +89,8 @@
 <script src="https://cdn.jsdelivr.net/npm/flot-spline@0.0.1/js/jquery.flot.spline.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/simpleweather@3.1.0/jquery.simpleWeather.min.js"></script>
-
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCMfl6pAmNv3T6PoDRy7ESSJRZLLSFf2jI&libraries=places&callback=initMap"
+        async defer></script>
 <script>
     $(document).ready(function() {
         $('.table').DataTable();

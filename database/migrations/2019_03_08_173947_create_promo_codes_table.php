@@ -18,7 +18,9 @@ class CreatePromoCodesTable extends Migration
             $table->integer('p_amount');
             $table->integer('h_amount');
             $table->string('code');
-            $table->string('c_area');
+            $table->string('lat');
+            $table->string('lng');
+            $table->string('location');
             $table->integer('r_area');
             $table->string('s_date');
             $table->string('e_date');

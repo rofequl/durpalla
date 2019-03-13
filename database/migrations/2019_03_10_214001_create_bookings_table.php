@@ -21,8 +21,10 @@ class CreateBookingsTable extends Migration
             $table->string('message',9999)->nullable();
             $table->string('promo_code')->nullable();
             $table->integer('discount')->nullable();
+            $table->integer('fine')->nullable();
             $table->integer('corporate')->nullable();
             $table->integer('amount');
+            $table->boolean('status')->default(1);
             $table->timestamps();
         });
     }

@@ -14,15 +14,10 @@
 Route::get('/', function () {return view('frontend.index');})->name('home');
 
 Route::get('/registration', function () {return view('frontend.log_in.registration');})->name('sp.registration');
-
 Route::get('/registration1', function () {return view('frontend.log_in.registration2');})->name('sp.registration1');
-
 Route::get('/login', function () {return view('frontend.log_in.login');})->name('sp.login');
-
 Route::post('/login', 'homeController@UserLogin')->name('sp.login');
-
 Route::post('/UserRegister', 'homeController@UserRegister');
-
 Route::get('/logout', 'homeController@LogoutUser')->name('sp.logout');
 
 Route::group(['middleware' => 'CheckUserLogin','namespace' => 'frontend'], function () {
@@ -37,6 +32,13 @@ Route::group(['middleware' => 'CheckUserLogin','namespace' => 'frontend'], funct
     Route::post('/sp-verification', 'VerificationController@SpVerificationPost')->name('sp.verification');
 
     Route::resource('resource', 'ResourceController');
+
+    Route::get('/current-booking/{data?}', 'BookingController@CurrentBooking')->name('current.booking');
+    Route::get('/booking-preview/{data?}', 'BookingController@BookingPreviewIndex')->name('booking.preview.index');
+    Route::post('/current-booking', 'BookingController@CurrentBookingCancel')->name('current.booking.cancel');
+
+    Route::get('/upcoming-ride', 'PostController@upcomingRideIndex')->name('upcoming.ride.index');
+    Route::get('/upcoming-ride-preview/{data}', 'PostController@upcomingRidePreview')->name('upcoming.ride.preview');
 
 });
 
@@ -57,10 +59,11 @@ Route::get('/find-ride', 'frontend\RideController@FindRide')->name('find.ride');
 Route::post('/find-ride', 'frontend\RideController@FindRideSearch')->name('find.ride');
 
 Route::get('/booking/{data}/{data2?}', 'frontend\BookingController@Index')->name('booking.index');
-
 Route::post('/booking', 'frontend\BookingController@Store')->name('booking.store');
-
 Route::get('/preview', 'frontend\BookingController@PreviewIndex')->name('preview.index');
+Route::post('/preview', 'frontend\BookingController@PreviewStore')->name('preview.store');
+Route::get('/booking-congrate', 'frontend\BookingController@congrate')->name('booking.congrate');
+
 
 
 Route::get('/map', function () {
@@ -82,17 +85,9 @@ Route::get('/ratting', function () {
 })->name('sp.ratting');
 
 
-Route::get('/current_bokking', function () {
-    return view('frontend.sp_panel.booking.current_book');
-})->name('sp.current_bokking');
-
 Route::get('/history', function () {
     return view('frontend.sp_panel.booking.history');
 })->name('sp.history');
-
-Route::get('/request_ride', function () {
-    return view('frontend.sp_panel.request_ride');
-})->name('sp.request_ride');
 
 Route::get('/complain', function () {
     return view('frontend.sp_panel.complain');
@@ -198,8 +193,19 @@ Route::group(['middleware' => 'CheckAdmin','namespace' => 'backend'], function (
 
     Route::get('/promo_code/{data?}', 'PromoCodeController@index')->name('promo_code.index');
     Route::post('/promo_code', 'PromoCodeController@store')->name('promo_code.store');
+    Route::post('/promo-code-update', 'PromoCodeController@Update')->name('promo_code.update');
     Route::get('/promo_code/delete/{data}', 'PromoCodeController@destroy')->name('promo_code.destroy');
+    Route::get('/promo_code/publish/{data}', 'PromoCodeController@publish')->name('promo_code.publish');
 
+    Route::get('/corporate', 'CorporateController@Index')->name('corporate.index');
+    Route::post('/corporate', 'CorporateController@Store')->name('corporate.Store');
+    Route::get('/corporate-group', 'CorporateController@IndexGroup')->name('corporate.group.index');
+    Route::post('/corporate-group', 'CorporateController@StoreGroup')->name('corporate.group.Store');
+
+    Route::get('/admin-complete-book/{data?}', 'BookingController@CompleteBook')->name('admin.complete.book');
+    Route::get('/admin-not-book', 'BookingController@NotBook')->name('admin.not.book');
+    Route::get('/admin-ongoing-book', 'BookingController@OngoingBook')->name('admin.ongoing.book');
+    Route::get('/admin-complete-ride', 'BookingController@CompleteRide')->name('admin.complete.ride');
 });
 
 

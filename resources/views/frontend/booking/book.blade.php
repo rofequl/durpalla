@@ -44,17 +44,21 @@
                                                         class="fas fa-minus"></i></span>
                                         </div>
                                     </div>
-                                    <div class="form-group ml-2 input-group-sm w-50 mb-3">
-                                        <input type="text" class="single-input form-control shadow-none border w-100"
-                                               name="promo" placeholder="Enter Promo Code">
-                                    </div>
+                                    @if(!corporateGroup(userInformation(Session('userId'), 'phone')))
+                                        <div class="form-group ml-2 input-group-sm w-50 mb-3">
+                                            <input type="text"
+                                                   class="single-input form-control shadow-none border w-100"
+                                                   name="promo" placeholder="Enter Promo Code">
+                                        </div>
+                                    @endif
                                 </div>
 
                                 <div class="form-group">
-                                    <textarea class="single-textarea rounded border" name="message" placeholder="Message"
+                                    <textarea class="single-textarea rounded border" name="message"
+                                              placeholder="Message"
                                               rows="3"></textarea>
                                 </div>
-                            <button class="blog_btn border mb-4 rounded text-right">Ride Booking</button>
+                                <button class="blog_btn border mb-4 rounded text-right">Ride Booking</button>
                             </form>
                         @endif
 
@@ -89,7 +93,7 @@
                                              class="img-thumbnail w-75" alt="...">
                                     </div>
                                     <div class="col-6">
-                                        @if(Session::get('userId') != null && Session::get('phone') != null && !isset($show) && seat($singleStopovers->going,$singleStopovers->target,$singleStopovers->post_id) != 0)
+                                        @if(Session::get('userId') != null && Session::get('phone') != null && !isset($show) && seat($singleStopovers->going,$singleStopovers->target,$singleStopovers->post_id) != 0 && Session::get('userId') != getRide($singleStopovers->post_id)->user_id)
                                             <a href="{{url('booking'.'/'.$singleStopovers->tracking.'/'.'get')}}"
                                                class="blog_btn border mb-4 rounded float-right">
                                                 Book Now

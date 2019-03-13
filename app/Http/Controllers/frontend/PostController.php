@@ -170,17 +170,14 @@ class PostController extends Controller
 
     }
 
-
-    public
-    function RidePost2($data)
+    public function RidePost2($data)
     {
         $post = post_ride::find($data);
         $stopover = stopover::where('post_id', $data)->get();
         return view('frontend.post_ride.post_ride2', compact('stopover', 'post'));
     }
 
-    public
-    function RidePostPrice(Request $request)
+    public function RidePostPrice(Request $request)
     {
 
         $stopover = stopover::where('post_id', $request->id)->get();
@@ -201,16 +198,14 @@ class PostController extends Controller
         return redirect('post-ride3/' . $request->id);
     }
 
-    public
-    function RidePost3($data)
+    public function RidePost3($data)
     {
         $post = post_ride::find($data);
         $stopover = stopover::where('post_id', $data)->get();
         return view('frontend.post_ride.post_ride3', compact('stopover', 'post'));
     }
 
-    public
-    function RidePostCondition(Request $request)
+    public function RidePostCondition(Request $request)
     {
         $request->merge([
             'condition' => implode(',', (array)$request->get('condition'))
@@ -221,6 +216,17 @@ class PostController extends Controller
         $post->save();
 
         return redirect('all-ride');
+    }
+
+    public function upcomingRideIndex(){
+        $post = post_ride::where('user_id',Session('userId'))->get();
+        return view('frontend.sp_panel.rides_offered.upcoming_ride',compact('post'));
+    }
+
+    public function upcomingRidePreview($data){
+        $post = post_ride::find($data);
+        $stopover = stopover::where('post_id', $data)->get();
+        return view('frontend.sp_panel.rides_offered.preview', compact('stopover', 'post'));
     }
 
 }

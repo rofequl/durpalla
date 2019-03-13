@@ -1,4 +1,4 @@
-<aside id="left-panel" class="left-panel">
+<aside id="left-panel" class="left-panel border-right shadow">
     <nav class="navbar navbar-expand-sm navbar-default">
         <div id="main-menu" class="main-menu collapse navbar-collapse">
             <ul class="nav navbar-nav">
@@ -33,7 +33,7 @@
                 <li class="menu-item-has-children dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fas fa-user-cog"></i>Rides offered</a>
                     <ul class="sub-menu children dropdown-menu">
-                        <li><i class="fa fa-id-badge"></i><a href="{{route('sp.upcomingRides')}}">Upcoming rides</a></li>
+                        <li><i class="fa fa-id-badge"></i><a href="{{route('upcoming.ride.index')}}">Upcoming rides</a></li>
                         <li><i class="fa fa-bars"></i><a href="{{route('sp.pastRides')}}">Past rides</a></li>
                         <li><i class="fa fa-bars"></i><a href="{{route('sp.archivedRides')}}">Archived rides</a></li>
                     </ul>
@@ -47,12 +47,12 @@
                 <li class="menu-item-has-children dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fas fa-user-cog"></i>My booking</a>
                     <ul class="sub-menu children dropdown-menu">
-                        <li><i class="fa fa-id-badge"></i><a href="{{route('sp.current_bokking')}}">Current Booking</a></li>
+                        <li><i class="fa fa-id-badge"></i><a href="{{route('current.booking')}}">Current Booking</a></li>
                         <li><i class="fa fa-bars"></i><a href="{{route('sp.history')}}">History</a></li>
                     </ul>
                 </li>
                 <li class="">
-                    <a href="{{route('sp.request_ride')}}"> <i class="menu-icon fas fa-hands-helping"></i>Request a ride</a>
+                    <a href=""> <i class="menu-icon fas fa-hands-helping"></i>Request a ride</a>
                 </li>
                 <li class="">
                     <a href="{{route('sp.complain')}}"> <i class="menu-icon fas fa-hands-helping"></i>Complain</a>

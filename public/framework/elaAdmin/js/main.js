@@ -1,9 +1,5 @@
 $.noConflict();
 
-$(document).ready(function() {
-	$('#DataTable').DataTable();
-});
-
 jQuery(document).ready(function($) {
 
 	"use strict";

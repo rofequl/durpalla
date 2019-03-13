@@ -1,4 +1,4 @@
-<aside id="left-panel" class="left-panel">
+<aside id="left-panel" class="left-panel border-right shadow">
     <nav class="navbar navbar-expand-sm navbar-default">
         <div id="main-menu" class="main-menu collapse navbar-collapse">
             <ul class="nav navbar-nav">
@@ -28,10 +28,10 @@
                 <li class="menu-item-has-children dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fas fa-car"></i>Booking</a>
                     <ul class="sub-menu children dropdown-menu">
-                        <li><i class="fas fa-check-circle"></i><a href="{{route('admin.approve.post')}}">Complete Book</a></li>
-                        <li><i class="fas fa-pause"></i><a href="{{route('admin.pending.post')}}">Not Book</a></li>
-                        <li><i class="fas fa-pause"></i><a href="{{route('admin.disapprove.post')}}">Ongoing Book</a></li>
-                        <li><i class="fas fa-check-circle"></i><a href="{{route('admin.disapprove.post')}}">Complete Ride</a></li>
+                        <li><i class="fas fa-check-circle"></i><a href="{{route('admin.complete.book')}}">Complete Book</a></li>
+                        <li><i class="fas fa-pause"></i><a href="{{route('admin.not.book')}}">Not Book</a></li>
+                        <li><i class="fas fa-pause"></i><a href="{{route('admin.ongoing.book')}}">Ongoing Book</a></li>
+                        <li><i class="fas fa-check-circle"></i><a href="{{route('admin.complete.ride')}}">Complete Ride</a></li>
                     </ul>
                 </li>
                 <li class="menu-item-has-children dropdown">
@@ -44,6 +44,13 @@
                 </li>
                 <li class="">
                     <a href="{{route('promo_code.index')}}"> <i class="menu-icon fas fa-hands-helping"></i>Promo Code</a>
+                </li>
+                <li class="menu-item-has-children dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fas fa-car"></i>Corporate</a>
+                    <ul class="sub-menu children dropdown-menu">
+                        <li><i class="fas fa-check-circle"></i><a href="{{route('corporate.index')}}">Corporate Add</a></li>
+                        <li><i class="fas fa-pause"></i><a href="{{route('corporate.group.index')}}">Corporate Group</a></li>
+                    </ul>
                 </li>
                 <li class="">
                     <a href="{{route('admin.transection')}}"> <i class="menu-icon fas fa-hands-helping"></i>Transection</a>

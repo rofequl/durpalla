@@ -15,8 +15,13 @@ class PromoCodeController extends Controller
      */
     public function index($data = false)
     {
+
         $promo = promo_code::all();
         $data2 = promo_code::find($data);
+        if ($data == "ADD"){
+            $add = "";
+            return view('backend.promo_code',compact('promo','add'));
+        }
         if ($data){
             return view('backend.promo_code',compact('promo','data2'));
         }else{
@@ -47,7 +52,9 @@ class PromoCodeController extends Controller
         $insert->p_amount = $request->p_amount;
         $insert->h_amount = $request->h_amount;
         $insert->code = $request->code;
-        $insert->c_area = $request->c_area;
+        $insert->location = $request->location;
+        $insert->lat = $request->lat;
+        $insert->lng = $request->lng;
         $insert->r_area = $request->r_area;
         $insert->s_date = $request->s_date;
         $insert->e_date = $request->e_date;
@@ -56,15 +63,37 @@ class PromoCodeController extends Controller
         return redirect('promo_code');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function Update(Request $request)
     {
 
+        $insert = promo_code::find($request->id);
+        $insert->p_amount = $request->p_amount;
+        $insert->h_amount = $request->h_amount;
+        $insert->code = $request->code;
+        $insert->location = $request->location;
+        $insert->lat = $request->lat;
+        $insert->lng = $request->lng;
+        $insert->r_area = $request->r_area;
+        $insert->s_date = $request->s_date;
+        $insert->e_date = $request->e_date;
+        $insert->save();
+
+        return redirect('promo_code');
+    }
+
+
+    public function publish($id)
+    {
+        $insert = promo_code::find($id);
+        if ($insert->publish == 1){
+            $insert->publish = 0;
+        }else{
+            $insert->publish = 1;
+        }
+
+        $insert->save();
+
+        return redirect('promo_code');
     }
 
     /**
@@ -78,24 +107,6 @@ class PromoCodeController extends Controller
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $data = promo_code::find($id);

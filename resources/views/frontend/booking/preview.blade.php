@@ -43,7 +43,7 @@
 
                                 <div class="text-center p-1 border rounded">
                                     Amount Due<br>
-                                    <p class="text-bold">150$</p>
+                                    <p class="text-bold">{{BookingCancel(Session('userId'))}}$</p>
                                 </div>
 
                             </div>
@@ -80,12 +80,12 @@
                         <td colspan="2" class="border">
                             Discount<br>
                             Corporate<br>
-                            Tax<br>
+                            Previous fine<br>
                         </td>
                         <td>
-                            00<br>
-                            00<br>
-                            00<br>
+                            {{$price2}}$<br>
+                            {{$corporatePrice}}$<br>
+                            {{BookingCancel(Session('userId'))}}$<br>
                         </td>
                     </tr>
                     <tr>
@@ -94,12 +94,27 @@
                             Total
                         </td>
                         <td class="bg-light">
-                           00
+                            <?php
+                            $totalAmount = ((($seat * $stopovers->price) - $price2)-$corporatePrice)+BookingCancel(Session('userId'));
+                            ?>
+                           {{$totalAmount}}
                         </td>
                     </tr>
 
                     </tbody>
                 </table>
+                <form method="post" action="{{route('preview.store')}}">
+                    {{csrf_field()}}
+                    <input type="hidden" name="tracking" value="{{$stopovers->tracking}}">
+                    <input type="hidden" name="seat" value="{{$seat}}">
+                    <input type="hidden" name="message" value="{{$message}}">
+                    <input type="hidden" name="promo_code" value="{{$promo}}">
+                    <input type="hidden" name="discount" value="{{$price2}}">
+                    <input type="hidden" name="fine" value="{{BookingCancel(Session('userId'))}}">
+                    <input type="hidden" name="corporate" value="{{$corporatePrice}}">
+                    <input type="hidden" name="amount" value="{{$totalAmount}}">
+                    <button type="submit" class="btn btn-primary float-right">Complete Booking</button>
+                </form>
             </div>
         </div>
     </section>

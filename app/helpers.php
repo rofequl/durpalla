@@ -72,6 +72,14 @@ function getStopoverRide($column)
     return $query;
 }
 
+function getSingleStopover($column)
+{
+    $query = DB::table('stopovers')
+        ->where('tracking', '=', $column)
+        ->first();
+    return $query;
+}
+
 function car($column)
 {
     $query = DB::table('cars')
@@ -144,5 +152,19 @@ function ride_price($lat1, $lon1, $lat2, $lon2, $car)
     }else{
         return 00;
     }
+}
 
+function corporateGroup($column){
+    $query = DB::table('corporate_groups')
+        ->where('phone', '=', $column)
+        ->first();
+    return $query;
+}
+
+function BookingCancel($column){
+    $query = DB::table('booking_cancels')
+        ->where('user_id', '=', $column)
+        ->where('paid', '=', 0)
+        ->sum('booking_cancels.charge');
+    return $query;
 }
