@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1faa8066-59c8-4468-b0fe-fc98fb410102" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/backend/BookingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/backend/BookingController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/frontend/BookingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/frontend/BookingController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend/booking/complete_ride.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/booking/complete_ride.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend/booking/not_book.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/booking/not_book.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend/booking/ongoing_book.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/booking/ongoing_book.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend/inc/aside.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/inc/aside.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
-    </list>
+    <list default="true" id="1faa8066-59c8-4468-b0fe-fc98fb410102" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,8 +37,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/views/backend/inc/aside.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="79">
-              <caret line="38" column="90" selection-start-line="38" selection-start-column="90" selection-end-line="38" selection-end-column="90" />
+            <state relative-caret-position="232">
+              <caret line="47" column="21" lean-forward="true" selection-start-line="47" selection-start-column="21" selection-end-line="47" selection-end-column="21" />
             </state>
           </provider>
         </entry>
@@ -240,7 +232,7 @@
       <path value="$PROJECT_DIR$/vendor/dragonmantank/cron-expression" />
     </include_path>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="486" />
     <option name="width" value="1382" />
     <option name="height" value="784" />
@@ -254,82 +246,7 @@
     </navigator>
     <panes>
       <pane id="Scope" />
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="durpalla" type="b2602c69:ProjectViewProjectNode" />
-              <item name="durpalla" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="durpalla" type="b2602c69:ProjectViewProjectNode" />
-              <item name="durpalla" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="durpalla" type="b2602c69:ProjectViewProjectNode" />
-              <item name="durpalla" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="Http" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="durpalla" type="b2602c69:ProjectViewProjectNode" />
-              <item name="durpalla" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="Http" type="462c0819:PsiDirectoryNode" />
-              <item name="Controllers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="durpalla" type="b2602c69:ProjectViewProjectNode" />
-              <item name="durpalla" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="Http" type="462c0819:PsiDirectoryNode" />
-              <item name="Controllers" type="462c0819:PsiDirectoryNode" />
-              <item name="backend" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="durpalla" type="b2602c69:ProjectViewProjectNode" />
-              <item name="durpalla" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="durpalla" type="b2602c69:ProjectViewProjectNode" />
-              <item name="durpalla" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="durpalla" type="b2602c69:ProjectViewProjectNode" />
-              <item name="durpalla" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="backend" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="durpalla" type="b2602c69:ProjectViewProjectNode" />
-              <item name="durpalla" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="backend" type="462c0819:PsiDirectoryNode" />
-              <item name="booking" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="durpalla" type="b2602c69:ProjectViewProjectNode" />
-              <item name="durpalla" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="backend" type="462c0819:PsiDirectoryNode" />
-              <item name="inc" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="durpalla" type="b2602c69:ProjectViewProjectNode" />
-              <item name="durpalla" type="462c0819:PsiDirectoryNode" />
-              <item name="routes" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
+      <pane id="ProjectPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -418,16 +335,15 @@
       <workItem from="1552378253093" duration="66000" />
       <workItem from="1552378360157" duration="27094000" />
       <workItem from="1552451027651" duration="6875000" />
-      <workItem from="1552480321359" duration="4246000" />
+      <workItem from="1552480321359" duration="4621000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="434361000" />
+    <option name="totallyTimeSpent" value="434736000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="486" y="0" width="1382" height="784" extended-state="0" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
     <layout>
       <window_info id="Favorites" order="0" side_tool="true" />
       <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.22108346" />
@@ -838,8 +754,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/backend/inc/aside.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="79">
-          <caret line="38" column="90" selection-start-line="38" selection-start-column="90" selection-end-line="38" selection-end-column="90" />
+        <state relative-caret-position="232">
+          <caret line="47" column="21" lean-forward="true" selection-start-line="47" selection-start-column="21" selection-end-line="47" selection-end-column="21" />
         </state>
       </provider>
     </entry>
