@@ -70,7 +70,7 @@ class BookingController extends Controller
                         } else {
                             $price2 = $code->h_amount;
                         }
-                        return view('frontend.booking.preview', compact('seat', 'message', 'code', 'stopovers', 'price2', 'promo'));
+                        return view('frontend.booking.preview', compact('seat', 'message', 'code', 'stopovers', 'price2', 'promo','corporatePrice'));
                     } else {
                         Session::flash('message', 'Ride Distance');
                         return redirect()->back();
