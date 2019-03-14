@@ -49,8 +49,8 @@ class BookingController extends Controller
         $price2 = 0;
         $corporatePrice = 0;
         $userInfo = corporateGroup(userInformation(Session('userId'), 'phone'));
-        $corporate = corporate::find($userInfo->corporate_id);
-        if ($corporate) {
+        if ($userInfo) {
+            $corporate = corporate::find($userInfo->corporate_id);
             $corporatePrice = (($corporate->discount / 100) * ($stopovers->price * $seat));
         }
         $s_lat = PostRideAddress($stopovers->post_id, $stopovers->going, 'lat');

@@ -9,10 +9,10 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col-8 border-right py-0">
-                            <h3 class="my-1">Not Booking Ride time over</h3>
+                            <h3 class="my-1">Partial Book Ride time over</h3>
                         </div>
                         <div class="col">
-                            <a href="{{route('admin.not.book','time')}}" class="btn btn-sm btn-primary">Not time
+                            <a href="{{route('admin.partial.book','time')}}" class="btn btn-sm btn-primary">Not time
                                 over</a>
                         </div>
                     </div>
@@ -28,7 +28,7 @@
                             $e_lat = PostRideAddress($stopovers->post_id, $stopovers->target, 'lat');
                             $e_lng = PostRideAddress($stopovers->post_id, $stopovers->target, 'lng');
                             ?>
-                            @if(seat($stopovers->going,$stopovers->target,$stopovers->post_id) > 0 && $stopovers->seat < 1)
+                            @if(seat($stopovers->going,$stopovers->target,$stopovers->post_id) > 0 && $stopovers->seat > 0)
                                 <div class="col-12">
                                     Departure:{{$s_location}}<br>
                                     Destination:{{$e_location}}<br>
@@ -48,10 +48,10 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col-8 border-right py-0">
-                            <h3 class="my-1">Not Booking Ride time not over</h3>
+                            <h3 class="my-1">Partial Book Ride time not over</h3>
                         </div>
                         <div class="col">
-                            <a href="{{route('admin.not.book')}}" class="btn btn-sm btn-primary">Time
+                            <a href="{{route('admin.partial.book')}}" class="btn btn-sm btn-primary">Time
                                 over</a>
                         </div>
                     </div>
@@ -67,7 +67,7 @@
                             $e_lat = PostRideAddress($stopovers->post_id, $stopovers->target, 'lat');
                             $e_lng = PostRideAddress($stopovers->post_id, $stopovers->target, 'lng');
                             ?>
-                            @if(seat($stopovers->going,$stopovers->target,$stopovers->post_id) < 0 && $stopovers->seat < 1)
+                            @if(seat($stopovers->going,$stopovers->target,$stopovers->post_id) > 0 && $stopovers->seat > 0)
                                 <div class="col-12">
                                     Departure:{{$s_location}}<br>
                                     Destination:{{$e_location}}<br>

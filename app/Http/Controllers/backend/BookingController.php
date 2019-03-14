@@ -21,6 +21,18 @@ class BookingController extends Controller
 
     }
 
+    public function PartialBook($id = false)
+    {
+        if ($id == "time") {
+            $stopover = stopover::where('date','>',date("m/d/Y"))->get();
+            return view('backend.booking.partial_book',compact('stopover','id'));
+        }else{
+            $stopover = stopover::where('date','<',date("m/d/Y"))->get();
+            return view('backend.booking.partial_book',compact('stopover'));
+        }
+
+    }
+
     public function NotBook($id = false)
     {
         if ($id == "time") {
@@ -32,26 +44,18 @@ class BookingController extends Controller
         }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+
+    public function OngoingBook()
     {
-        //
+            $stopover = stopover::where('date','=',date("m/d/Y"))->get();
+            return view('backend.booking.ongoing_book',compact('stopover'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+
+    public function CompleteRide()
     {
-        //
+        $stopover = stopover::where('date','<',date("m/d/Y"))->get();
+        return view('backend.booking.complete_ride',compact('stopover'));
     }
 
     /**
