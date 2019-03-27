@@ -220,6 +220,9 @@ Route::group(['middleware' => 'CheckAdmin','namespace' => 'backend'], function (
     Route::get('/admin-not-book/{data?}', 'BookingController@NotBook')->name('admin.not.book');
     Route::get('/admin-ongoing-book', 'BookingController@OngoingBook')->name('admin.ongoing.book');
     Route::get('/admin-complete-ride', 'BookingController@CompleteRide')->name('admin.complete.ride');
+
+    Route::get('/admin-sp-account-close', 'SpAccountController@SpAccountClose')->name('admin.sp.account.close');
+    Route::get('/admin-sp-account-close-done', 'SpAccountController@SpAccountCloseDone')->name('admin.sp.account.close.done');
 });
 
 

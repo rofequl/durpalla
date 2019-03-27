@@ -21,9 +21,27 @@
                 @endif
 
             </div>
-            <div class="header-left">
-                <a href="{{route('sp.logout')}}" class="btn mt-2">LogOut</a>
+            <div class="user-area dropdown float-right show">
+                <a href="#" class="dropdown-toggle user-dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    <img class="user-avatar rounded-circle" src="images/admin.jpg" alt="User Avatar">
+                </a>
+
+                <div class="user-menu dropdown-menu user-dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; right: 0; top: 0px; left: 0px; transform: translate3d(-65px, 55px, 0px);">
+                    <a class="nav-link" href="#"><i class="fa fa-user"></i>My Profile</a>
+
+                    <a class="nav-link" href="#"><i class="fa fa-bell-o"></i>Notifications <span class="count">13</span></a>
+
+                    <a class="nav-link" href="#"><i class="fa fa-cog"></i>Settings</a>
+
+                    <a class="nav-link" href="{{route('sp.logout')}}"><i class="fa fa-power-off"></i>Logout</a>
+                </div>
             </div>
         </div>
     </div>
 </header>
+
+<script>
+    jQuery('.user-dropdown-toggle').click(function () {
+        jQuery('.user-dropdown-menu').toggle('show');
+    });
+</script>

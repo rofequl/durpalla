@@ -24,6 +24,7 @@ class SpAccountController extends Controller
         $insert->reason = $request->reason;
         $insert->recommend = $request->recommend;
         $insert->improve = $request->improve;
+        $insert->user_id = Session('userId');
         $insert->save();
 
         Session::flash('message', 'Account will be close');

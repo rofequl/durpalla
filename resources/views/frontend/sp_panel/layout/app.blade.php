@@ -73,9 +73,11 @@
 
 <script src="{{asset('framework/jquery/jquery-migrate.min.js')}}"></script>
 <script src="{{asset('framework/jquery-easing/jquery.easing.min.js')}}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/popper.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="{{asset('framework/elaAdmin/js/main.js')}}"></script>
+<script src="{{asset('framework/elaAdmin/js/dashboard.js')}}"></script>
 <!-- Bootstrap 4 -->
 <script src="{{asset('js/bootstrap.min.js')}}"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>

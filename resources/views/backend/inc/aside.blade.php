@@ -44,6 +44,9 @@
                     </ul>
                 </li>
                 <li class="">
+                    <a href="{{route('admin.sp.account.close')}}"> <i class="menu-icon fas fa-hands-helping"></i>Account close request</a>
+                </li>
+                <li class="">
                     <a href="{{route('promo_code.index')}}"> <i class="menu-icon fas fa-hands-helping"></i>Promo Code</a>
                 </li>
                 <li class="menu-item-has-children dropdown">
