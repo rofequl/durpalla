@@ -43,6 +43,40 @@
                 </form>
             </div>
         </div>
+
+            <div class="card border shadow">
+                <div class="card-header">
+                    Corporate list
+                    <button class="btn btn-sm btn-primary pull-right" data-toggle="modal" data-target="#exampleModal">Add
+                        Corporate
+                    </button>
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered" cellspacing="0" id="DataTable">
+                        <thead>
+                        <tr>
+                            <th>Phone</th>
+                            <th>Company Name</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($corporate_group as $corporate_groups)
+                            <tr>
+                                <td>{{$corporate_groups->phone}}</td>
+                                <td>{{CorporateById($corporate_groups->id)->name}}</td>
+                                <td>
+                                    <a href="{{route('corporate.group.delete',$corporate_groups->id)}}" class="btn btn-danger">Delete</a>
+                                </td>
+
+                            </tr>
+                        @endforeach
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
     </div>
 
 

@@ -16,10 +16,16 @@ class CreateVerificationsTable extends Migration
         Schema::create('verifications', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nid')->nullable();
+            $table->string('nid_image1')->nullable();
+            $table->string('nid_image2')->nullable();
             $table->boolean('nid_status')->default(0);
             $table->string('passport')->nullable();
+            $table->string('passport_image1')->nullable();
+            $table->string('passport_image2')->nullable();
             $table->boolean('passport_status')->default(0);
             $table->string('driving')->nullable();
+            $table->string('driving_image1')->nullable();
+            $table->string('driving_image2')->nullable();
             $table->boolean('driving_status')->default(0);
             $table->string('email')->nullable();
             $table->string('phone')->nullable();

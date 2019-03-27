@@ -59,7 +59,9 @@
                             <a href="{{route('upcoming.ride.preview',$posts->id)}}" type="button"
                                class="btn btn-sm btn-success">View Ride</a>
                             <a href="{{route('current.booking',$posts->id)}}" type="button"
-                               class="btn btn-sm btn-danger">Ride Edit</a>
+                               class="btn btn-sm btn-warning">Ride Edit</a>
+                            <a href="{{route('upcoming.ride.cancel',$posts->id)}}" type="button"
+                               class="btn btn-sm btn-danger cancel-ride">Cancel Ride</a>
                         </div>
                     @endforeach
                 </div>
@@ -67,5 +69,26 @@
         </div>
     </div>
 
+
+    <script>
+
+        jQuery('.cancel-ride').click(function (e) {
+            e.preventDefault(); // Prevent the href from redirecting directly
+            let linkURL = jQuery(this).attr("href");
+            warnBeforeRedirect(linkURL);
+        });
+
+        function warnBeforeRedirect(linkURL) {
+            swal({
+                title: "Sure want to cancel this ride?",
+                text: "If you click 'OK' ride will be cancel",
+                type: "warning",
+                showCancelButton: true
+            }, function () {
+                window.location.href = linkURL;
+            });
+        }
+
+    </script>
 
 @endsection

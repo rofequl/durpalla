@@ -16,7 +16,9 @@ class CreateRideSettingsTable extends Migration
         Schema::create('ride_settings', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('search')->default(0);
-            $table->integer('fine')->default(0);
+            $table->integer('fine_6h')->default(0);
+            $table->integer('fine_12h')->default(0);
+            $table->integer('fine_12_upper')->default(0);
             $table->integer('km_1st')->default(0);
             $table->integer('price')->default(0);
             $table->integer('price2')->default(0);

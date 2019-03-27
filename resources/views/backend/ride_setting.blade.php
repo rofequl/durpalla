@@ -14,8 +14,13 @@
                         {{csrf_field()}}
                         Find a ride KM search:<input type="number" value="{{$data->search}}" name="search" class="form-control"
                                                      placeholder="Enter Km to search find ride"><br>
-                        Booking Cancel fine:<input type="number" value="{{$data->fine}}" name="fine" class="form-control"
-                                                     placeholder="Enter Km to search find ride"><br>
+                        <h3>Booking Cancel fine percent:</h3>
+                        Canceled within 6 hours <input type="number" value="{{$data->fine_6h}}" name="fine" class="form-control"
+                                                     placeholder="Canceled within 6 hours"><br>
+                        Canceled within 12 hours <input type="number" value="{{$data->fine_12h}}" name="fine2" class="form-control"
+                                                           placeholder="Canceled within 12 hours"><br>
+                        Cancel after more than 12 hours <input type="number" value="{{$data->fine_12_upper}}" name="fine3" class="form-control"
+                                                            placeholder="Cancel after more than 12 hours"><br>
                         <h3 class="mt-5">Standard Car:</h3>
                         First <input type="number" value="{{$data->km_1st}}" name="km1" class="form-control" placeholder="Enter first Km"> Km price <input
                                 type="number" value="{{$data->price}}" name="price1" class="form-control" placeholder="First Km Price"><br>
@@ -42,7 +47,10 @@
             </div>
             <div class="card-body">
                 Find a ride Km search:{{$data->search}}<br>
-                Booking cancel user fine:{{$data->fine}}$<br>
+                <h3 class="mt-5">Booking cancel user fine percent:</h3>
+                Canceled within 6 hours: {{$data->fine_6h}}%<br>
+                Canceled within 12 hours: {{$data->fine_12h}}%<br>
+                Cancel after more than 12 hours: {{$data->fine_12_upper}}%<br>
                 <h3 class="mt-5">Standard Car:</h3>
                 First {{$data->km_1st}} Km, Per Km price: {{$data->price}}$<br>
                 Second per Km price: {{$data->price2}}$

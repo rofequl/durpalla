@@ -5,6 +5,7 @@ namespace App\Http\Controllers\frontend;
 use App\post_ride;
 use App\post_ride_address;
 use App\stopover;
+use App\verification;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Session;
@@ -30,6 +31,12 @@ class PostController extends Controller
             return redirect('post-ride');
         }
 
+        $validation = verification::where('user_id',Session('userId'))->first();
+
+        if ($validation->nid_status != 1 && $validation->passport_status != 1 && $validation->driving_status != 1) {
+            Session::flash('message', 'Submit this form verifications NID, Passport and Driving licence.');
+            return redirect('post-ride');
+        }
 
         $request->validate([
             'location' => 'required',
@@ -219,7 +226,7 @@ class PostController extends Controller
     }
 
     public function upcomingRideIndex(){
-        $post = post_ride::where('user_id',Session('userId'))->get();
+        $post = post_ride::where('user_id',Session('userId'))->where('status',1)->get();
         return view('frontend.sp_panel.rides_offered.upcoming_ride',compact('post'));
     }
 
@@ -227,6 +234,18 @@ class PostController extends Controller
         $post = post_ride::find($data);
         $stopover = stopover::where('post_id', $data)->get();
         return view('frontend.sp_panel.rides_offered.preview', compact('stopover', 'post'));
+    }
+
+    public function upcomingRideCancel($data){
+        $insert = post_ride::find($data);
+            $insert->status = 3;
+            $insert->save();
+            return redirect('upcoming-ride');
+    }
+
+    public function ArchivedRideIndex(){
+        $post = post_ride::where('user_id',Session('userId'))->get();
+        return view('frontend.sp_panel.rides_offered.archived_rides',compact('post'));
     }
 
 }

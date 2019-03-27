@@ -38,8 +38,10 @@ class RideController extends Controller
 
         $group = [];
         foreach ($ride as $item) {
-            if (!in_array($item->date, $group)) {
-                array_push($group, $item->date);
+            if(getRide($item->post_id)->status == 1){
+                if (!in_array($item->date, $group)) {
+                    array_push($group, $item->date);
+                }
             }
 
         }

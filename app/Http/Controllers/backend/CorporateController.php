@@ -22,7 +22,8 @@ class CorporateController extends Controller
     public function IndexGroup()
     {
         $corporate = corporate::all();
-        return view('backend.corporate.group_corporate',compact('corporate'));
+        $corporate_group = corporate_group::all();
+        return view('backend.corporate.group_corporate',compact('corporate','corporate_group'));
     }
 
     public function Store(Request $request)
@@ -87,15 +88,13 @@ class CorporateController extends Controller
 
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function DeleteGroup($id)
     {
-        //
+        $delete = corporate_group::find($id);
+        $delete->delete();
+
+        Session::flash('message', 'Corporate User Delete Successfully');
+        return redirect('corporate-group');
     }
 
     /**

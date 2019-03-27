@@ -21,7 +21,7 @@
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
     <link href="https://cdn.jsdelivr.net/npm/chartist@0.11.0/dist/chartist.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/jqvmap@1.5.1/dist/jqvmap.min.css" rel="stylesheet">
-
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/weathericons@2.1.0/css/weather-icons.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.css" rel="stylesheet" />
 
@@ -46,6 +46,8 @@
 
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <!-- jQuery -->
+    <script src="{{asset('framework/jquery/jquery.min.js')}}"></script>
 </head>
 
 <style>
@@ -69,15 +71,10 @@
 
 <!-- REQUIRED SCRIPTS -->
 
-<!-- jQuery -->
-<script src="{{asset('framework/jquery/jquery.min.js')}}"></script>
 <script src="{{asset('framework/jquery/jquery-migrate.min.js')}}"></script>
 <script src="{{asset('framework/jquery-easing/jquery.easing.min.js')}}"></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="{{asset('custom/script.js')}}"></script>
-<script src="{{asset('custom/frontend/timeScript.js')}}"></script>
-<script src="{{asset('framework/elaAdmin/js/dashboard.js')}}"></script>
 <script src="{{asset('framework/elaAdmin/js/main.js')}}"></script>
 <!-- Bootstrap 4 -->
 <script src="{{asset('js/bootstrap.min.js')}}"></script>
@@ -97,28 +94,9 @@
 <script src="https://cdn.jsdelivr.net/npm/simpleweather@3.1.0/jquery.simpleWeather.min.js"></script>
 
 <script>
-    $(document).ready(function() {
-        $('#DataTable').DataTable();
+    jQuery(document).ready(function() {
+        jQuery('#DataTable').DataTable();
     });
-
-    $('.delete').click(function () {
-        swal({
-                title: "are u sure?",
-                text: "lorem lorem lorem",
-                type: "error",
-                showCancelButton: true,
-                confirmButtonClass: 'btn-danger waves-effect waves-light',
-                confirmButtonText: "Delete",
-                cancelButtonText: "Cancel",
-                closeOnConfirm: true,
-                closeOnCancel: true
-            },
-            function(){
-                window.location.href = "ok";
-            });
-    });
-
-
 </script>
 </body>
 </html>

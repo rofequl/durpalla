@@ -20,12 +20,10 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach ($group as $groups)
-                        @foreach (getRide($groups) as $rides)
-                            @if($rides->status == 1)
+                    @foreach ($ride as $rides)
                                 <tr>
                                     <td>
-                                        <p class="my-0 fs-12 lh-1-2">{{date("l F-d", strtotime($groups))}}</p>
+                                        <p class="my-0 fs-12 lh-1-2">{{date("l F-d", strtotime($rides->departure))}}</p>
                                         <p class="my-0 fs-12 lh-1-2">{{$rides->d_time}}:00 {{$rides->d_time2}}</p>
                                         <?php $dist = GetDrivingDistance($rides->s_lat, $rides->s_lng, $rides->e_lat, $rides->e_lng); ?>
                                         <p class="my-0 fs-12 lh-1-2">Distance: {{$dist['distance']}}</p>
@@ -46,8 +44,6 @@
                                     </td>
                                 </tr>
 
-                            @endif
-                        @endforeach
                     @endforeach
                     </tbody>
                 </table>

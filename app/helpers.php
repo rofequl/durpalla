@@ -22,7 +22,7 @@ function distance($lat1, $lon1, $lat2, $lon2, $unit)
 
 function GetDrivingDistance($lat1, $long1, $lat2, $long2)
 {
-    $url = "https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=".$lat1.",".$long1."&destinations=".$lat2.",".$long2."&key=AIzaSyCMfl6pAmNv3T6PoDRy7ESSJRZLLSFf2jI";
+    $url = "https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=" . $lat1 . "," . $long1 . "&destinations=" . $lat2 . "," . $long2 . "&key=AIzaSyCMfl6pAmNv3T6PoDRy7ESSJRZLLSFf2jI";
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -38,7 +38,8 @@ function GetDrivingDistance($lat1, $long1, $lat2, $long2)
     return array('distance' => $dist, 'time' => $time);
 }
 
-function PostRideAddress($column,$column2,$column3){
+function PostRideAddress($column, $column2, $column3)
+{
     $query = DB::table('post_ride_addresses')
         ->where('post_id', '=', $column)
         ->where('serial', '=', $column2)
@@ -106,20 +107,37 @@ function userInformation($column, $column2)
     return $query;
 }
 
-function seat($going,$target,$post){
+function seat($going, $target, $post, $date)
+{
     $query = DB::table('post_ride_addresses')->where('post_id', $post)->get();
     $seat = DB::table('post_rides')->where('id', $post)->pluck('seat')->first();
+    $date1 = DB::table('post_rides')->where('id', $post)->where('departure', $date)->first();
 
-    foreach ($query as $querys){
-        if ($querys->serial < $going){
-            $seat -= DB::table('stopovers')->where('post_id', $post)->where('going', $querys->serial)->where('target','>',$going)->sum('stopovers.seat');
-        }elseif ($querys->serial == $going){
-            $seat -= DB::table('stopovers')->where('post_id', $post)->where('going', $going)->where('target','>=',$target)->sum('stopovers.seat');
-        }else{
-            $seat -= DB::table('stopovers')->where('post_id', $post)->where('going','>=', $querys->serial)->where('target','<=',$target)->sum('stopovers.seat');
+    if ($date1) {
+        foreach ($query as $querys) {
+            if ($querys->serial < $going) {
+                $seat -= DB::table('stopovers')->where('post_id', $post)->where('date', $date)->where('going', $querys->serial)->where('target', '>', $going)->sum('stopovers.seat');
+            } elseif ($querys->serial == $going) {
+                $seat -= DB::table('stopovers')->where('post_id', $post)->where('date', $date)->where('going', $going)->where('target', '>=', $target)->sum('stopovers.seat');
+            } else {
+                $seat -= DB::table('stopovers')->where('post_id', $post)->where('date', $date)->where('going', '>=', $querys->serial)->where('target', '<=', $target)->sum('stopovers.seat');
+            }
         }
+        return $seat;
+    } else {
+//        foreach ($query as $querys){
+//            if ($querys->serial < $going){
+//
+//            }elseif ($querys->serial == $going){
+//                $seat -= DB::table('stopovers')->where('post_id', $post)->where('date', $date)->where('going', $going)->where('target','<=',$target)->sum('stopovers.seat');
+//            }else{
+//                $seat -= DB::table('stopovers')->where('post_id', $post)->where('going','>=', $querys->serial)->where('target','<=',$target)->sum('stopovers.seat');
+//            }
+//        }
+        return 0;
     }
-   return $seat;
+
+
 }
 
 function ride_price($lat1, $lon1, $lat2, $lon2, $car)
@@ -131,40 +149,70 @@ function ride_price($lat1, $lon1, $lat2, $lon2, $car)
     $query2 = DB::table('cars')
         ->find($car);
 
-    if ($query){
-        if ($query2->car_type == "Standard"){
-            if ($km > $query->km_1st){
+    if ($query) {
+        if ($query2->car_type == "Standard") {
+            if ($km > $query->km_1st) {
                 $price = (($km - $query->km_1st) * $query->price2) + ($query->km_1st * $query->price);
                 return ceil($price);
-            }else{
+            } else {
                 $price = $km * $query->price;
                 return ceil($price);
             }
-        }else{
-            if ($km > $query->km_1st){
+        } else {
+            if ($km > $query->km_1st) {
                 $price = (($km - $query->pkm_1st) * $query->pprice2) + ($query->pkm_1st * $query->pprice);
                 return ceil($price);
-            }else{
+            } else {
                 $price = $km * $query->price;
                 return ceil($price);
             }
         }
-    }else{
+    } else {
         return 00;
     }
 }
 
-function corporateGroup($column){
+function corporateGroup($column)
+{
     $query = DB::table('corporate_groups')
         ->where('phone', '=', $column)
         ->first();
     return $query;
 }
 
-function BookingCancel($column){
+function BookingCancel($column)
+{
     $query = DB::table('booking_cancels')
         ->where('user_id', '=', $column)
         ->where('paid', '=', 0)
         ->sum('booking_cancels.charge');
     return $query;
 }
+
+function CarBrandById($id)
+{
+    $query = DB::table('car_brands')->find($id);
+    return $query->brand_name;
+}
+
+function CorporateCheckById($id)
+{
+    $query = DB::table('corporate_groups')->where('phone',$id)->first();
+    if ($query){
+        return $query->corporate_id;
+    }
+    return false;
+
+}
+
+function CorporateById($id = false)
+{
+    if ($id) {
+        $query = DB::table('corporates')->find($id);
+    } else {
+        $query = DB::table('corporates')->find($id);
+    }
+    return $query;
+}
+
+

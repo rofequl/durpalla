@@ -31,14 +31,26 @@ Route::group(['middleware' => 'CheckUserLogin','namespace' => 'frontend'], funct
     Route::get('/sp-verification', 'VerificationController@SpVerification')->name('sp.verification');
     Route::post('/sp-verification', 'VerificationController@SpVerificationPost')->name('sp.verification');
 
-    Route::resource('resource', 'ResourceController');
+    Route::get('/resource', 'ResourceController@Index')->name('resource.index');
+    Route::post('/resource-store', 'ResourceController@Store')->name('resource.store');
+    Route::get('/resource-delete/{data}', 'ResourceController@Delete')->name('resource.delete');
 
     Route::get('/current-booking/{data?}', 'BookingController@CurrentBooking')->name('current.booking');
     Route::get('/booking-preview/{data?}', 'BookingController@BookingPreviewIndex')->name('booking.preview.index');
     Route::post('/current-booking', 'BookingController@CurrentBookingCancel')->name('current.booking.cancel');
 
+    Route::get('/history-booking/{data?}', 'BookingController@HistoryBooking')->name('history.booking');
+
     Route::get('/upcoming-ride', 'PostController@upcomingRideIndex')->name('upcoming.ride.index');
     Route::get('/upcoming-ride-preview/{data}', 'PostController@upcomingRidePreview')->name('upcoming.ride.preview');
+    Route::get('/upcoming-ride-cancel/{data}', 'PostController@upcomingRideCancel')->name('upcoming.ride.cancel');
+
+    Route::get('/archived-ride', 'PostController@ArchivedRideIndex')->name('archived.ride.index');
+
+    Route::get('/sp-account-close', 'SpAccountController@SpAccountClose')->name('sp.account.close');
+    Route::post('/sp-account-close-done', 'SpAccountController@SpAccountCloseDone')->name('sp.account.close.done');
+
+
 
 });
 
@@ -169,7 +181,7 @@ Route::post('/AdminUserRegister', 'backend\adminController@AdminUserRegister');
 
 Route::group(['middleware' => 'CheckAdmin','namespace' => 'backend'], function () {
 
-    Route::get('/dashboard', 'AdminController@dashboard')->name('dashboard');
+    Route::get('/dashboard', 'adminController@dashboard')->name('dashboard');
 
     Route::get('/ride-setting', 'RideSettingController@RideSetting')->name('admin.ride.setting');
     Route::post('/ride-setting', 'RideSettingController@RideSettingPost')->name('admin.ride.setting');
@@ -201,6 +213,7 @@ Route::group(['middleware' => 'CheckAdmin','namespace' => 'backend'], function (
     Route::post('/corporate', 'CorporateController@Store')->name('corporate.Store');
     Route::get('/corporate-group', 'CorporateController@IndexGroup')->name('corporate.group.index');
     Route::post('/corporate-group', 'CorporateController@StoreGroup')->name('corporate.group.Store');
+    Route::get('/corporate-delete/{data}', 'CorporateController@DeleteGroup')->name('corporate.group.delete');
 
     Route::get('/admin-complete-book/{data?}', 'BookingController@CompleteBook')->name('admin.complete.book');
     Route::get('/admin-partial-book/{data?}', 'BookingController@PartialBook')->name('admin.partial.book');

@@ -53,8 +53,9 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text" id="basic-addon1">$</span>
                                                 </div>
-                                                <input type="text" value=" <?php echo ride_price($s_lat, $s_lng, $e_lat, $e_lng, $post->car_id); ?>" class="form-control" placeholder="00000"
-                                                       name="price[]" autofocus>
+                                                <?php $price = ride_price($s_lat, $s_lng, $e_lat, $e_lng, $post->car_id); ?>
+                                                <input type="number" value="{{$price}}" class="form-control" placeholder="00000"
+                                                       name="price[]" max="{{$price+100}}" min="{{$price - 100}}" autofocus>
                                             </div>
                                         </div>
                                     </div>

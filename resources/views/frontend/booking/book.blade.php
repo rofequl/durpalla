@@ -75,7 +75,7 @@
                                         <li><a href="#">{{$singleStopovers->price}}$<i class="lnr lnr-bubble"></i></a>
                                         </li>
                                         <li>
-                                            <a href="#">{{seat($singleStopovers->going,$singleStopovers->target,$singleStopovers->post_id)}}
+                                            <a href="#">{{seat($singleStopovers->going,$singleStopovers->target,$singleStopovers->post_id,$singleStopovers->date)}}
                                                 Seat<i
                                                         class="lnr lnr-bubble"></i></a></li>
                                     </ul>
@@ -93,7 +93,7 @@
                                              class="img-thumbnail w-75" alt="...">
                                     </div>
                                     <div class="col-6">
-                                        @if(Session::get('userId') != null && Session::get('phone') != null && !isset($show) && seat($singleStopovers->going,$singleStopovers->target,$singleStopovers->post_id) != 0 && Session::get('userId') != getRide($singleStopovers->post_id)->user_id)
+                                        @if(Session::get('userId') != null && Session::get('phone') != null && !isset($show) && seat($singleStopovers->going,$singleStopovers->target,$singleStopovers->post_id,$singleStopovers->date) != 0 && Session::get('userId') != getRide($singleStopovers->post_id)->user_id)
                                             <a href="{{url('booking'.'/'.$singleStopovers->tracking.'/'.'get')}}"
                                                class="blog_btn border mb-4 rounded float-right">
                                                 Book Now
@@ -199,7 +199,7 @@
         $(function () {
             $(".plus").click(function () {
                 let input = $(".seat"), value = parseInt(input.val()),
-                    seat = {{seat($singleStopovers->going,$singleStopovers->target,$singleStopovers->post_id)}};
+                    seat = {{seat($singleStopovers->going,$singleStopovers->target,$singleStopovers->post_id,$singleStopovers->date)}};
                 if (value < seat) value = value + 1;
                 else value = seat;
                 input.val(value);

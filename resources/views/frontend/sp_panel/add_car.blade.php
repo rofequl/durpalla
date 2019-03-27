@@ -26,7 +26,7 @@
                 </button>
             </div>
             <div class="card-body">
-                <table class="table table-striped" cellspacing="0" id="DataTable">
+                <table class="table table-striped table-hover" cellspacing="0" id="DataTable">
                     <thead>
                     <tr>
                         <th>Sl.</th>
@@ -34,6 +34,9 @@
                         <th>Model</th>
                         <th>Fuel type</th>
                         <th>Kilometers run</th>
+                        <th>Registration Date</th>
+                        <th>Registration Date</th>
+                        <th>Model Year</th>
                         <th>Car type</th>
                         <th>Status</th>
                         <th>Action</th>
@@ -44,10 +47,13 @@
                     @foreach($car as $cars)
                         <tr>
                             <td>{{$listNum}}</td>
-                            <td>{{$cars->brand}}</td>
+                            <td>{{CarBrandById($cars->brand_id)}}</td>
                             <td>{{$cars->model}}</td>
                             <td>{{$cars->fuel}}</td>
                             <td>{{$cars->kilometers}}</td>
+                            <td>{{$cars->registration_date}}</td>
+                            <td>{{$cars->registration_year}}</td>
+                            <td>{{$cars->model_year}}</td>
                             <td>{{$cars->car_type}}</td>
                             <td>
                                 @if($cars->status == 0)
@@ -71,9 +77,10 @@
         </div>
     </div>
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" role="dialog"
+         aria-labelledby="myLargeModalLabel"
          aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Add Car Information</h5>
@@ -88,8 +95,11 @@
                         <div class="form-group row">
                             <label for="staticEmail" class="col-md-3 col-form-label">Brand</label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" name="brand" id="brand"
-                                       placeholder="Enter Brand">
+                                <select class="form-control" name="brand">
+                                    @foreach($car_brand as $car_brands)
+                                        <option value="{{$car_brands->id}}">{{$car_brands->brand_name}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -109,6 +119,27 @@
                             <div class="col-md-9">
                                 <input type="text" class="form-control" name="kilometers" id="kilometers"
                                        placeholder="kilometers run">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputPassword" class="col-md-3 col-form-label">Registration Date</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" name="regDate" id="kilometers"
+                                       placeholder="Registration Date">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputPassword" class="col-md-3 col-form-label">Registration Year</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" name="regYear" id="kilometers"
+                                       placeholder="Registration Year">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputPassword" class="col-md-3 col-form-label">Model Year</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" name="modelYear" id="kilometers"
+                                       placeholder="Model Year">
                             </div>
                         </div>
 

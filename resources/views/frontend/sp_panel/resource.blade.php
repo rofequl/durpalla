@@ -44,10 +44,13 @@
                             <td>{{$listNum}}</td>
                             <td>{{$resources->name}}</td>
                             <td>{{$resources->phone}}</td>
-                            <td></td>
+                            <td>
+                                <img src="{{asset('storage/resource/'.$resources->image)}}"
+                                     class="img-thumbnail" width="70px" alt="...">
+                            </td>
                             <td>{{$resources->national_id}}</td>
                             <td>
-                                <a href="{{url('Delete='.$resources->id)}}"
+                                <a href="{{route('resource.delete',$resources->id)}}"
                                    class="btn btn-sm btn-danger delete">Delete</a>
 
                             </td>

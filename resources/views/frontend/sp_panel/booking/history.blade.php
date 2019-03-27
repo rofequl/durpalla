@@ -4,57 +4,44 @@
 
     <div class="content">
 
-        Here you can find the history of your past bookings
+
+        Here you can find your History bookings. Recent bookings can be found in your Recent booking.
         <div class="card mt-2">
             <div class="card-header">
                 <div class="row">
-                    <div class="col border-right">
-                        Dhaka <i class="fas fa-arrow-right"></i> Delhi
+                    <div class="col-8 border-right">
+                        Booking Information
                     </div>
                     <div class="col">
-                        Cancelled
+                        Action
                     </div>
                 </div>
             </div>
             <div class="card-body">
                 <div class="row">
-                    <div class="col border-right">
-                        <i class="far fa-calendar-alt"></i> Fri 01 Feb - 15:20<br>
-                        <i class="fas fa-wheelchair"></i> 2 seat - $4400 cash<br>
-                        <i class="fas fa-user"></i> Siddhartho
-                    </div>
-                    <div class="col">
-                        you booking request expired
-                    </div>
+                    @foreach($booking as $bookings)
+                        <?php
+                        $stopover = getSingleStopover($bookings->tracking);
+                        $s_location = PostRideAddress($stopover->post_id, $stopover->going, 'location');
+                        $e_location = PostRideAddress($stopover->post_id, $stopover->target, 'location');
+                        ?>
+                        <div class="col-8 border-right">
+                            Departure:{{$s_location}}<br>
+                            Destination:{{$e_location}}<br>
+                            <i class="far fa-calendar-alt"></i> {{date("l F-d", strtotime($stopover->date))}}
+                            - {{$stopover->time}}:{{$stopover->time2}}<br>
+                            <i class="fas fa-wheelchair"></i> {{$bookings->seat}} seat - ${{$bookings->amount}} cash<br>
+                        </div>
+                        <div class="col-4">
+                            <a href="{{route('booking.preview.index',$bookings->id)}}" type="button"
+                               class="btn btn-sm btn-success">View Ride</a>
+                            <a href="{{route('current.booking',$bookings->id)}}" type="button"
+                               class="btn btn-sm btn-danger">Cancel Ride</a>
+                        </div>
+                    @endforeach
                 </div>
             </div>
         </div>
-
-        <div class="card mt-2">
-            <div class="card-header">
-                <div class="row">
-                    <div class="col border-right">
-                        Dhaka <i class="fas fa-arrow-right"></i> Delhi
-                    </div>
-                    <div class="col">
-                        Cancelled
-                    </div>
-                </div>
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col border-right">
-                        <i class="far fa-calendar-alt"></i> Fri 01 Feb - 15:20<br>
-                        <i class="fas fa-wheelchair"></i> 2 seat - $4400 cash<br>
-                        <i class="fas fa-user"></i> Siddhartho
-                    </div>
-                    <div class="col">
-                        you booking request expired
-                    </div>
-                </div>
-            </div>
-        </div>
-
     </div>
 
 

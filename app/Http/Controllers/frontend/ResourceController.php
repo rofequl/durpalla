@@ -14,7 +14,7 @@ class ResourceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function Index()
     {
         $resource = resource::where('user_id',Session('userId'))->get();
         return view('frontend.sp_panel.resource',compact('resource'));
@@ -36,7 +36,7 @@ class ResourceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function Store(Request $request)
     {
         $request->validate([
             'phone' => 'required|max:15',
@@ -103,8 +103,12 @@ class ResourceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function Delete($id)
     {
-        //
+        $delete = resource::find($id);
+        $delete->delete();
+
+        Session::flash('message', 'Resource Delete Successfully');
+        return redirect('resource');
     }
 }

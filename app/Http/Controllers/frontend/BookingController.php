@@ -70,7 +70,7 @@ class BookingController extends Controller
                         } else {
                             $price2 = $code->h_amount;
                         }
-                        return view('frontend.booking.preview', compact('seat', 'message', 'code', 'stopovers', 'price2', 'promo','corporatePrice'));
+                        return view('frontend.booking.preview', compact('seat', 'message', 'code', 'stopovers', 'price2', 'promo', 'corporatePrice'));
                     } else {
                         Session::flash('message', 'Ride Distance');
                         return redirect()->back();
@@ -147,12 +147,22 @@ class BookingController extends Controller
     public function CurrentBookingCancel(Request $request)
     {
         $money = ride_setting::first();
+        $post2 = stopover::where('tracking', $request->tracking)->first();
+        $post = strtotime($post2->date) - time();
+        $hours = round($post / 3600);
         $insert = new booking_cancel;
         $insert->user_id = Session('userId');
         $insert->tracking = $request->tracking;
         $insert->reason = $request->reason;
         $insert->message = $request->message;
-        $insert->charge = $money->fine;
+        if ($hours < 6) {
+            $price = ($post2->price / $money->fine_6h) * 100;
+        } elseif ($hours < 12) {
+            $price = ($post2->price / $money->fine_12h) * 100;
+        } else {
+            $price = ($post2->price / $money->fine_12_upper) * 100;
+        }
+        $insert->charge = ceil($price);
         $insert->save();
 
         $booking = booking::where('user_id', Session('userId'))->where('tracking', $request->tracking)->first();
@@ -160,6 +170,20 @@ class BookingController extends Controller
         $booking->save();
 
         return redirect('current-booking');
+
+    }
+
+    public function HistoryBooking($data = false)
+    {
+        $booking = booking::where('user_id', Session('userId'))->where('status', 1)->get();
+        $cancel = "";
+        if ($data) {
+            $bookingsingle = booking::find($data);
+            return view('frontend.sp_panel.booking.current_book', compact('booking', 'cancel', 'bookingsingle'));
+        } else {
+            return view('frontend.sp_panel.booking.current_book', compact('booking'));
+        }
+
 
     }
 }
