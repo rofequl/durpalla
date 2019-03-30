@@ -252,7 +252,7 @@
       <path value="$PROJECT_DIR$/vendor/laravel/socialite" />
     </include_path>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="69" />
     <option name="y" value="19" />
     <option name="width" value="1260" />
@@ -404,12 +404,12 @@
       <workItem from="1553684643440" duration="9101000" />
       <workItem from="1553712236168" duration="12497000" />
       <workItem from="1553788177400" duration="2406000" />
-      <workItem from="1553839593131" duration="33608000" />
+      <workItem from="1553839593131" duration="34206000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="102308000" />
+    <option name="totallyTimeSpent" value="102906000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
