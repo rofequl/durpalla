@@ -11,7 +11,12 @@
 |
 */
 
-Route::get('/', function () {return view('frontend.index');})->name('home');
+Route::get('/', 'homeController@homepage')->name('home');
+
+Route::get('/language', 'homeController@language')->name('language');
+
+Route::get('login/facebook', 'homeController@redirectToProvider')->name('signup.facebook');
+Route::get('login/facebook/callback', 'homeController@handleProviderCallback');
 
 Route::get('/registration', function () {return view('frontend.log_in.registration');})->name('sp.registration');
 Route::get('/registration1', function () {return view('frontend.log_in.registration2');})->name('sp.registration1');
@@ -50,7 +55,10 @@ Route::group(['middleware' => 'CheckUserLogin','namespace' => 'frontend'], funct
     Route::get('/sp-account-close', 'SpAccountController@SpAccountClose')->name('sp.account.close');
     Route::post('/sp-account-close-done', 'SpAccountController@SpAccountCloseDone')->name('sp.account.close.done');
 
-
+    Route::get('/sp-account-profile', 'SpAccountController@Profile')->name('sp.account.profile');
+    Route::post('/sp-account-profile-update', 'SpAccountController@ProfileUpdate')->name('sp.account.profile.update');
+    Route::get('/sp-account-photo', 'SpAccountController@Photo')->name('sp.account.photo');
+    Route::post('/sp-account-photo-store', 'SpAccountController@PhotoStore')->name('sp.account.photo.store');
 
 });
 
@@ -223,6 +231,9 @@ Route::group(['middleware' => 'CheckAdmin','namespace' => 'backend'], function (
 
     Route::get('/admin-sp-account-close', 'SpAccountController@SpAccountClose')->name('admin.sp.account.close');
     Route::get('/admin-sp-account-close-done', 'SpAccountController@SpAccountCloseDone')->name('admin.sp.account.close.done');
+
+    Route::get('/admin-landing-image', 'LandingImageController@index')->name('admin.landing.image');
+    Route::post('/admin-landing-image-store', 'LandingImageController@store')->name('admin.landing.image.store');
 });
 
 

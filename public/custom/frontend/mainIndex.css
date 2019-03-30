@@ -548,14 +548,34 @@ margin-top: 5px;
 .submenu li{
     border-bottom: 0!important;
     cursor: pointer;
-    padding: 4px;
+    padding: 2px 8px;
 }
 .submenu li:hover{
     background-color: #e4e4e4;
 }
 
 
+.user-submenu li:hover,
+.user-submenu li:hover .user-link{
+    background-color: #d0deee;
+    color: #4b626e;
+}
 
+.user-submenu li{
+    border: 1px solid #d7e5f5;
+}
+
+.user-submenu li .user-link{
+    color: #607d8b;
+    display: block;
+    font-size: 13px;
+    line-height: 22px;
+    padding: 5px 0;
+}
+
+.user-submenu li .user-link i{
+    margin-right: 10px;
+}
 
 
 

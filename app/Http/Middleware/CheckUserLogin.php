@@ -16,7 +16,7 @@ class CheckUserLogin
      */
     public function handle($request, Closure $next)
     {
-        if(Session::get('userId') != null && Session::get('phone') != null) {
+        if(Session::get('userId') != null) {
             return $next($request);  // if exist proceed to next step
         } else {
             return redirect('/login');

@@ -1,14 +1,14 @@
 @extends('frontend.layout.app')
 @section('content')
     <style>
-        #map {
+        #img {
             height: 70vh;
             width: 100%;
         }
     </style>
     <!--================ Start Home Banner Area =================-->
-    <section id="map" class="overlay">
-
+    <section class="overlay">
+<img src="{{$landingPage? asset('storage/landing_page/'.$landingPage) : "img/footer.jpg"}}" id="img">
     </section>
     <!--================ End Home Banner Area =================-->
 
@@ -17,7 +17,7 @@
         <div class="pageBanner col-12 col-lg-8 ml-lg-5 mt-0">
             <div class="container-fluid">
                 <h3 class="text-white my-0 ml-md-5">
-                    Long Distance Ride Sharing
+                    {{__('file.index1')}}
                 </h3>
                 <form class="pr-md-5">
                     <div class="form-row">
@@ -68,7 +68,7 @@
                     <div class="single_feature">
                         <div class="info-content">
                             <i class="fas fa-3x text-black fa-car-side"></i>
-                            <h5>Sign up for free</h5>
+                            <h5>{{__('file.index2')}}</h5>
                             <p>Qualified Drivers</p>
 
                         </div>
@@ -79,7 +79,7 @@
                     <div class="single_feature">
                         <div class="info-content">
                             <i class="fas fa-3x text-black fa-user-circle"></i>
-                            <h5>Daily commute</h5>
+                            <h5>{{__('file.index3')}}</h5>
                             <p>Service Provider</p>
                         </div>
                     </div>
@@ -89,7 +89,7 @@
                     <div class="single_feature">
                         <div class="info-content">
                             <i class="fas fa-3x text-black fa-map-marked-alt"></i>
-                            <h5>Long distance ride</h5>
+                            <h5>{{__('file.index4')}}</h5>
                             <p>Trusted Clients</p>
                         </div>
                     </div>
@@ -99,7 +99,7 @@
                     <div class="single_feature">
                         <div class="info-content">
                             <i class="fas fa-3x text-black fa-money-bill"></i>
-                            <h5>Online payment</h5>
+                            <h5>{{__('file.index5')}}</h5>
                             <p>Achievements</p>
                         </div>
                     </div>
@@ -240,7 +240,7 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-8">
-                    <h1 class="mb-4">Going that way anyway</h1>
+                    <h1 class="mb-4">{{__('file.index6')}}</h1>
                     <a href="#" class="genric-btn white-border circle m-1">Download in Appstore</a>
                     <a href="#" class="genric-btn white-border circle my-2">Download in Google Play</a>
                 </div>
@@ -253,7 +253,7 @@
     <!--================ Real people section Start ================-->
     <section class="about-area mt-0 pb-5" id="realPeople">
         <div class="container pt-5">
-            <h2 class="text-center text-capitalize">Happy clint list</h2>
+            <h2 class="text-center text-capitalize">{{__('file.index7')}}</h2>
             <div class="about-inner">
                 <div class="row">
                     <div class="col-lg-6 col-md-6">

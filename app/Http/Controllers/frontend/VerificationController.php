@@ -17,7 +17,7 @@ class VerificationController extends Controller
             $verification->user_id = Session('userId');
             $verification->save();
         }
-        return view('frontend.sp_panel.verification', compact('verification'));
+        return view('frontend.sp_panel.profile.verification', compact('verification'));
     }
 
     public function SpVerificationPost(Request $request)

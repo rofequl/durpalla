@@ -15,12 +15,6 @@
                     </ul>
                 </li>
                 --->
-                <li class="">
-                    <a href="{{route('sp.verification')}}"> <i class="menu-icon fas fa-hands-helping"></i>Verification Menu</a>
-                </li>
-                <li class="">
-                    <a href="{{route('sp.account.close')}}"> <i class="menu-icon fas fa-hands-helping"></i>Close my account</a>
-                </li>
                 {{--<li class="">--}}
                     {{--<a href="{{route('sp.personalInformation')}}"> <i class="menu-icon fas fa-hands-helping"></i>Personal Information</a>--}}
                 {{--</li>--}}

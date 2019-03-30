@@ -13,14 +13,14 @@
                     <h2>How do you want to sign up?</h2>
                     <section class="about-area mt-0">
                         <div class="about-inner">
-                            <div class="single-success p-3 hov-pointer">
-                                Continue with Facebook
-                                <i class="fas fa-angle-right float-right fs-20 mt-1"></i>
-                            </div>
-                            <a href="{{route('sp.registration1')}}"><div class="single-success p-3 hov-pointer">
-                                Sign up with my phone
+                            <a href="{{route('signup.facebook')}}"><div class="single-success p-3 hov-pointer">
+                                    Continue with Facebook
                                 <i class="fas fa-angle-right float-right fs-20 mt-1"></i>
                             </div></a>
+                            <a href="{{route('sp.registration1')}}"><div class="single-success p-3 hov-pointer">
+                                    Sign up with my phone
+                                    <i class="fas fa-angle-right float-right fs-20 mt-1"></i>
+                                </div></a>
                         </div>
                     </section>
                     <br><br>

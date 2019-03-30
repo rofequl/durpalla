@@ -49,6 +49,9 @@
                 <li class="">
                     <a href="{{route('promo_code.index')}}"> <i class="menu-icon fas fa-hands-helping"></i>Promo Code</a>
                 </li>
+                <li class="">
+                    <a href="{{route('admin.landing.image')}}"> <i class="menu-icon fas fa-hands-helping"></i>Landing Image</a>
+                </li>
                 <li class="menu-item-has-children dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fas fa-car"></i>Corporate</a>
                     <ul class="sub-menu children dropdown-menu">

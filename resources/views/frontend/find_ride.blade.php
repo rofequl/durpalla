@@ -113,7 +113,7 @@
                                 </div>
 
                                 <div class="row mx-1">
-                                    <div class="input-group mb-3 col-4 px-0 pr-1">
+                                    <div class="input-group input-group-sm mb-3 col-4 px-0 pr-1">
                                         <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1"><i class="fa fa-calendar"
                                                                                             aria-hidden="true"></i></span>
@@ -122,7 +122,7 @@
                                                value="@if(isset($after)) {{$after}} @endif"
                                                placeholder="On or After">
                                     </div>
-                                    <div class="input-group mb-3 col-4 px-0 pr-1">
+                                    <div class="input-group input-group-sm mb-3 col-4 px-0 pr-1">
                                         <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1"><i class="fa fa-calendar"
                                                                                             aria-hidden="true"></i></span>
@@ -131,14 +131,25 @@
                                                value="@if(isset($before)) {{$before}} @endif"
                                                placeholder="On or Before">
                                     </div>
-                                    <div class="input-group mb-3 col-4 px-0">
+
+
+                                    <div class="input-group input-group-sm mb-3 col-4 px-0">
                                         <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1"><i class="fa fa-users"
-                                                                                            aria-hidden="true"></i></span>
+                                    <span class="input-group-text" id="basic-addon1"><i class="fa fa-car"
+                                                                                        aria-hidden="true"></i></span>
                                         </div>
-                                        <input type="text" class="form-control" name="seat" min="1"
+                                        <input type="text" class="form-control seat" name="seat" min="1"
                                                placeholder="1+ seats" value="@if(isset($seat)) {{$seat}} @endif">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text plus" id="basic-addon1"><i
+                                                        class="fas fa-plus"></i></span>
+                                        </div>
+                                        <div class="input-group-append">
+                                            <span class="input-group-text minus" id="basic-addon1"><i
+                                                        class="fas fa-minus"></i></span>
+                                        </div>
                                     </div>
+
                                     <div class="w-100">
                                         <button class="btn btn-primary float-right">Search</button>
                                     </div>
@@ -174,8 +185,10 @@
                                        placeholder="1+ seats" value="@if(isset($seat)) {{$seat}} @endif">
                                 <i class="fa fa-search fa-3x" aria-hidden="true"></i>
                                 <p>No rides found passing by</p>
-                                <button type="submit" class="btn btn-sm btn-danger radius w-100 my-2">Create a rides request for
-                                    driver</button>
+                                <button type="submit" class="btn btn-sm btn-danger radius w-100 my-2">Create a rides
+                                    request for
+                                    driver
+                                </button>
                                 <p>
                                     Drag the marker to search for a rides in other places, or visit the
                                     homepage to explore rides worldwide.
@@ -224,12 +237,12 @@
 
                                 @foreach ($stopover as $stopovers)
                                     <?php
-                                    $s_location = PostRideAddress($stopovers->post_id,$stopovers->going,'location');
-                                    $e_location = PostRideAddress($stopovers->post_id,$stopovers->target,'location');
-                                    $s_lat = PostRideAddress($stopovers->post_id,$stopovers->going,'lat');
-                                    $s_lng = PostRideAddress($stopovers->post_id,$stopovers->going,'lng');
-                                    $e_lat = PostRideAddress($stopovers->post_id,$stopovers->target,'lat');
-                                    $e_lng = PostRideAddress($stopovers->post_id,$stopovers->target,'lng');
+                                    $s_location = PostRideAddress($stopovers->post_id, $stopovers->going, 'location');
+                                    $e_location = PostRideAddress($stopovers->post_id, $stopovers->target, 'location');
+                                    $s_lat = PostRideAddress($stopovers->post_id, $stopovers->going, 'lat');
+                                    $s_lng = PostRideAddress($stopovers->post_id, $stopovers->going, 'lng');
+                                    $e_lat = PostRideAddress($stopovers->post_id, $stopovers->target, 'lat');
+                                    $e_lng = PostRideAddress($stopovers->post_id, $stopovers->target, 'lng');
                                     ?>
                                     @if (distance($s_lat, $s_lng, $userLat, $userLng, "K") < $satting->search && distance($e_lat, $e_lng, $userLat2, $userLng2, "K") < $satting->search)
                                         <li>
@@ -289,7 +302,7 @@
                                                 </div>
                                                 <div class="col-12 col-sm-4 col-md-2 my-auto">
                                                     <?php
-                                                    $data = [1,3];
+                                                    $data = [1, 3];
                                                     ?>
                                                     @if(in_array(1,$data))<img
                                                             src="{{asset('img/icon/smokeNoSmall.gif')}}">@endif
@@ -479,6 +492,40 @@
                 }
             });
 
+        });
+
+        $(function(){
+            $(".plus").click(function(e) {
+                e.preventDefault();
+                var $this = $(this);
+                var $input = $(".seat");
+                var value = parseInt($input.val());
+
+                if (value < 12) {
+                    value = value + 1;
+                }
+                else {
+                    value =1;
+                }
+
+                $input.val(value);
+            });
+
+            $(".minus").click(function(e) {
+                e.preventDefault();
+                var $this = $(this);
+                var $input = $(".seat");
+                var value = parseInt($input.val());
+
+                if (value > 1) {
+                    value = value - 1;
+                }
+                else {
+                    value =1;
+                }
+
+                $input.val(value);
+            });
         });
     </script>
 
