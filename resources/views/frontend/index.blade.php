@@ -8,7 +8,7 @@
     </style>
     <!--================ Start Home Banner Area =================-->
     <section class="overlay">
-<img src="{{$landingPage? asset('storage/landing_page/'.$landingPage) : "img/footer.jpg"}}" id="img">
+<img src="{{$landingPage? asset('storage/landing_page/'.$landingPage) : "img/landing_page.jpg"}}" id="img">
     </section>
     <!--================ End Home Banner Area =================-->
 

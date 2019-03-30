@@ -10,8 +10,6 @@ use Laravel\Socialite\Facades\Socialite;
 use Redirect;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use App;
-use Illuminate\Support\Facades\Config;
 
 class homeController extends Controller
 {
@@ -35,8 +33,16 @@ class homeController extends Controller
             ->first();
         if (!empty($admin)) {
             if ($admin && Hash::check($request->password, $admin->password)) {
-                Session::put('phone', $request->phone);
-                Session::put('userId', $admin->user_id);
+
+                if ($request->remember_me){
+                    setcookie('userId', $admin->user_id, time() + (86400 * 30), "/");
+                    setcookie('token', $admin->token, time() + (86400 * 30), "/");
+                    Session::put('token', $admin->token);
+                    Session::put('userId', $admin->user_id);
+                }else{
+                    Session::put('token', $admin->token);
+                    Session::put('userId', $admin->user_id);
+                }
                 return redirect('/');
             } else {
                 $request->session()->flash('message', 'password not match');
@@ -54,8 +60,8 @@ class homeController extends Controller
         $request->validate([
             'phone' => 'required|max:15',
             'name' => 'required|max:191',
-            'dob' => 'required',
-            'gender' => 'required',
+            'dob' => 'required|max:191',
+            'gender' => 'required|',
             'password' => 'required|max:20|min:6',
         ]);
 
@@ -69,11 +75,11 @@ class homeController extends Controller
         $user->gender = $request->gender;
         $user->image = "admin.jpg";
         $user->password = Hash::make($request->password);
+        $user->token = $request->_token;
         $user->save();
 
-        Session::put('phone', $request->phone);
         Session::put('userId', $userId);
-        return redirect('/sp-panel');
+        return redirect('/');
     }
 
 
@@ -127,8 +133,10 @@ class homeController extends Controller
 
     public function LogoutUser()
     {
-        Session::forget('phone');
+        Session::forget('token');
         Session::forget('userId');
+        setcookie('userId', '', time() - 3600);
+        setcookie('token', '', time() - 3600);
         return redirect('/');
 
     }

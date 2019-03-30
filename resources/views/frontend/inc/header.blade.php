@@ -61,7 +61,7 @@
                                 style="overflow: visible;max-height: unset">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
                                    aria-haspopup="true" aria-expanded="false">
-                                    <img class="user-avatar rounded-circle" src="{{asset('storage/user/'.userInformation(Session('userId'),'image'))}}" alt="User Avatar">
+                                    <img class="user-avatar rounded-circle" src="{{asset('storage/user/'.userInformation(Session('userId'),'image'))}}">
                                 </a>
                                 <ul class="dropdown-menu" style="margin-left: -122px">
                                     <li class="nav-item"><a class="user-link" href="{{route('sp.home')}}"><i
