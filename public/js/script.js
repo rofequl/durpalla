@@ -5,3 +5,7 @@
 $( function() {
     $( ".datepicker" ).datepicker();
 });
+
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+});

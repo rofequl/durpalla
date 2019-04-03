@@ -35,7 +35,7 @@
                             @endif
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control {{ $errors->has('dob') ? ' is-invalid' : '' }}" id="datepicker" name="dob"
+                            <input type="text" class="form-control datepicker {{ $errors->has('dob') ? ' is-invalid' : '' }}" id="datepicker" name="dob"
                                    placeholder="Enter your Date of birth" onfocus="this.placeholder = ''"
                                    onblur="this.placeholder = 'Enter your Date of birth'">
                             @if ($errors->has('dob'))

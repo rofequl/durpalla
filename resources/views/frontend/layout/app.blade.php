@@ -53,7 +53,6 @@
 <!--gmaps Js-->
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCMfl6pAmNv3T6PoDRy7ESSJRZLLSFf2jI&libraries=places&callback=initMap"
         async defer></script>
-</script>
 <script src="{{asset('js/theme.js')}}"></script>
 </body>
 

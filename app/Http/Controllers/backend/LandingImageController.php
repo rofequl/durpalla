@@ -10,7 +10,8 @@ use App\Http\Controllers\Controller;
 class LandingImageController extends Controller
 {
     public function index(){
-        return view('backend.dashboard_image');
+        $image = landing_image::all();
+        return view('backend.dashboard_image',compact('image'));
     }
 
     public function store(Request $request){
@@ -29,5 +30,20 @@ class LandingImageController extends Controller
         Session::flash('message', 'Photo upload successfully');
         return redirect('admin-landing-image');
 
+    }
+
+    public function Update(Request $request){
+        if ($request->show) {
+            $serviceHide = landing_image::where('approve',1)->first();
+            if ($serviceHide){
+                $serviceHide->approve = 0;
+                $serviceHide->save();
+            }
+            $serviceCategory = landing_image::find($request->show);
+            $serviceCategory->approve = 1;
+            $serviceCategory->save();
+            Session::flash('message', 'Photo Update successfully');
+            return redirect('admin-landing-image');
+        }
     }
 }

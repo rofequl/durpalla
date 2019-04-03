@@ -47,7 +47,7 @@ class SpAccountController extends Controller
             $extension = $request->file('image')->getClientOriginalExtension();
             $fileStore3 = rand(10, 100) . time() . "." . $extension;
             $request->file('image')->storeAs('public/user', $fileStore3);
-            $user->image = $fileStore3;
+            $user->image = \URL::to('').'/storage/user/'.$fileStore3;
         }
         $user->save();
 

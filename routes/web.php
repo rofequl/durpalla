@@ -74,6 +74,7 @@ Route::get('/post-ride3/{data}', 'frontend\PostController@RidePost3')->name('pos
 Route::post('/post-ride3', 'frontend\PostController@RidePostCondition')->name('post.ride3');
 
 Route::get('/all-ride', 'frontend\RideController@Ride')->name('all.ride');
+Route::post('/all-ride-search', 'frontend\RideController@RideSearch')->name('all.ride.search');
 
 Route::get('/find-ride', 'frontend\RideController@FindRide')->name('find.ride');
 Route::post('/find-ride', 'frontend\RideController@FindRideSearch')->name('find.ride');
@@ -234,6 +235,7 @@ Route::group(['middleware' => 'CheckAdmin','namespace' => 'backend'], function (
 
     Route::get('/admin-landing-image', 'LandingImageController@index')->name('admin.landing.image');
     Route::post('/admin-landing-image-store', 'LandingImageController@store')->name('admin.landing.image.store');
+    Route::get('/admin-landing-image-update', 'LandingImageController@Update')->name('admin.landing.image.update');
 });
 
 

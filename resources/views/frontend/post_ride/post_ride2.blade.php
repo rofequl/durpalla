@@ -51,7 +51,7 @@
 
                                             <div class="input-group input-group-sm mb-3">
                                                 <div class="input-group-prepend">
-                                                    <span class="input-group-text" id="basic-addon1">$</span>
+                                                    <span class="input-group-text" id="basic-addon1">৳</span>
                                                 </div>
                                                 <?php $price = ride_price($s_lat, $s_lng, $e_lat, $e_lng, $post->car_id); ?>
                                                 <input type="number" value="{{$price}}" class="form-control" placeholder="00000"

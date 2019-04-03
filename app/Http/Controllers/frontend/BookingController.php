@@ -22,7 +22,7 @@ class BookingController extends Controller
         $post = post_ride::where('id', $singleStopovers->post_id)->first();
         $car = car::where('user_id', $post->user_id)->where('id', $post->car_id)->first();
         if ($data2) {
-            if (Session::get('userId') == null && Session::get('phone') == null) {
+            if (Session::get('userId') == null && Session::get('token') == null) {
                 Session::flash('message', 'Submit this form Login first.');
                 return redirect('login');
             }

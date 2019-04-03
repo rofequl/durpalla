@@ -86,7 +86,7 @@
                                                                                         aria-hidden="true"></i></span>
                                     </div>
                                     <input id="start" type="text" class="form-control"
-                                           placeholder="Where do you want to go?"
+                                           placeholder="Leaving from..."
                                            value="@if(isset($userLoca)) {{$userLoca}} @endif">
                                     <input type="hidden" name="lat" id="lat"
                                            value="@if(isset($userLat)) {{$userLat}} @endif">
@@ -102,7 +102,7 @@
                                                                                         aria-hidden="true"></i></span>
                                     </div>
                                     <input type="text" id="end" class="form-control"
-                                           placeholder="Where do you want to go?"
+                                           placeholder="Going to..."
                                            value="@if(isset($userLoca2)) {{$userLoca2}} @endif">
                                     <input type="hidden" name="lat2" id="lat2"
                                            value="@if(isset($userLat2)) {{$userLat2}} @endif">
@@ -214,11 +214,11 @@
                             <p>Search Details</p>
                         </div>
                         <div class="col-6">
-                            <select class="text-black float-right" onchange="document.location.href=this.value">
-                                <option>Select</option>
-                                <option value="{{route('find.ride')}}">Highest to lowest</option>
-                                <option>Lowest to highest</option>
-                            </select>
+                            {{--<select class="text-black float-right" onchange="document.location.href=this.value">--}}
+                                {{--<option>Select</option>--}}
+                                {{--<option value="{{route('find.ride')}}">Highest to lowest</option>--}}
+                                {{--<option>Lowest to highest</option>--}}
+                            {{--</select>--}}
                         </div>
                     </div>
                     <div class="card-body">
@@ -235,97 +235,108 @@
                             <ul class="list-unstyled">
 
 
-                                @foreach ($stopover as $stopovers)
+                                @foreach ($stopover as $ride)
                                     <?php
-                                    $s_location = PostRideAddress($stopovers->post_id, $stopovers->going, 'location');
-                                    $e_location = PostRideAddress($stopovers->post_id, $stopovers->target, 'location');
-                                    $s_lat = PostRideAddress($stopovers->post_id, $stopovers->going, 'lat');
-                                    $s_lng = PostRideAddress($stopovers->post_id, $stopovers->going, 'lng');
-                                    $e_lat = PostRideAddress($stopovers->post_id, $stopovers->target, 'lat');
-                                    $e_lng = PostRideAddress($stopovers->post_id, $stopovers->target, 'lng');
+                                    $s_location = PostRideAddress($ride->post_id, $ride->going, 'location');
+                                    $e_location = PostRideAddress($ride->post_id, $ride->target, 'location');
+                                    $s_lat = PostRideAddress($ride->post_id, $ride->going, 'lat');
+                                    $s_lng = PostRideAddress($ride->post_id, $ride->going, 'lng');
+                                    $e_lat = PostRideAddress($ride->post_id, $ride->target, 'lat');
+                                    $e_lng = PostRideAddress($ride->post_id, $ride->target, 'lng');
                                     ?>
                                     @if (distance($s_lat, $s_lng, $userLat, $userLng, "K") < $satting->search && distance($e_lat, $e_lng, $userLat2, $userLng2, "K") < $satting->search)
-                                        <li>
-                                            <div class="row text-center">
-                                                <div class="col-12 col-sm-4 col-md-2 dateShow lh-1-3">
-                                                    <p class="my-0">{{$stopovers->time}}
-                                                        :00 {{$stopovers->time2}}</p>
-                                                    <p class="my-0">Date: {{$stopovers->date}}</p>
-                                                    <?php  $dist = GetDrivingDistance($s_lat, $s_lng, $e_lat, $e_lng); ?>
-                                                    <p class="my-0">Distance: {{$dist['distance']}}</p>
-                                                    <p class="my-0">Duration: {{$dist['time']}}</p>
-                                                </div>
-                                                <div style="width: 10px">
-                                                    <div class="relative">
-                                                        <div class="absolute"></div>
-                                                        <div class="absolute2"></div>
-                                                        <div class="absolute3"></div>
+                                            <li onclick="location.href='{{route('booking.index',$ride->tracking)}}';">
+
+                                                <div class="row text-center">
+                                                    <div class="col-12 col-sm-4 col-md-2 dateShow lh-1-3">
+                                                        <p class="my-0">{{$ride->time}}
+                                                            :00 {{$ride->time2}}</p>
+                                                        <?php // $dist = GetDrivingDistance($s_lat, $s_lng, $e_lat, $e_lng); ?>
+                                                        {{--<p class="my-0">Distance: {{$dist['distance']}}</p>--}}
+                                                        {{--<p class="my-0">Duration: {{$dist['time']}}</p>--}}
+                                                    </div>
+                                                    <div style="width: 10px">
+                                                        <div class="relative">
+                                                            <div class="absolute"></div>
+                                                            <div class="absolute2"></div>
+                                                            <div class="absolute3"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-11 col-sm-4 col-md location text-left">
+
+                                                        <h4>Departure</h4>
+                                                        <p>{{$s_location}}</p><br>
+                                                        <h4>Destination</h4>
+                                                        {{$e_location}}
+                                                        <p></p>
+
+
+                                                    </div>
+                                                    <div class="col-12 col-sm-4 col-md-2 p-0">
+
+                                                        <aside class="single_sidebar_widget author_widget text-center lh-1-1">
+                                                            <img class="author_img w-25 rounded-circle"
+                                                                 src="{{userInformation(getRide($ride->post_id)->user_id,'image')}}"
+                                                                 alt=""><br>
+                                                            <h5 class="my-0">{{userInformation(getRide($ride->post_id)->user_id,'name')}}</h5>
+                                                            <a href="#" class="fs-8 my-0">
+                                                                <span class="fa fa-star checked"></span>
+                                                                <span class="fa fa-star checked"></span>
+                                                                <span class="fa fa-star checked"></span>
+                                                                <span class="fa fa-star"></span>
+                                                                <span class="fa fa-star"></span>
+                                                            </a><br>
+                                                            <a href="#"
+                                                               class="btn btn-success small circle my-1 fs-10">View
+                                                                profile/Preview</a>
+                                                        </aside>
+
+
+                                                    </div>
+                                                    <div class="col-12 col-sm-4 col-md-2 my-auto">
+                                                        <div class="price my-2 text-bold fs-18 text-black">
+                                                            ৳ {{$ride->price}}</div>
+                                                        @if(seat($ride->going,$ride->target,$ride->post_id,$ride->date) > 0)
+                                                            @for($i=1;$i<=seat($ride->going,$ride->target,$ride->post_id,$ride->date);$i++)
+                                                                <span class="fa-2x fas fa-male checked"
+                                                                      data-toggle="tooltip"
+                                                                      data-placement="bottom"
+                                                                      title="{{seat($ride->going,$ride->target,$ride->post_id,$ride->date)}} Seat"></span>
+                                                            @endfor
+                                                        @else
+                                                            {{"Booked"}}
+                                                        @endif
+                                                    </div>
+                                                    <div class="col-12 col-sm-4 col-md-2 my-auto">
+                                                        <?php
+                                                        $data = explode(",", getRide($ride->post_id)->condition);
+                                                        ?>
+                                                        @if(in_array(1,$data))<img
+                                                                src="{{asset('img/icon/smokeNoSmall.gif')}}">@endif
+                                                        @if(in_array(2,$data))<img
+                                                                src="{{asset('img/icon/bagSizeSmallSmall.gif')}}">@endif
+                                                        @if(in_array(3,$data))<img
+                                                                src="{{asset('img/icon/emailAccessYesSmall.gif')}}">@endif
+                                                        @if(in_array(4,$data))<img
+                                                                src="{{asset('img/icon/phoneAccessYesSmall.gif')}}">@endif
+                                                        <p class="text-bold fs-14"><b
+                                                                    class="text-muted">{{getCarById(getRide($ride->post_id)->car_id,'car_type')=='Premier'? 'Luxury':'Comfortable'}}</b>
+                                                        </p>
+                                                    </div>
+                                                    <div class="col-12 col-sm-4 col-md-2 reviewStar my-auto">
+                                                        <span class="fa fa-star checked"></span>
+                                                        <span class="fa fa-star checked"></span>
+                                                        <span class="fa fa-star checked"></span>
+                                                        <span class="fa fa-star"></span>
+                                                        <span class="fa fa-star"></span>
+                                                        <p class="lh-1-1">(04)</p>
+                                                        <button class="btn small circle btn-primary my-1 fs-10">
+                                                            Select & Continue
+                                                        </button>
                                                     </div>
                                                 </div>
-                                                <div class="col-11 col-sm-4 col-md location text-left">
 
-                                                    <h4>Departure</h4>
-                                                    <p>{{$s_location}}</p><br>
-                                                    <h4>Destination</h4>
-                                                    {{$e_location}}
-                                                    <p></p>
-
-
-                                                </div>
-                                                <div class="col-12 col-sm-4 col-md-2 p-0">
-
-                                                    <aside class="single_sidebar_widget author_widget text-center lh-1-1">
-                                                        <img class="author_img w-25 rounded-circle"
-                                                             src="img/blog/author.png" alt=""><br>
-                                                        <h5 class="my-0">Charlie Barber</h5>
-                                                        <a href="#" class="fs-8 my-0">
-                                                            <span class="fa fa-star checked"></span>
-                                                            <span class="fa fa-star checked"></span>
-                                                            <span class="fa fa-star checked"></span>
-                                                            <span class="fa fa-star"></span>
-                                                            <span class="fa fa-star"></span>
-                                                        </a><br>
-                                                        <a href="#"
-                                                           class="btn btn-success small circle my-1 fs-10">View
-                                                            profile/Preview</a>
-                                                    </aside>
-
-
-                                                </div>
-                                                <div class="col-12 col-sm-4 col-md-2 my-auto">
-                                                    <div class="price">{{$stopovers->price}}$</div>
-                                                    <span class="fa-2x fas fa-male checked"></span>
-                                                    <span class="fa-2x fas fa-male checked"></span>
-                                                    <span class="fa-2x fas fa-male checked"></span>
-                                                    <span class="fa-2x fas fa-male"></span>
-                                                    <span class="fa-2x fas fa-male"></span>
-                                                </div>
-                                                <div class="col-12 col-sm-4 col-md-2 my-auto">
-                                                    <?php
-                                                    $data = [1, 3];
-                                                    ?>
-                                                    @if(in_array(1,$data))<img
-                                                            src="{{asset('img/icon/smokeNoSmall.gif')}}">@endif
-                                                    @if(in_array(2,$data))<img
-                                                            src="{{asset('img/icon/bagSizeSmallSmall.gif')}}">@endif
-                                                    @if(in_array(3,$data))<img
-                                                            src="{{asset('img/icon/emailAccessYesSmall.gif')}}">@endif
-                                                    @if(in_array(4,$data))<img
-                                                            src="{{asset('img/icon/phoneAccessYesSmall.gif')}}">@endif
-                                                </div>
-                                                <div class="col-12 col-sm-4 col-md-2 reviewStar my-auto">
-                                                    <span class="fa fa-star checked"></span>
-                                                    <span class="fa fa-star checked"></span>
-                                                    <span class="fa fa-star checked"></span>
-                                                    <span class="fa fa-star"></span>
-                                                    <span class="fa fa-star"></span>
-                                                    <p class="lh-1-1">(04)</p>
-                                                    <button class="btn small circle btn-primary my-1 fs-10">
-                                                        Select & Continue
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </li>
+                                            </li>
                                     @endif
                                 @endforeach
 

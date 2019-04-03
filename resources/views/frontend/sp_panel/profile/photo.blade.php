@@ -8,23 +8,23 @@
         <hr>
         <p>Add your photo now! Other members will be reassured to see who they'll be travelling with, and you'll find
             your car share much more easily. Photos also help members to recognise each other</p>
+        @if ($errors->any())
+            @foreach ($errors->all() as $error)
+                <div class="alert alert-danger alert-dismissible">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    {{$error}}
+                </div>
+            @endforeach
+        @endif
+        @if(session()->has('message'))
+            <div class="alert alert-success alert-dismissible">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                {{ session()->get('message') }}
+            </div>
+        @endif
         <div class="card">
             <div class="card-body">
                 <div class="row">
-                    @if ($errors->any())
-                        @foreach ($errors->all() as $error)
-                            <div class="alert alert-danger alert-dismissible">
-                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                                {{$error}}
-                            </div>
-                        @endforeach
-                    @endif
-                    @if(session()->has('message'))
-                        <div class="alert alert-success alert-dismissible">
-                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                            {{ session()->get('message') }}
-                        </div>
-                    @endif
                     <div class="col-8 text-center">
                         <img src="" class="img-fluid rounded img-thumbnail mx-auto"
                              style="height: 150px;width: 150px;display: none"

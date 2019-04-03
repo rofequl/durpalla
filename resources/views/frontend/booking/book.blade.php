@@ -67,12 +67,13 @@
                             <div class="col-lg-3  col-md-3">
                                 <div class="blog_info text-right">
                                     <ul class="blog_meta list fs-12">
-                                        <li><a href="#">Mark wiens<i class="lnr lnr-user"></i></a></li>
+                                        <li><a href="#">{{userInformation($post->user_id,'name')}}<i
+                                                        class="lnr lnr-user"></i></a></li>
                                         <li><a href="#">{{$singleStopovers->date}}<i class="lnr lnr-calendar-full"></i></a>
                                         </li>
                                         <li><a href="#">{{$singleStopovers->time}}:{{$singleStopovers->time2}}<i
                                                         class="lnr lnr-eye"></i></a></li>
-                                        <li><a href="#">{{$singleStopovers->price}}$<i class="lnr lnr-bubble"></i></a>
+                                        <li><a href="#">৳ {{$singleStopovers->price}}<i class="lnr lnr-bubble"></i></a>
                                         </li>
                                         <li>
                                             <a href="#">{{seat($singleStopovers->going,$singleStopovers->target,$singleStopovers->post_id,$singleStopovers->date)}}
@@ -81,11 +82,19 @@
                                     </ul>
                                 </div>
                             </div>
+                            <?php
+                            $s_location = PostRideAddress($singleStopovers->post_id, $singleStopovers->going, 'location');
+                            $e_location = PostRideAddress($singleStopovers->post_id, $singleStopovers->target, 'location');
+                            $s_lat = PostRideAddress($singleStopovers->post_id, $singleStopovers->going, 'lat');
+                            $s_lng = PostRideAddress($singleStopovers->post_id, $singleStopovers->going, 'lng');
+                            $e_lat = PostRideAddress($singleStopovers->post_id, $singleStopovers->target, 'lat');
+                            $e_lng = PostRideAddress($singleStopovers->post_id, $singleStopovers->target, 'lng');
+                            ?>
                             <div class="col-lg-9 col-md-9 blog_details">
-                                <h4 class="fs-12">
-                                    Departure: {{PostRideAddress($singleStopovers->post_id, $singleStopovers->going, 'location')}}</h4>
-                                <h4 class="fs-12">
-                                    Destination: {{PostRideAddress($singleStopovers->post_id, $singleStopovers->target, 'location')}}</h4>
+                                <h3 class="fs-15">
+                                    Departure: {{$s_location}}</h3>
+                                <h3 class="fs-15">
+                                    Destination: {{$e_location}}</h3>
                                 <div class="row mt-4 mb-2">
                                     <div class="col-6">
                                         <h5>Car Information:</h5>
@@ -93,12 +102,31 @@
                                              class="img-thumbnail w-75" alt="...">
                                     </div>
                                     <div class="col-6">
-                                        @if(Session::get('userId') != null && Session::get('phone') != null && !isset($show) && seat($singleStopovers->going,$singleStopovers->target,$singleStopovers->post_id,$singleStopovers->date) != 0 && Session::get('userId') != getRide($singleStopovers->post_id)->user_id)
-                                            <a href="{{url('booking'.'/'.$singleStopovers->tracking.'/'.'get')}}"
-                                               class="blog_btn border mb-4 rounded float-right">
-                                                Book Now
-                                            </a>
-                                        @endif
+                                        <div class="row">
+                                            <?php  $dist = GetDrivingDistance($s_lat, $s_lng, $e_lat, $e_lng); ?>
+
+
+                                                <div class="col-12">
+                                                    @if(Session::get('userId') != null && Session::get('token') != null && !isset($show) && seat($singleStopovers->going,$singleStopovers->target,$singleStopovers->post_id,$singleStopovers->date) != 0 && Session::get('userId') != getRide($singleStopovers->post_id)->user_id)
+                                                        <a href="{{url('booking'.'/'.$singleStopovers->tracking.'/'.'get')}}"
+                                                           class="blog_btn border mb-4 rounded float-right">
+                                                            Book Now
+                                                        </a>
+                                                    @endif
+                                                </div>
+                                            <div class="col-6 text-right">
+                                                Distance:
+                                            </div>
+                                            <div class="col-6">
+                                                {{$dist['distance']}}
+                                            </div>
+                                            <div class="col-6 text-right">
+                                                Duration:
+                                            </div>
+                                            <div class="col-6">
+                                                {{$dist['time']}}
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -114,11 +142,11 @@
                                     </thead>
                                     <tbody>
                                     <tr>
-                                        <td>{{$car->brand}}</td>
+                                        <td>{{CarBrandById($car->brand_id)}}</td>
                                         <td>{{$car->model}}</td>
                                         <td>{{$car->fuel}}</td>
                                         <td>{{$car->kilometers}}</td>
-                                        <td>{{$car->car_type}}</td>
+                                        <td>{{$car->car_type=='Premier'? 'Luxury':'Comfortable'}}</td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -134,8 +162,9 @@
                 <div class="col-4">
                     <div class="blog_right_sidebar">
                         <aside class="single_sidebar_widget author_widget">
-                            <img class="author_img rounded-circle" src="{{asset('img/blog/author.png')}}" alt="">
-                            <h4>Charlie Barber</h4>
+                            <img class="author_img rounded-circle" src="{{userInformation($post->user_id,'image')}}"
+                                 alt="">
+                            <h4>{{userInformation($post->user_id,'name')}}</h4>
                             <p>Senior blog writer</p>
                             <div class="social_icon">
                                 <a href="#"><i class="fa fa-facebook"></i></a>

@@ -10,16 +10,28 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-6 my-2">
-                            Brand: {{$carwas->brand}}
+                            Brand: {{CarBrandById($carwas->brand_id)}}
                         </div>
                         <div class="col-6 my-2">
                             Model: {{$carwas->model}}
+                        </div>
+                        <div class="col-6 my-2">
+                            Brand: {{$carwas->user_id}}
+                        </div>
+                        <div class="col-6 my-2">
+                            Model: {{$carwas->model_year}}
                         </div>
                         <div class="col-6 my-2">
                             Fuel type: {{$carwas->fuel}}
                         </div>
                         <div class="col-6 my-2">
                             Kilometers run: {{$carwas->kilometers}}
+                        </div>
+                        <div class="col-6 my-2">
+                            Fuel type: {{$carwas->registration_date}}
+                        </div>
+                        <div class="col-6 my-2">
+                            Kilometers run: {{$carwas->registration_year}}
                         </div>
                     </div>
                     <form method="post" class="row" action="{{url('admin-pending-car-Approve')}}">
@@ -57,9 +69,11 @@
                     <tr>
                         <th>Id</th>
                         <th>User Id</th>
-                        <th>Name</th>
                         <th>Brand</th>
                         <th>Model</th>
+                        <th>Fuel</th>
+                        <th>Registration Date</th>
+                        <th>Model Year</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -69,9 +83,11 @@
                         <tr>
                             <td>{{$listNum}}</td>
                             <td>{{$cars->user_id}}</td>
-                            <td>{{$cars->brand}}</td>
-                            <td>{{$cars->brand}}</td>
+                            <td>{{CarBrandById($cars->brand_id)}}</td>
                             <td>{{$cars->model}}</td>
+                            <td>{{$cars->fuel}}</td>
+                            <td>{{$cars->registration_date}}</td>
+                            <td>{{$cars->model_year}}</td>
                             <td>
                                 <a href="{{route('admin.pending.car').'/'.$cars->id}}"
                                    class="btn btn-sm btn-success">View</a>

@@ -16,10 +16,17 @@ class CheckUserLogin
      */
     public function handle($request, Closure $next)
     {
+
         if(Session::get('userId') != null) {
-            return $next($request);  // if exist proceed to next step
+            return $next($request);
         } else {
-            return redirect('/login');
+            if (isset($_COOKIE['userId']) && isset($_COOKIE['token'])){
+                Session::put('token', $_COOKIE['token']);
+                Session::put('userId', $_COOKIE['userId']);
+                return $next($request);
+            }else{
+                return redirect('/login');
+            }
         }
     }
 }

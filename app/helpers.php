@@ -90,6 +90,12 @@ function car($column)
     return $query;
 }
 
+function getCarById($column,$column2)
+{
+    $query = DB::table('cars')->where('id',$column)->pluck($column2)->first();
+    return $query;
+}
+
 function resource($column)
 {
     $query = DB::table('resources')

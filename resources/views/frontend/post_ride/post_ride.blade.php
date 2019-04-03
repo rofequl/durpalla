@@ -62,7 +62,7 @@
                                     <input type="hidden" name="lng2" id="lng2">
                                     <input type="hidden" name="location2" id="location2">
                                 </div>
-                                @if(Session::get('userId') != null && Session::get('phone') != null)
+                                @if(Session::get('userId') != null && Session::get('token') != null)
                                     <label for="basic-url">Car selection</label>
                                     <div class="input-group mb-3">
                                         <select name="car">
@@ -72,11 +72,11 @@
                                         </select>
                                     </div>
                                 @endif
-                                @if(Session::get('userId') != null && Session::get('phone') != null)
+                                @if(Session::get('userId') != null && Session::get('token') != null)
                                     <label for="basic-url">Driver selection</label>
                                     <div class="input-group mb-3">
                                         <select name="driver">
-                                            <option value="SP">{{userInformation(Session::get('userId'),'name')}}</option>
+                                            <option value="SP" selected>{{userInformation(Session::get('userId'),'name')}}</option>
                                             @foreach(resource(Session::get('userId')) as $categorys)
                                                 <option value="{{$categorys->id}}">{{$categorys->name}}</option>
                                             @endforeach
@@ -349,7 +349,7 @@
 
     <script>
 
-        @if(Session::get('userId') == null && Session::get('phone') == null)
+        @if(Session::get('userId') == null && Session::get('token') == null)
 
         $(document).ready(function () {
             swal({

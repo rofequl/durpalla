@@ -33,10 +33,16 @@ class PostController extends Controller
 
         $validation = verification::where('user_id',Session('userId'))->first();
 
-        if ($validation->nid_status != 1 && $validation->passport_status != 1 && $validation->driving_status != 1) {
+        if ($validation){
+            if ($validation->nid_status != 1 && $validation->passport_status != 1 && $validation->driving_status != 1) {
+                Session::flash('message', 'Submit this form verifications NID, Passport and Driving licence.');
+                return redirect('post-ride');
+            }
+        }else{
             Session::flash('message', 'Submit this form verifications NID, Passport and Driving licence.');
             return redirect('post-ride');
         }
+
 
         $request->validate([
             'location' => 'required',
@@ -222,6 +228,7 @@ class PostController extends Controller
         $post->condition = $request->condition;
         $post->save();
 
+        Session::flash('message', 'Post ride insert successfully, Wait until admin approval');
         return redirect('all-ride');
     }
 
