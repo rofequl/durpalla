@@ -33,8 +33,8 @@
                     <div class="card">
                         <div class="card-header" id="headingOne">
                             Nid Number: {{$verification->nid}}<br>
-                            <img src="{{asset('storage/nid/'.$verification->nid_image1)}}" class="img-thumbnail img-size-64">
-                            <img src="{{asset('storage/nid/'.$verification->nid_image2)}}" class="img-thumbnail img-size-64">
+                            @if($verification->nid_image1)<img src="{{asset('storage/nid/'.$verification->nid_image1)}}" class="img-thumbnail img-size-64">@endif
+                            @if($verification->nid_image2)<img src="{{asset('storage/nid/'.$verification->nid_image2)}}" class="img-thumbnail img-size-64">@endif
                             <button class="btn btn-sm pull-right" type="button" data-toggle="collapse"
                                     data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                 Details
@@ -89,8 +89,8 @@
                     <div class="card">
                         <div class="card-header" id="headingTwo">
                             Passport: {{$verification->passport}}<br>
-                            <img src="{{asset('storage/passport/'.$verification->passport_image1)}}" class="img-thumbnail img-size-64">
-                            <img src="{{asset('storage/passport/'.$verification->passport_image2)}}" class="img-thumbnail img-size-64">
+                            @if($verification->passport_image1) <img src="{{asset('storage/passport/'.$verification->passport_image1)}}" class="img-thumbnail img-size-64">@endif
+                            @if($verification->passport_image2) <img src="{{asset('storage/passport/'.$verification->passport_image2)}}" class="img-thumbnail img-size-64">@endif
                             <button class="btn btn-sm pull-right" type="button" data-toggle="collapse"
                                     data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                                 Details
@@ -143,8 +143,8 @@
                     <div class="card">
                         <div class="card-header" id="headingThree">
                             Driving Licence: {{$verification->driving}}<br>
-                            <img src="{{asset('storage/driving/'.$verification->driving_image1)}}" class="img-thumbnail img-size-64">
-                            <img src="{{asset('storage/driving/'.$verification->driving_image2)}}" class="img-thumbnail img-size-64">
+                            @if($verification->driving_image1) <img src="{{asset('storage/driving/'.$verification->driving_image1)}}" class="img-thumbnail img-size-64">@endif
+                            @if($verification->driving_image2) <img src="{{asset('storage/driving/'.$verification->driving_image2)}}" class="img-thumbnail img-size-64">@endif
                             <button class="btn btn-sm pull-right" type="button" data-toggle="collapse"
                                     data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
                                 Details
