@@ -47,7 +47,8 @@
                                                 {{$e_location}}
                                             </div>
                                             <div class="col-12 col-sm-4 col-md-2 p-0">
-                                                <?php echo distance($s_lat, $s_lng, $e_lat, $e_lng, "K") . " Km"; ?>
+                                                <?php  $dist = GetDrivingDistance($s_lat, $s_lng, $e_lat, $e_lng); ?>
+                                                {{$dist['distance']}}
                                             </div>
                                             <div class="col-12 col-sm-4 col-md-2 reviewStar my-auto">
                                                 <div class="price">{{$stopovers->price}}$</div>

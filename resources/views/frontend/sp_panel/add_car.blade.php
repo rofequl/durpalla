@@ -32,10 +32,10 @@
                         <th>Sl.</th>
                         <th>Brand</th>
                         <th>Model</th>
+                        <th>Image</th>
                         <th>Fuel type</th>
                         <th>Kilometers run</th>
-                        <th>Registration Date</th>
-                        <th>Registration Date</th>
+                        <th>Registration Year</th>
                         <th>Model Year</th>
                         <th>Car type</th>
                         <th>Status</th>
@@ -49,9 +49,9 @@
                             <td>{{$listNum}}</td>
                             <td>{{CarBrandById($cars->brand_id)}}</td>
                             <td>{{$cars->model}}</td>
+                            <td><img src="{{asset('storage/car/'.$cars->car_image)}}" class="img-thumbnail img-size-64"></td>
                             <td>{{$cars->fuel}}</td>
                             <td>{{$cars->kilometers}}</td>
-                            <td>{{$cars->registration_date}}</td>
                             <td>{{$cars->registration_year}}</td>
                             <td>{{$cars->model_year}}</td>
                             <td>{{$cars->car_type}}</td>
@@ -88,7 +88,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form method="post" action="{{route('sp.addcar')}}">
+                <form method="post" action="{{route('sp.addcar')}}" enctype="multipart/form-data">
                     {{csrf_field()}}
                     <div class="modal-body">
 
@@ -108,6 +108,14 @@
                                 <input type="text" class="form-control" name="modal" id="modal" placeholder="Model">
                             </div>
                         </div>
+
+                        <div class="form-group row">
+                            <label for="inputPassword" class="col-md-3 col-form-label">Car Image</label>
+                            <div class="col-md-9">
+                                <input type="file" name="car_image" id="modal" placeholder="Model">
+                            </div>
+                        </div>
+
                         <div class="form-group row">
                             <label for="inputPassword" class="col-md-3 col-form-label">Fuel type</label>
                             <div class="col-md-9">
@@ -119,13 +127,6 @@
                             <div class="col-md-9">
                                 <input type="text" class="form-control" name="kilometers" id="kilometers"
                                        placeholder="kilometers run">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="inputPassword" class="col-md-3 col-form-label">Registration Date</label>
-                            <div class="col-md-9">
-                                <input type="text" class="form-control" name="regDate" id="kilometers"
-                                       placeholder="Registration Date">
                             </div>
                         </div>
                         <div class="form-group row">

@@ -45,7 +45,7 @@
                                                                                         aria-hidden="true"></i></span>
                                     </div>
                                     <input id="start" type="text" class="form-control"
-                                           placeholder="Where do you want to go?">
+                                           placeholder="Leaving from...">
                                     <input type="hidden" name="lat" id="lat">
                                     <input type="hidden" name="lng" id="lng">
                                     <input type="hidden" name="location" id="location">
@@ -57,14 +57,14 @@
                                                                                         aria-hidden="true"></i></span>
                                     </div>
                                     <input type="text" id="end" class="form-control"
-                                           placeholder="Where do you want to go?">
+                                           placeholder="Going to...">
                                     <input type="hidden" name="lat2" id="lat2">
                                     <input type="hidden" name="lng2" id="lng2">
                                     <input type="hidden" name="location2" id="location2">
                                 </div>
 
                                 <div class="row mx-1">
-                                    <div class="input-group mb-3 col-4 px-0 pr-1">
+                                    <div class="input-group input-group-sm mb-3 col-4 px-0 pr-1">
                                         <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1"><i class="fa fa-calendar"
                                                                                             aria-hidden="true"></i></span>
@@ -72,7 +72,7 @@
                                         <input type="text" id="after" name="after" class="form-control datepicker"
                                                placeholder="On or After">
                                     </div>
-                                    <div class="input-group mb-3 col-4 px-0 pr-1">
+                                    <div class="input-group input-group-sm mb-3 col-4 px-0 pr-1">
                                         <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1"><i class="fa fa-calendar"
                                                                                             aria-hidden="true"></i></span>
@@ -80,13 +80,21 @@
                                         <input type="text" id="before" name="before" class="form-control datepicker"
                                                placeholder="On or Before">
                                     </div>
-                                    <div class="input-group mb-3 col-4 px-0">
+                                    <div class="input-group input-group-sm mb-3 col-4 px-0">
                                         <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1"><i class="fa fa-users"
-                                                                                            aria-hidden="true"></i></span>
+                                    <span class="input-group-text" id="basic-addon1"><i class="fa fa-car"
+                                                                                        aria-hidden="true"></i></span>
                                         </div>
-                                        <input type="number" id="seat" name="seat" class="form-control" min="1"
-                                               placeholder="1+ seats">
+                                        <input type="text" class="form-control seat" name="seat" min="1"
+                                               placeholder="1+ seats" value="@if(isset($seat)) {{$seat}} @endif">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text plus" id="basic-addon1"><i
+                                                        class="fas fa-plus"></i></span>
+                                        </div>
+                                        <div class="input-group-append">
+                                            <span class="input-group-text minus" id="basic-addon1"><i
+                                                        class="fas fa-minus"></i></span>
+                                        </div>
                                     </div>
                                     <div class="w-100">
                                         <button type="submit" class="btn btn-primary float-right">Published My Ride</button>
@@ -262,6 +270,40 @@
                 }
             });
 
+        });
+
+        $(function(){
+            $(".plus").click(function(e) {
+                e.preventDefault();
+                var $this = $(this);
+                var $input = $(".seat");
+                var value = parseInt($input.val());
+
+                if (value < 12) {
+                    value = value + 1;
+                }
+                else {
+                    value =1;
+                }
+
+                $input.val(value);
+            });
+
+            $(".minus").click(function(e) {
+                e.preventDefault();
+                var $this = $(this);
+                var $input = $(".seat");
+                var value = parseInt($input.val());
+
+                if (value > 1) {
+                    value = value - 1;
+                }
+                else {
+                    value =1;
+                }
+
+                $input.val(value);
+            });
         });
     </script>
 

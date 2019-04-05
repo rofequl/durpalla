@@ -15,28 +15,26 @@ class PromoCodeController extends Controller
      */
     public function index($data = false)
     {
-
-        $promo = promo_code::all();
+        $promo = promo_code::where('e_date','>=', date("m/d/Y"))->get();
         $data2 = promo_code::find($data);
         if ($data == "ADD"){
             $add = "";
-            return view('backend.promo_code',compact('promo','add'));
+            return view('backend.promo_code.promo_code',compact('promo','add'));
         }
         if ($data){
-            return view('backend.promo_code',compact('promo','data2'));
+            return view('backend.promo_code.promo_code',compact('promo','data2'));
         }else{
-            return view('backend.promo_code',compact('promo'));
+            return view('backend.promo_code.promo_code',compact('promo'));
         }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+
+    public function ExpiredIndex()
     {
-        //
+        $promo = promo_code::where('e_date','<', date("m/d/Y"))->get();
+
+        return view('backend.promo_code.expired_promo_code',compact('promo'));
+
     }
 
     /**

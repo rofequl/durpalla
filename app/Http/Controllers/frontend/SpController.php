@@ -28,8 +28,8 @@ class SpController extends Controller
             'brand' => 'required|max:15',
             'modal' => 'required|max:191',
             'fuel' => 'required',
+            'car_image' => 'required',
             'kilometers' => 'required',
-            'regDate' => 'required',
             'regYear' => 'required',
             'modelYear' => 'required',
         ]);
@@ -37,9 +37,14 @@ class SpController extends Controller
         $car = new car;
         $car->brand_id = $request->brand;
         $car->model = $request->modal;
+        if ($request->hasFile('car_image')) {
+            $extension = $request->file('car_image')->getClientOriginalExtension();
+            $fileStore3 = rand(10, 100) . time() . "." . $extension;
+            $request->file('car_image')->storeAs('public/car', $fileStore3);
+            $car->car_image = $fileStore3;
+        }
         $car->fuel = $request->fuel;
         $car->kilometers = $request->kilometers;
-        $car->registration_date = $request->regDate;
         $car->registration_year = $request->regYear;
         $car->model_year = $request->modelYear;
         $car->user_id = Session('userId');

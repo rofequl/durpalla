@@ -60,10 +60,13 @@ Route::group(['middleware' => 'CheckUserLogin','namespace' => 'frontend'], funct
     Route::get('/sp-account-photo', 'SpAccountController@Photo')->name('sp.account.photo');
     Route::post('/sp-account-photo-store', 'SpAccountController@PhotoStore')->name('sp.account.photo.store');
 
+    Route::get('/request-next', 'RequestController@RequestNext')->name('request.ride.next');
+
+    Route::get('/notification', 'NotificationController@notification')->name('notification');
+    Route::get('/notification-preview/{data}', 'NotificationController@NotificationPreview')->name('notification.preview');
 });
 
 Route::get('/request', function () {return view('frontend.request');})->name('request.ride');
-Route::get('/request-next', 'frontend\RequestController@RequestNext')->name('request.ride.next');
 Route::post('/request','frontend\RequestController@RequestPost')->name('request.ride.post');
 
 Route::get('/post-ride', function () {return view('frontend.post_ride.post_ride');})->name('post.ride');
@@ -91,32 +94,15 @@ Route::get('/map', function () {
     return view('frontend.map2');
 });
 
-Route::get('/reference', function () {
-    return view('frontend.sp_panel.reference');
-})->name('sp.reference');
 
 
 
-Route::get('/transection', function () {
-    return view('frontend.sp_panel.transection');
-})->name('sp.transection');
-
-Route::get('/ratting', function () {
-    return view('frontend.sp_panel.ratting');
-})->name('sp.ratting');
 
 
 Route::get('/history', function () {
     return view('frontend.sp_panel.booking.history');
 })->name('sp.history');
 
-Route::get('/complain', function () {
-    return view('frontend.sp_panel.complain');
-})->name('sp.complain');
-
-Route::get('/personalInformation', function () {
-    return view('frontend.sp_panel.personal_information');
-})->name('sp.personalInformation');
 
 Route::get('/upcomingRides', function () {
     return view('frontend.sp_panel.rides_offered.upcoming_ride');
@@ -214,6 +200,7 @@ Route::group(['middleware' => 'CheckAdmin','namespace' => 'backend'], function (
 
     Route::get('/promo_code/{data?}', 'PromoCodeController@index')->name('promo_code.index');
     Route::post('/promo_code', 'PromoCodeController@store')->name('promo_code.store');
+    Route::get('/expired_promo_code', 'PromoCodeController@ExpiredIndex')->name('expired.promo_code.index');
     Route::post('/promo-code-update', 'PromoCodeController@Update')->name('promo_code.update');
     Route::get('/promo_code/delete/{data}', 'PromoCodeController@destroy')->name('promo_code.destroy');
     Route::get('/promo_code/publish/{data}', 'PromoCodeController@publish')->name('promo_code.publish');
@@ -232,6 +219,7 @@ Route::group(['middleware' => 'CheckAdmin','namespace' => 'backend'], function (
 
     Route::get('/admin-sp-account-close', 'SpAccountController@SpAccountClose')->name('admin.sp.account.close');
     Route::get('/admin-sp-account-close-done', 'SpAccountController@SpAccountCloseDone')->name('admin.sp.account.close.done');
+    Route::get('/admin-sp-account-close-list', 'SpAccountController@SpAccountCloseList')->name('admin.sp.account.close.list');
 
     Route::get('/admin-landing-image', 'LandingImageController@index')->name('admin.landing.image');
     Route::post('/admin-landing-image-store', 'LandingImageController@store')->name('admin.landing.image.store');

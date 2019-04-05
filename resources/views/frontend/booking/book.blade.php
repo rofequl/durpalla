@@ -98,7 +98,7 @@
                                 <div class="row mt-4 mb-2">
                                     <div class="col-6">
                                         <h5>Car Information:</h5>
-                                        <img src="https://d1ek71enupal89.cloudfront.net/images/blocks_png/VAUXHALL/GRANDLAND%20X/5DR/18VauGra5drGryFr2_800.jpg"
+                                        <img src="{{asset('storage/car/'.$car->car_image)}}"
                                              class="img-thumbnail w-75" alt="...">
                                     </div>
                                     <div class="col-6">
@@ -106,14 +106,14 @@
                                             <?php  $dist = GetDrivingDistance($s_lat, $s_lng, $e_lat, $e_lng); ?>
 
 
-                                                <div class="col-12">
-                                                    @if(Session::get('userId') != null && Session::get('token') != null && !isset($show) && seat($singleStopovers->going,$singleStopovers->target,$singleStopovers->post_id,$singleStopovers->date) != 0 && Session::get('userId') != getRide($singleStopovers->post_id)->user_id)
-                                                        <a href="{{url('booking'.'/'.$singleStopovers->tracking.'/'.'get')}}"
-                                                           class="blog_btn border mb-4 rounded float-right">
-                                                            Book Now
-                                                        </a>
-                                                    @endif
-                                                </div>
+                                            <div class="col-12">
+                                                @if(Session::get('userId') != null && Session::get('token') != null && !isset($show) && seat($singleStopovers->going,$singleStopovers->target,$singleStopovers->post_id,$singleStopovers->date) != 0 && Session::get('userId') != getRide($singleStopovers->post_id)->user_id)
+                                                    <a href="{{url('booking'.'/'.$singleStopovers->tracking.'/'.'get')}}"
+                                                       class="blog_btn border mb-4 rounded float-right">
+                                                        Book Now
+                                                    </a>
+                                                @endif
+                                            </div>
                                             <div class="col-6 text-right">
                                                 Distance:
                                             </div>
@@ -146,7 +146,7 @@
                                         <td>{{$car->model}}</td>
                                         <td>{{$car->fuel}}</td>
                                         <td>{{$car->kilometers}}</td>
-                                        <td>{{$car->car_type=='Premier'? 'Luxury':'Comfortable'}}</td>
+                                        <td>{{$car->car_type}}</td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -162,9 +162,20 @@
                 <div class="col-4">
                     <div class="blog_right_sidebar">
                         <aside class="single_sidebar_widget author_widget">
-                            <img class="author_img rounded-circle" src="{{userInformation($post->user_id,'image')}}"
+                        <?php
+                        if ($post->driver == 'SP'){
+                            $image  = userInformation($post->user_id,'image');
+                            $name = userInformation($post->user_id,'name');
+                        }else{
+                            $image  = asset('storage/resource/'.getResourceById($post->driver)->image);
+                            $name = getResourceById($post->driver)->name;
+                        }
+                        ?>
+
+                            <img class="author_img rounded-circle" src="{{$image}}"
+                                 width="100px" height="100px"
                                  alt="">
-                            <h4>{{userInformation($post->user_id,'name')}}</h4>
+                            <h4>{{$name}}</h4>
                             <p>Senior blog writer</p>
                             <div class="social_icon">
                                 <a href="#"><i class="fa fa-facebook"></i></a>

@@ -47,9 +47,9 @@
                         <li><i class="fa fa-bars"></i><a href="{{route('history.booking')}}">History</a></li>
                     </ul>
                 </li>
-                {{--<li class="">--}}
-                    {{--<a href=""> <i class="menu-icon fas fa-hands-helping"></i>Request a ride</a>--}}
-                {{--</li>--}}
+                <li class="">
+                    <a href="{{route('request.ride.next')}}"> <i class="menu-icon fas fa-hands-helping"></i>Request a ride</a>
+                </li>
                 {{--<li class="">--}}
                     {{--<a href="{{route('sp.complain')}}"> <i class="menu-icon fas fa-hands-helping"></i>Complain</a>--}}
                 {{--</li>--}}

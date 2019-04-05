@@ -46,7 +46,12 @@
                                 </li>
                             </a>
                             @if (Session::has('userId'))
-
+                                <a href="{{route('notification')}}" class="notification fs-25">
+                                    <span><i class="fa fa-bell"></i></span>
+                                    @if(notification() > 0)
+                                        <span class="badge">{{notification()}}</span>
+                                    @endif
+                                </a>
                             @else
                                 <a href="{{route('sp.registration')}}">
                                     <li>{{__('file.header5')}}</li>
@@ -61,9 +66,10 @@
                                 style="overflow: visible;max-height: unset">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
                                    aria-haspopup="true" aria-expanded="false">
-                                    <img class="user-avatar rounded-circle" width="70px" height="70px" src="{{userInformation(Session('userId'),'image')}}">
+                                    <img class="user-avatar rounded-circle" width="70px" height="70px"
+                                         src="{{userInformation(Session('userId'),'image')}}">
                                 </a>
-                                <ul class="dropdown-menu" style="margin-left: -122px">
+                                <ul class="dropdown-menu pro-droupdown" style="margin-left: -122px">
                                     <li class="nav-item"><a class="user-link" href="{{route('sp.home')}}"><i
                                                     class="fas fa-tachometer-alt"></i>Dashboard</a></li>
                                     <li class="nav-item"><a class="user-link" href="{{route('sp.account.profile')}}"><i

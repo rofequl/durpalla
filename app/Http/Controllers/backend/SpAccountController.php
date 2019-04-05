@@ -26,4 +26,9 @@ class SpAccountController extends Controller
        }
        return redirect('admin-sp-account-close');
     }
+
+    public function SpAccountCloseList(){
+        $cancel = close_account::all();
+        return view('backend.close_account_list',compact('cancel'));
+    }
 }

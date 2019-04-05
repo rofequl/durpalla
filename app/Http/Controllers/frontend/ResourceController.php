@@ -42,7 +42,9 @@ class ResourceController extends Controller
             'phone' => 'required|max:15',
             'name' => 'required|max:35',
             'national_id' => 'required|max:50|unique:resources',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:5000'
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:5000',
+            'nid_image1' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:5000',
+            'nid_image2' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:5000'
         ]);
 
         $insert = new resource;
@@ -54,6 +56,20 @@ class ResourceController extends Controller
             $fileStore3 = rand(10, 100) . time() . "." . $extension;
             $request->file('image')->storeAs('public/resource', $fileStore3);
             $insert->image = $fileStore3;
+        }
+
+        if ($request->hasFile('nid_image1')) {
+            $extension = $request->file('nid_image1')->getClientOriginalExtension();
+            $fileStore3 = rand(10, 100) . time() . "." . $extension;
+            $request->file('nid_image1')->storeAs('public/resource', $fileStore3);
+            $insert->nid_image1 = $fileStore3;
+        }
+
+        if ($request->hasFile('nid_image2')) {
+            $extension = $request->file('nid_image2')->getClientOriginalExtension();
+            $fileStore3 = rand(10, 100) . time() . "." . $extension;
+            $request->file('nid_image2')->storeAs('public/resource', $fileStore3);
+            $insert->nid_image2 = $fileStore3;
         }
         $insert->resource_id = time();
         $insert->user_id = Session('userId');

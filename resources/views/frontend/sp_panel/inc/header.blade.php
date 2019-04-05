@@ -77,7 +77,7 @@
             </div>
             <div class="user-area dropdown float-right show">
                 <a href="#" class="dropdown-toggle user-dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                    <img class="user-avatar rounded-circle" src="{{userInformation(Session('userId'),'image')}}" alt="User Avatar">
+                    <img class="user-avatar rounded-circle" src="{{userInformation(Session('userId'),'image')}}" alt="User Avatar" height="40px">
                 </a>
 
                 <div class="user-menu dropdown-menu user-dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; right: 0; top: 0px; left: 0px; transform: translate3d(-65px, 55px, 0px);">

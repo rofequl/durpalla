@@ -577,7 +577,38 @@ margin-top: 5px;
     margin-right: 10px;
 }
 
+.notification {
+    color: white;
+    text-decoration: none;
+    position: relative;
+    display: inline-block;
+    border-radius: 2px;
+}
 
+.notification:hover {
+    color: #1a3e66;
+}
+
+.notification .badge {
+    position: absolute;
+    top: -11px;
+    right: 4px;
+    padding: 3px 7px;
+    border-radius: 22%;
+    font-size: 12px;
+    background: red;
+    color: white;
+}
+
+/*=======================================
+        responsive css
+=========================================*/
+
+@media (max-width: 991px){
+    .pro-droupdown {
+        margin-left: 0!important;
+    }
+}
 
 
 
