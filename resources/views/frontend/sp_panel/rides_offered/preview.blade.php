@@ -49,7 +49,7 @@
                                                 <?php echo distance($s_lat, $s_lng, $e_lat, $e_lng, "K") . " Km"; ?>
                                             </div>
                                             <div class="col-12 col-sm-4 col-md-2 reviewStar my-auto">
-                                                <div class="price">{{$stopovers->price}}$</div>
+                                                <div class="price">{{$stopovers->price}}৳</div>
                                             </div>
                                         </div>
                                     </li>

@@ -25,7 +25,7 @@ class CarController extends Controller
         $carwas->status = 1;
         $carwas->save();
 
-        return redirect('admin-pending-car');
+        return redirect('admin-approve-car');
     }
 
     public function ApproveCar($data = false){

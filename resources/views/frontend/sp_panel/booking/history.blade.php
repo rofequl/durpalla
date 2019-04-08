@@ -30,7 +30,7 @@
                             Destination:{{$e_location}}<br>
                             <i class="far fa-calendar-alt"></i> {{date("l F-d", strtotime($stopover->date))}}
                             - {{$stopover->time}}:{{$stopover->time2}}<br>
-                            <i class="fas fa-wheelchair"></i> {{$bookings->seat}} seat - ${{$bookings->amount}} cash<br>
+                            <i class="fas fa-wheelchair"></i> {{$bookings->seat}} seat - ৳{{$bookings->amount}} cash<br>
                         </div>
                         <div class="col-4">
                             <a href="{{route('booking.preview.index',$bookings->id)}}" type="button"

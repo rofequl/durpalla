@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateResourcesTable extends Migration
+class CreateNotificationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,11 @@ class CreateResourcesTable extends Migration
      */
     public function up()
     {
-        Schema::create('resources', function (Blueprint $table) {
+        Schema::create('notifications', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('phone');
-            $table->string('image');
-            $table->string('national_id');
-            $table->string('nid_image1')->nullable();
-            $table->string('nid_image2')->nullable();
-            $table->integer('resource_id');
+            $table->string('type')->nullable();
+            $table->string('user_post')->nullable();
+            $table->string('matching',9999)->nullable();
             $table->boolean('status')->default(0);
             $table->integer('user_id');
             $table->timestamps();
@@ -35,6 +31,6 @@ class CreateResourcesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('resources');
+        Schema::dropIfExists('notifications');
     }
 }

@@ -46,6 +46,52 @@
                                 </li>
                             </a>
                             @if (Session::has('userId'))
+                                {{--                                <a href="{{route('notification')}}" class="notification fs-25">--}}
+                                {{--                                    <span><i class="fa fa-bell"></i></span>--}}
+                                {{--                                    @if(notification() > 0)--}}
+                                {{--                                        <span class="badge">{{notification()}}</span>--}}
+                                {{--                                    @endif--}}
+                                {{--                                </a>--}}
+
+
+                                <div class="dropdown">
+                                    <a class="notification fs-25 notishow" href="#" role="button" id="dropdownMenuLink"
+                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <span><i class="fa fa-bell"></i></span>
+                                        @if(notification() > 0)
+                                            <span class="badge notify-badge">{{notification()}}</span>
+                                        @endif
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right notification-menu shadow border p-0">
+                                        <div class="card border-0">
+                                            <div class="card-header p-1 fs-12 bold">Notification</div>
+                                            <div class="card-body p-0 fs-13">
+
+
+                                                @foreach(notificationList() as $notifications)
+                                                    <a class="pr-0"
+                                                       href="{{route('notification.preview',$notifications->id)}}">
+                                                        <div class="p-2">
+                                                            Your request ride
+                                                            match {{convertNumber(count(explode(",",$notifications->matching)))}}
+                                                            post {{$notifications->matching}}.
+                                                        </div>
+                                                    </a>
+                                                    <hr class="my-0">
+                                                @endforeach
+                                                @if(notificationList()->count() == 0)
+                                                    <p class="text-center p-1">You have no any notification.</p>
+                                                @endif
+                                            </div>
+                                            <div class="card-footer p-1 fs-12 bold">
+                                                <p class="text-center mb-0"><a href="{{route('notification')}}"
+                                                                               class="text-muted">See All</a></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
 
                             @else
                                 <a href="{{route('sp.registration')}}">
@@ -61,9 +107,10 @@
                                 style="overflow: visible;max-height: unset">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
                                    aria-haspopup="true" aria-expanded="false">
-                                    <img class="user-avatar rounded-circle" width="70px" height="70px" src="{{userInformation(Session('userId'),'image')}}">
+                                    <img class="user-avatar rounded-circle" width="70px" height="70px"
+                                         src="{{userInformation(Session('userId'),'image')}}">
                                 </a>
-                                <ul class="dropdown-menu" style="margin-left: -122px">
+                                <ul class="dropdown-menu pro-droupdown" style="margin-left: -122px">
                                     <li class="nav-item"><a class="user-link" href="{{route('sp.home')}}"><i
                                                     class="fas fa-tachometer-alt"></i>Dashboard</a></li>
                                     <li class="nav-item"><a class="user-link" href="{{route('sp.account.profile')}}"><i
@@ -85,5 +132,20 @@
         </nav>
     </div>
 </header>
+
+<script>
+
+    $(document).on('click', '.notishow', function () {
+        $.ajax({
+            url: "{{ route('notification.show') }}",
+            type: 'get',
+            success: function (response) {
+                $('.notify-badge').hide();
+            }
+        });
+    });
+
+</script>
+
 
 <!--================ End Header Menu Area =================-->

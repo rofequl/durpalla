@@ -34,6 +34,7 @@
                         <th>Phone</th>
                         <th>Image</th>
                         <th>National Id</th>
+                        <th>National Id Image</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -50,14 +51,18 @@
                             </td>
                             <td>{{$resources->national_id}}</td>
                             <td>
+                                <img src="{{asset('storage/resource/'.$resources->nid_image1)}}"
+                                     class="img-thumbnail" width="70px" alt="...">
+                                <img src="{{asset('storage/resource/'.$resources->nid_image2)}}"
+                                     class="img-thumbnail" width="70px" alt="...">
+                            </td>
+                            <td>
                                 <a href="{{route('resource.delete',$resources->id)}}"
                                    class="btn btn-sm btn-danger delete">Delete</a>
-
                             </td>
                         </tr>
                         <?php $listNum++; ?>
                     @endforeach
-
                     </tbody>
                 </table>
             </div>
@@ -92,7 +97,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="inputPassword" class="col-md-3 col-form-label">Image:</label>
+                            <label for="inputPassword" class="col-md-3 col-form-label">User Image:</label>
                             <div class="col-md-9">
                                 <input type="file" name="image" id="image" placeholder="User Image">
                             </div>
@@ -102,6 +107,18 @@
                             <div class="col-md-9">
                                 <input type="text" class="form-control" name="national_id" id="nationalId"
                                        placeholder="National Id Number">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputPassword" class="col-md-3 col-form-label">National Id Front Image:</label>
+                            <div class="col-md-9">
+                                <input type="file" name="nid_image1" id="phone" placeholder="Enter Phone Number">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputPassword" class="col-md-3 col-form-label">National Id Back Image:</label>
+                            <div class="col-md-9">
+                                <input type="file" name="nid_image2" id="phone" placeholder="Enter Phone Number">
                             </div>
                         </div>
 

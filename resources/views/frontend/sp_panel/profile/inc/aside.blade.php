@@ -7,20 +7,20 @@
                 </li>
                 <li class="menu-title">Profile information</li><!-- /.menu-title -->
                 <li class="">
-                    <a href="{{route('sp.account.profile')}}"> <i class="menu-icon fas fa-hands-helping"></i>Personal information</a>
+                    <a href="{{route('sp.account.profile')}}"> <i class="menu-icon fas fa-user-tie"></i>Personal information</a>
                 </li>
                 <li class="">
-                    <a href="{{route('sp.verification')}}"> <i class="menu-icon fas fa-hands-helping"></i>Verification</a>
+                    <a href="{{route('sp.verification')}}"> <i class="menu-icon fas fa-certificate"></i>Verification</a>
                 </li>
                 <li class="">
-                    <a href="{{route('sp.account.photo')}}"> <i class="menu-icon fas fa-hands-helping"></i>Photo</a>
+                    <a href="{{route('sp.account.photo')}}"> <i class="menu-icon fas fa-image"></i>Photo</a>
                 </li>
                 <li class="menu-title">Account</li><!-- /.menu-title -->
                 <li class="">
-                    <a href="#"> <i class="menu-icon fas fa-hands-helping"></i>Password</a>
+                    <a href="#"> <i class="menu-icon fas fa-user-cog"></i>Password</a>
                 </li>
                 <li class="">
-                    <a href="{{route('sp.account.close')}}"> <i class="menu-icon fas fa-hands-helping"></i>Close my Account</a>
+                    <a href="{{route('sp.account.close')}}"> <i class="menu-icon fas fa-closed-captioning"></i>Close my Account</a>
                 </li>
             </ul>
         </div>

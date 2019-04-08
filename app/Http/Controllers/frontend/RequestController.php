@@ -36,8 +36,7 @@ class RequestController extends Controller
         $insert->user_id = Session('userId');
         $insert->save();
 
-        Session::flash('message', 'Request ride insert successfully');
-        return view('frontend.request');
+        return view('frontend.request_congrates');
     }
 
     public function RequestNext(){

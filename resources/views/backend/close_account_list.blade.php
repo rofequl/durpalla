@@ -3,20 +3,14 @@
 @section('content')
 
     <div class="content">
-        <h1 class="link-muted">User want to close account</h1>
-
+        <h1 class="link-muted">User close account List</h1>
         <div class="card">
-            <div class="card-header">
-                <a href="{{route('admin.sp.account.close.list')}}" class="btn btn-sm btn-primary px-4 float-right">Close account list</a>
-            </div>
             <div class="card-body">
 
                 @foreach($cancel as $cancels)
-                    @if(userInformation($cancels->user_id, 'status') == 0)
+                    @if(userInformation($cancels->user_id, 'status') == 1)
                         <div class="m-2">
-                            <p class="float-right" style="font-size: 13px;">1 second ago
-                                <a href="{{route('admin.sp.account.close.done','cancel='.$cancels->user_id)}}" class="btn btn-sm btn-danger ml-2">Close Account</a>
-                                <a href="{{route('admin.sp.account.close.done')}}" class="btn btn-sm btn-warning ml-2">Cancel</a>
+                            <p class="float-right" style="font-size: 13px;">
                             </p>
                             <h4>User Information:</h4>
                             <p>Name: {{userInformation($cancels->user_id, 'name')}}</p>

@@ -1,6 +1,11 @@
 <?php
 
 
+use App\notification;
+use App\request_ride;
+use App\ride_setting;
+use App\stopover;
+
 function distance($lat1, $lon1, $lat2, $lon2, $unit)
 {
 
@@ -90,9 +95,9 @@ function car($column)
     return $query;
 }
 
-function getCarById($column,$column2)
+function getCarById($column, $column2)
 {
-    $query = DB::table('cars')->where('id',$column)->pluck($column2)->first();
+    $query = DB::table('cars')->where('id', $column)->pluck($column2)->first();
     return $query;
 }
 
@@ -101,6 +106,13 @@ function resource($column)
     $query = DB::table('resources')
         ->where('user_id', '=', $column)
         ->get();
+    return $query;
+}
+
+function getResourceById($column)
+{
+    $query = DB::table('resources')
+        ->find($column);
     return $query;
 }
 
@@ -124,31 +136,32 @@ function seat($going, $target, $post, $date)
             if ($querys->serial < $going) {
                 $seat -= DB::table('stopovers')->where('post_id', $post)->where('date', $date)->where('going', $querys->serial)->where('target', '>', $going)->sum('stopovers.seat');
             } elseif ($querys->serial == $going) {
-                $seat -= DB::table('stopovers')->where('post_id', $post)->where('date', $date)->where('going', $going)->where('target', '>=', $target)->sum('stopovers.seat');
+                $seat -= DB::table('stopovers')->where('post_id', $post)->where('date', $date)->where('going', $going)->sum('stopovers.seat');
             } else {
-                $seat -= DB::table('stopovers')->where('post_id', $post)->where('date', $date)->where('going', '>=', $querys->serial)->where('target', '<=', $target)->sum('stopovers.seat');
+                $seat -= DB::table('stopovers')->where('post_id', $post)->where('date', $date)->where('going', '=', $querys->serial)->where('target', '<=', $target)->sum('stopovers.seat');
             }
         }
         return $seat;
     } else {
-//        foreach ($query as $querys){
-//            if ($querys->serial < $going){
-//
-//            }elseif ($querys->serial == $going){
-//                $seat -= DB::table('stopovers')->where('post_id', $post)->where('date', $date)->where('going', $going)->where('target','<=',$target)->sum('stopovers.seat');
-//            }else{
-//                $seat -= DB::table('stopovers')->where('post_id', $post)->where('going','>=', $querys->serial)->where('target','<=',$target)->sum('stopovers.seat');
-//            }
-//        }
-        return 0;
+        foreach ($query as $querys){
+            if ($querys->serial > $going){
+                $seat -= DB::table('stopovers')->where('post_id', $post)->where('date', $date)->where('going', $querys->serial)->where('target','>',$going)->sum('stopovers.seat');
+            }elseif ($querys->serial == $going){
+                $seat -= DB::table('stopovers')->where('post_id', $post)->where('date', $date)->where('going', $going)->sum('stopovers.seat');
+            }else{
+                $seat -= DB::table('stopovers')->where('post_id', $post)->where('date', $date)->where('going','=', $querys->serial)->where('target','>=',$target)->sum('stopovers.seat');
+            }
+        }
+        return $seat;
     }
-
-
 }
 
 function ride_price($lat1, $lon1, $lat2, $lon2, $car)
 {
-    $km = distance($lat1, $lon1, $lat2, $lon2, 'K');
+    //$km = distance($lat1, $lon1, $lat2, $lon2, 'K');
+    $dist = GetDrivingDistance($lat1, $lon1, $lat2, $lon2);
+
+    $km = number_format((float)($dist['distance']), 1, '.', '');
 
     $query = DB::table('ride_settings')->first();
 
@@ -156,7 +169,7 @@ function ride_price($lat1, $lon1, $lat2, $lon2, $car)
         ->find($car);
 
     if ($query) {
-        if ($query2->car_type == "Standard") {
+        if ($query2->car_type == "Comfort") {
             if ($km > $query->km_1st) {
                 $price = (($km - $query->km_1st) * $query->price2) + ($query->km_1st * $query->price);
                 return ceil($price);
@@ -203,8 +216,8 @@ function CarBrandById($id)
 
 function CorporateCheckById($id)
 {
-    $query = DB::table('corporate_groups')->where('phone',$id)->first();
-    if ($query){
+    $query = DB::table('corporate_groups')->where('phone', $id)->first();
+    if ($query) {
         return $query->corporate_id;
     }
     return false;
@@ -221,4 +234,110 @@ function CorporateById($id = false)
     return $query;
 }
 
+function notificationAdd()
+{
+    $requests = request_ride::where('user_id', Session('userId'))->get();
+    $ride = stopover::where('date', '>=', date("m/d/Y"))->where('user_id', '!=', Session('userId'))->get();
+    $satting = ride_setting::first();
+    if ($satting) {
+        $satting = $satting->search;
+    } else {
+        $satting = 10;
+    }
 
+    foreach ($requests as $request) {
+        $tracking = [];
+        foreach ($ride as $item) {
+            $s_lat = PostRideAddress($item->post_id, $item->going, 'lat');
+            $s_lng = PostRideAddress($item->post_id, $item->going, 'lng');
+            $e_lat = PostRideAddress($item->post_id, $item->target, 'lat');
+            $e_lng = PostRideAddress($item->post_id, $item->target, 'lng');
+            if (distance($s_lat, $s_lng, $request->s_lat, $request->s_lng, "K") < $satting) {
+                if (distance($e_lat, $e_lng, $request->e_lat, $request->e_lng, "K") < $satting) {
+                    array_push($tracking, $item->tracking);
+                }
+            }
+        }
+
+        if (sizeof($tracking) > 0){
+            $notification_check = notification::where('user_post', $request->id)->where('user_id',Session('userId')) ->first();
+            if ($notification_check) {
+                $notification_check->matching = implode(",",$tracking);
+                $notification_check->save();
+            } else {
+                $notification = new notification;
+                $notification->type = 'request';
+                $notification->user_post = $request->id;
+                $notification->matching = implode(",",$tracking);
+                $notification->user_id = Session('userId');
+                $notification->save();
+            }
+        }
+    }
+
+
+}
+
+function notification()
+{
+    notificationAdd();
+    $notification_check = notification::where('user_id',Session('userId'))->where('status', 0)->get();
+    return $notification_check->count();
+
+}
+
+function notificationList()
+{
+    $notification_check = notification::where('user_id',Session('userId'))->get();
+    return $notification_check;
+}
+
+
+
+function convertNumber($num = false)
+{
+    $num = str_replace(array(',', ''), '' , trim($num));
+    if(! $num) {
+        return false;
+    }
+    $num = (int) $num;
+    $words = array();
+    $list1 = array('', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven',
+        'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'
+    );
+    $list2 = array('', 'ten', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety', 'hundred');
+    $list3 = array('', 'thousand', 'million', 'billion', 'trillion', 'quadrillion', 'quintillion', 'sextillion', 'septillion',
+        'octillion', 'nonillion', 'decillion', 'undecillion', 'duodecillion', 'tredecillion', 'quattuordecillion',
+        'quindecillion', 'sexdecillion', 'septendecillion', 'octodecillion', 'novemdecillion', 'vigintillion'
+    );
+    $num_length = strlen($num);
+    $levels = (int) (($num_length + 2) / 3);
+    $max_length = $levels * 3;
+    $num = substr('00' . $num, -$max_length);
+    $num_levels = str_split($num, 3);
+    for ($i = 0; $i < count($num_levels); $i++) {
+        $levels--;
+        $hundreds = (int) ($num_levels[$i] / 100);
+        $hundreds = ($hundreds ? ' ' . $list1[$hundreds] . ' hundred' . ( $hundreds == 1 ? '' : '' ) . ' ' : '');
+        $tens = (int) ($num_levels[$i] % 100);
+        $singles = '';
+        if ( $tens < 20 ) {
+            $tens = ($tens ? ' and ' . $list1[$tens] . ' ' : '' );
+        } elseif ($tens >= 20) {
+            $tens = (int)($tens / 10);
+            $tens = ' and ' . $list2[$tens] . ' ';
+            $singles = (int) ($num_levels[$i] % 10);
+            $singles = ' ' . $list1[$singles] . ' ';
+        }
+        $words[] = $hundreds . $tens . $singles . ( ( $levels && ( int ) ( $num_levels[$i] ) ) ? ' ' . $list3[$levels] . ' ' : '' );
+    } //end for loop
+    $commas = count($words);
+    if ($commas > 1) {
+        $commas = $commas - 1;
+    }
+    $words = implode(' ',  $words);
+    $words = preg_replace('/^\s\b(and)/', '', $words );
+    $words = trim($words);
+    $words = ucfirst($words);
+    return $words;
+}

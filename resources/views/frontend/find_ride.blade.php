@@ -138,7 +138,7 @@
                                     <span class="input-group-text" id="basic-addon1"><i class="fa fa-car"
                                                                                         aria-hidden="true"></i></span>
                                         </div>
-                                        <input type="text" class="form-control seat" name="seat" min="1"
+                                        <input type="text" class="form-control seat" name="seat" min="1" value="1"
                                                placeholder="1+ seats" value="@if(isset($seat)) {{$seat}} @endif">
                                         <div class="input-group-append">
                                             <span class="input-group-text plus" id="basic-addon1"><i
@@ -407,7 +407,7 @@
                 //alert("Lat= " + item_Lat + "_____Lang=" + item_Lng + "_____Location=" + item_Location);
                 $("#lat").val(item_Lat);
                 $("#lng").val(item_Lng);
-                $("#location").val(item_Location);
+                $("#location").val($('#start').val());
 
 
                 var address = '';
@@ -457,7 +457,7 @@
                 //alert("Lat= " + item_Lat + "_____Lang=" + item_Lng + "_____Location=" + item_Location);
                 $("#lat2").val(item_Lat);
                 $("#lng2").val(item_Lng);
-                $("#location2").val(item_Location);
+                $("#location2").val($('#end').val());
 
 
                 var address = '';
@@ -499,8 +499,20 @@
         $(document).ready(function () {
             $('#upload_form').on('submit', function () {
                 if ($('#start').val() == "" || $('#end').val() == "" || $('#after').val() == "") {
-                    event.preventDefault();
+                    swal({
+                        title: "You are not Submit Form",
+                        text: "Departure, Destination and Date must be fill-up.",
+                        type: "warning",
+                    });
+                }else{
+                    if($('#start').val().split(",").length <= 2)
+                        swal('Error', 'Departure address must be specific address', 'warning'), $('#start').val('');
+                    else if($('#end').val().split(",").length <= 2)
+                        swal('Error', 'Destination address must be specific address', 'warning'), $('#end').val('');
+                    else
+                        return;
                 }
+                event.preventDefault();
             });
 
         });

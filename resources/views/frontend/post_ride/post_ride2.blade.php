@@ -55,7 +55,7 @@
                                                 </div>
                                                 <?php $price = ride_price($s_lat, $s_lng, $e_lat, $e_lng, $post->car_id); ?>
                                                 <input type="number" value="{{$price}}" class="form-control" placeholder="00000"
-                                                       name="price[]" max="{{$price+100}}" min="{{$price - 100}}" autofocus>
+                                                       name="price[]" max="{{$price+$setting->min_price}}" min="{{$price-$setting->min_price}}" autofocus>
                                             </div>
                                         </div>
                                     </div>
@@ -72,7 +72,7 @@
                                     <span class="input-group-text" id="basic-addon1"><i class="fa fa-car"
                                                                                         aria-hidden="true"></i></span>
                                         </div>
-                                        <input type="text" class="form-control seat" value="01" name="seat">
+                                        <input type="text" class="form-control seat" value="1" name="seat">
                                         <div class="input-group-append">
                                     <span class="input-group-text plus" id="basic-addon1"><i class="fas fa-plus"></i></span>
                                         </div>

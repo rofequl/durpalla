@@ -15,13 +15,6 @@ class homeController extends Controller
 {
     public function homepage(){
 
-        if(Session::get('userId') == null) {
-            if (isset($_COOKIE['userId']) && isset($_COOKIE['token'])){
-                Session::put('token', $_COOKIE['token']);
-                Session::put('userId', $_COOKIE['userId']);
-            }
-        }
-
         $landingPage = landing_image::where('approve',1)->first();
         if($landingPage){
             $landingPage =  $landingPage->image;
@@ -68,7 +61,9 @@ class homeController extends Controller
         $request->validate([
             'phone' => 'required|max:15',
             'name' => 'required|max:191',
-            'dob' => 'required|max:191',
+            'day' => 'required|max:191',
+            'month' => 'required|max:191',
+            'year' => 'required|max:191',
             'gender' => 'required|',
             'password' => 'required|max:20|min:6',
         ]);
@@ -78,7 +73,9 @@ class homeController extends Controller
         $user = new user;
         $user->phone = $request->phone;
         $user->name = $request->name;
-        $user->dob = $request->dob;
+        $user->day = $request->day;
+        $user->month = $request->month;
+        $user->year = $request->year;
         $user->user_id = $userId;
         $user->gender = $request->gender;
         $user->image = \URL::to('').'/images/admin.jpg';
@@ -86,6 +83,7 @@ class homeController extends Controller
         $user->token = $request->_token;
         $user->save();
 
+        Session::put('token', $request->_token);
         Session::put('userId', $userId);
         return redirect('/');
     }

@@ -45,7 +45,7 @@
 
                                 <div class="text-center p-1 border rounded">
                                     Amount Due<br>
-                                    <p class="text-bold">150$</p>
+                                    <p class="text-bold">150৳</p>
                                 </div>
 
                             </div>
@@ -71,10 +71,10 @@
                             {{$booking->seat}}
                         </td>
                         <td>
-                            {{$stopovers->price}}$
+                            {{$stopovers->price}}৳
                         </td>
                         <td>
-                            {{$booking->seat * $stopovers->price}}$
+                            {{$booking->seat * $stopovers->price}}৳
                         </td>
                     </tr>
                     <tr>

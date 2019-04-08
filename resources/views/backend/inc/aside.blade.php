@@ -36,21 +36,21 @@
                     </ul>
                 </li>
                 <li class="menu-item-has-children dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fas fa-car"></i>All Ride Post</a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fab fa-bandcamp"></i>All Ride Post</a>
                     <ul class="sub-menu children dropdown-menu">
                         <li><i class="fas fa-check-circle"></i><a href="{{route('admin.approve.post')}}">Approve</a></li>
                         <li><i class="fas fa-pause"></i><a href="{{route('admin.pending.post')}}">Pending</a></li>
-                        <li><i class="fas fa-pause"></i><a href="{{route('admin.disapprove.post')}}">Disapprove</a></li>
+                        <li><i class="fas fa-times-circle"></i><a href="{{route('admin.disapprove.post')}}">Disapprove</a></li>
                     </ul>
                 </li>
                 <li class="">
-                    <a href="{{route('admin.sp.account.close')}}"> <i class="menu-icon fas fa-hands-helping"></i>Account close request</a>
+                    <a href="{{route('admin.sp.account.close')}}"> <i class="menu-icon fas fa-closed-captioning"></i>Account close request</a>
                 </li>
                 <li class="">
-                    <a href="{{route('promo_code.index')}}"> <i class="menu-icon fas fa-hands-helping"></i>Promo Code</a>
+                    <a href="{{route('promo_code.index')}}"> <i class="menu-icon fab fa-centercode"></i>Promo Code</a>
                 </li>
                 <li class="">
-                    <a href="{{route('admin.landing.image')}}"> <i class="menu-icon fas fa-hands-helping"></i>Landing Image</a>
+                    <a href="{{route('admin.landing.image')}}"> <i class="menu-icon fas fa-road"></i>Landing Image</a>
                 </li>
                 <li class="menu-item-has-children dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fas fa-car"></i>Corporate</a>

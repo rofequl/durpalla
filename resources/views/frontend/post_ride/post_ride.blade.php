@@ -31,7 +31,7 @@
                             <p>After booking you can chat with your Tasker, agree on a exact time.</p>
                         </div>
                     </div>
-                    <form method="post" id="upload_form" action="{{route('post.ride')}}">
+                    <form method="post" id="upload_form" action="{{route('post.ride')}}" autocomplete="off">
                         {{csrf_field()}}
                         <div class="card">
                             <div class="card-header bg-paste text-white py-1">
@@ -63,25 +63,27 @@
                                     <input type="hidden" name="location2" id="location2">
                                 </div>
                                 @if(Session::get('userId') != null && Session::get('token') != null)
-                                    <label for="basic-url">Car selection</label>
-                                    <div class="input-group mb-3">
-                                        <select name="car">
-                                            @foreach(car(Session::get('userId')) as $categorys)
-                                                <option value="{{$categorys->id}}">{{$categorys->model}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                @endif
-                                @if(Session::get('userId') != null && Session::get('token') != null)
-                                    <label for="basic-url">Driver selection</label>
-                                    <div class="input-group mb-3">
-                                        <select name="driver">
-                                            <option value="SP" selected>{{userInformation(Session::get('userId'),'name')}}</option>
-                                            @foreach(resource(Session::get('userId')) as $categorys)
-                                                <option value="{{$categorys->id}}">{{$categorys->name}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Car selection:</label>
+                                            <div class="input-group mb-3 col-sm-8">
+                                                <select name="car" class="w-50" aria-invalid="false">
+                                                    @foreach(car(Session::get('userId')) as $categorys)
+                                                        <option value="{{$categorys->id}}">{{$categorys->model}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Driver selection:</label>
+                                            <div class="input-group mb-3 col-sm-8">
+                                                <select name="driver" class="w-50" aria-invalid="false">
+                                                    <option value="SP" selected>{{userInformation(Session::get('userId'),'name')}}</option>
+                                                    @foreach(resource(Session::get('userId')) as $categorys)
+                                                        <option value="{{$categorys->id}}">{{$categorys->name}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
                                 @endif
                                 <h4 class="my-0 mt-5">
                                     Stopovers <i class="fa fa-question-circle" aria-hidden="true"></i>
@@ -449,7 +451,7 @@
                 //alert("Lat= " + item_Lat + "_____Lang=" + item_Lng + "_____Location=" + item_Location);
                 $("#lat").val(item_Lat);
                 $("#lng").val(item_Lng);
-                $("#location").val(item_Location);
+                $("#location").val($('#start').val());
 
 
                 var address = '';
@@ -499,7 +501,7 @@
                 //alert("Lat= " + item_Lat + "_____Lang=" + item_Lng + "_____Location=" + item_Location);
                 $("#lat2").val(item_Lat);
                 $("#lng2").val(item_Lng);
-                $("#location2").val(item_Location);
+                $("#location2").val($('#end').val());
 
 
                 var address = '';
@@ -549,7 +551,7 @@
                 //alert("Lat= " + item_Lat + "_____Lang=" + item_Lng + "_____Location=" + item_Location);
                 $("#alat").val(item_Lat);
                 $("#alng").val(item_Lng);
-                $("#alocation").val(item_Location);
+                $("#alocation").val($('#stopmap').val());
 
 
                 var address = '';
@@ -599,7 +601,7 @@
                 //alert("Lat= " + item_Lat + "_____Lang=" + item_Lng + "_____Location=" + item_Location);
                 $("#alat1").val(item_Lat);
                 $("#alng1").val(item_Lng);
-                $("#alocation1").val(item_Location);
+                $("#alocation1").val($('#stopmap1').val());
 
 
                 var address = '';
@@ -649,7 +651,7 @@
                 //alert("Lat= " + item_Lat + "_____Lang=" + item_Lng + "_____Location=" + item_Location);
                 $("#alat2").val(item_Lat);
                 $("#alng2").val(item_Lng);
-                $("#alocation2").val(item_Location);
+                $("#alocation2").val($('#stopmap2').val());
 
 
                 var address = '';
@@ -699,7 +701,7 @@
                 //alert("Lat= " + item_Lat + "_____Lang=" + item_Lng + "_____Location=" + item_Location);
                 $("#alat3").val(item_Lat);
                 $("#alng3").val(item_Lng);
-                $("#alocation3").val(item_Location);
+                $("#alocation3").val($('#stopmap3').val());
 
 
                 var address = '';
@@ -749,7 +751,7 @@
                 //alert("Lat= " + item_Lat + "_____Lang=" + item_Lng + "_____Location=" + item_Location);
                 $("#alat4").val(item_Lat);
                 $("#alng4").val(item_Lng);
-                $("#alocation4").val(item_Location);
+                $("#alocation4").val($('#stopmap4').val());
 
 
                 var address = '';
@@ -799,7 +801,7 @@
                 //alert("Lat= " + item_Lat + "_____Lang=" + item_Lng + "_____Location=" + item_Location);
                 $("#alat5").val(item_Lat);
                 $("#alng5").val(item_Lng);
-                $("#alocation5").val(item_Location);
+                $("#alocation5").val($('#stopmap5').val());
 
 
                 var address = '';
@@ -849,7 +851,7 @@
                 //alert("Lat= " + item_Lat + "_____Lang=" + item_Lng + "_____Location=" + item_Location);
                 $("#alat6").val(item_Lat);
                 $("#alng6").val(item_Lng);
-                $("#alocation6").val(item_Location);
+                $("#alocation6").val($('#stopmap6').val());
 
 
                 var address = '';
@@ -899,7 +901,7 @@
                 //alert("Lat= " + item_Lat + "_____Lang=" + item_Lng + "_____Location=" + item_Location);
                 $("#alat7").val(item_Lat);
                 $("#alng7").val(item_Lng);
-                $("#alocation7").val(item_Location);
+                $("#alocation7").val($('#stopmap7').val());
 
 
                 var address = '';
@@ -949,7 +951,7 @@
                 //alert("Lat= " + item_Lat + "_____Lang=" + item_Lng + "_____Location=" + item_Location);
                 $("#alat8").val(item_Lat);
                 $("#alng8").val(item_Lng);
-                $("#alocation8").val(item_Location);
+                $("#alocation8").val($('#stopmap8').val());
 
 
                 var address = '';
@@ -999,7 +1001,7 @@
                 //alert("Lat= " + item_Lat + "_____Lang=" + item_Lng + "_____Location=" + item_Location);
                 $("#alat9").val(item_Lat);
                 $("#alng9").val(item_Lng);
-                $("#alocation9").val(item_Location);
+                $("#alocation9").val($('#stopmap9').val());
 
 
                 var address = '';
@@ -1039,8 +1041,41 @@
         $(document).ready(function () {
             $('#upload_form').on('submit', function () {
                 if ($('#start').val() == "" || $('#end').val() == "" || $('#basicurl').val() == "") {
-                    event.preventDefault();
+                    swal({
+                        title: "You are not Submit Form",
+                        text: "Departure, Destination and Date must be fill-up.",
+                        type: "warning",
+                    });
+                }else{
+                    if($('#start').val().split(",").length <= 2)
+                        swal('Error', 'departure address must be specific address', 'warning'), $('#start').val('');
+                    else if($('#end').val().split(",").length <= 2)
+                        swal('Error', 'Destination address must be specific address', 'warning'), $('#end').val('');
+                    else if($('#stopmap').val()!="" && $('#stopmap').val().split(",").length <= 2)
+                        swal('Error', 'Stopover one address must be specific address', 'warning'), $('#end').val('');
+                    else if($('#stopmap1').val()!="" && $('#stopmap1').val().split(",").length <= 2)
+                        swal('Error', 'Stopover two address must be specific address', 'warning'), $('#end').val('');
+                    else if($('#stopmap2').val()!="" && $('#stopmap2').val().split(",").length <= 2)
+                        swal('Error', 'Stopover three address must be specific address', 'warning'), $('#end').val('');
+                    else if($('#stopmap3').val()!="" && $('#stopmap3').val().split(",").length <= 2)
+                        swal('Error', 'Stopover four address must be specific address', 'warning'), $('#end').val('');
+                    else if($('#stopmap4').val()!="" && $('#stopmap4').val().split(",").length <= 2)
+                        swal('Error', 'Stopover five address must be specific address', 'warning'), $('#end').val('');
+                    else if($('#stopmap5').val()!="" && $('#stopmap5').val().split(",").length <= 2)
+                        swal('Error', 'Stopover six address must be specific address', 'warning'), $('#end').val('');
+                    else if($('#stopmap6').val()!="" && $('#stopmap6').val().split(",").length <= 2)
+                        swal('Error', 'Stopover seven address must be specific address', 'warning'), $('#end').val('');
+                    else if($('#stopmap7').val()!="" && $('#stopmap7').val().split(",").length <= 2)
+                        swal('Error', 'Stopover eight address must be specific address', 'warning'), $('#end').val('');
+                    else if($('#stopmap8').val()!="" && $('#stopmap8').val().split(",").length <= 2)
+                        swal('Error', 'Stopover nine address must be specific address', 'warning'), $('#end').val('');
+                    else if($('#stopmap9').val()!="" && $('#stopmap9').val().split(",").length <= 2)
+                        swal('Error', 'Stopover ten address must be specific address', 'warning'), $('#end').val('');
+                    else
+                        return;
+
                 }
+                event.preventDefault();
             });
         });
 

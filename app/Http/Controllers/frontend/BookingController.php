@@ -19,6 +19,7 @@ class BookingController extends Controller
     public function Index($data, $data2 = false)
     {
         $singleStopovers = stopover::where('tracking', $data)->first();
+        $booking = booking::where('tracking',$singleStopovers->tracking)->where('status',1)->get();
         $post = post_ride::where('id', $singleStopovers->post_id)->first();
         $car = car::where('user_id', $post->user_id)->where('id', $post->car_id)->first();
         if ($data2) {
@@ -27,10 +28,10 @@ class BookingController extends Controller
                 return redirect('login');
             }
             $show = 2;
-            return view('frontend.booking.book', compact('singleStopovers', 'post', 'car', 'show'));
+            return view('frontend.booking.book', compact('singleStopovers', 'post', 'car', 'show','booking'));
 
         }
-        return view('frontend.booking.book', compact('singleStopovers', 'post', 'car'));
+        return view('frontend.booking.book', compact('singleStopovers', 'post', 'car','booking'));
 
     }
 
@@ -156,11 +157,11 @@ class BookingController extends Controller
         $insert->reason = $request->reason;
         $insert->message = $request->message;
         if ($hours < 6) {
-            $price = ($post2->price / $money->fine_6h) * 100;
+            $price = ($post2->price / 100) * $money->fine_6h;
         } elseif ($hours < 12) {
-            $price = ($post2->price / $money->fine_12h) * 100;
+            $price = ($post2->price / 100) * $money->fine_12h;
         } else {
-            $price = ($post2->price / $money->fine_12_upper) * 100;
+            $price = ($post2->price / 100) * $money->fine_12_upper;
         }
         $insert->charge = ceil($price);
         $insert->save();
@@ -168,6 +169,11 @@ class BookingController extends Controller
         $booking = booking::where('user_id', Session('userId'))->where('tracking', $request->tracking)->first();
         $booking->status = 0;
         $booking->save();
+
+        $stopover = stopover::where('tracking',$booking->tracking)->first();
+        $seat = $stopover->seat - $booking->seat;
+        $stopover->seat = $seat;
+        $stopover->save();
 
         return redirect('current-booking');
 

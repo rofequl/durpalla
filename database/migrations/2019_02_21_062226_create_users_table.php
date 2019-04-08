@@ -18,7 +18,9 @@ class CreateUsersTable extends Migration
             $table->string('phone')->nullable();
             $table->string('phone_verify')->nullable();
             $table->string('name');
-            $table->string('dob')->nullable();
+            $table->string('day')->nullable();
+            $table->string('month')->nullable();
+            $table->string('year')->nullable();
             $table->string('gender')->nullable();
             $table->integer('user_id');
             $table->string('image');

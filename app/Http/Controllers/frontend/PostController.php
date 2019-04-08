@@ -4,6 +4,7 @@ namespace App\Http\Controllers\frontend;
 
 use App\post_ride;
 use App\post_ride_address;
+use App\ride_setting;
 use App\stopover;
 use App\verification;
 use Illuminate\Http\Request;
@@ -187,7 +188,8 @@ class PostController extends Controller
     {
         $post = post_ride::find($data);
         $stopover = stopover::where('post_id', $data)->get();
-        return view('frontend.post_ride.post_ride2', compact('stopover', 'post'));
+        $setting = ride_setting::first();
+        return view('frontend.post_ride.post_ride2', compact('stopover', 'post','setting'));
     }
 
     public function RidePostPrice(Request $request)

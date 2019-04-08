@@ -10,16 +10,29 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-6 my-2">
-                            Brand: {{$carwas->brand}}
+                            Brand: {{CarBrandById($carwas->brand_id)}}
                         </div>
                         <div class="col-6 my-2">
                             Model: {{$carwas->model}}
                         </div>
                         <div class="col-6 my-2">
+                            User Id: {{$carwas->user_id}}
+                        </div>
+                        <div class="col-6 my-2">
+                            Model Year: {{$carwas->model_year}}
+                        </div>
+                        <div class="col-6 my-2">
                             Fuel type: {{$carwas->fuel}}
                         </div>
                         <div class="col-6 my-2">
+                            Registration Year: {{$carwas->registration_year}}
+                        </div>
+                        <div class="col-6 my-2">
                             Kilometers run: {{$carwas->kilometers}}
+                        </div>
+                        <div class="col-8 my-2">
+                            <img src="{{asset('storage/car/'.$carwas->car_image1)}}" class="img-thumbnail w-25">
+                            <img src="{{asset('storage/car/'.$carwas->car_image2)}}" class="img-thumbnail w-25">
                         </div>
                     </div>
                     <form method="post" class="row" action="{{url('admin-pending-car-Approve')}}">
@@ -30,8 +43,8 @@
                                 <label for="staticEmail" class="col-sm-3 col-form-label">Car type:</label>
                                 <div class="col-sm-8">
                                     <select class="form-control-sm form-control" name="type">
-                                        <option value="Standard">Standard</option>
-                                        <option value="Premier">Premier</option>
+                                        <option value="Comfort" {{$carwas->car_type == "Comfort"?'selected':''}}>Comfort</option>
+                                        <option value="Luxury" {{$carwas->car_type == "Luxury"?'selected':''}}>Luxury</option>
                                     </select>
                                 </div>
                             </div>
@@ -56,9 +69,10 @@
                     <tr>
                         <th>Id</th>
                         <th>User Id</th>
-                        <th>Name</th>
                         <th>Brand</th>
+                        <th>Number Plate</th>
                         <th>Model</th>
+                        <th>Fuel</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -68,9 +82,10 @@
                         <tr>
                             <td>{{$listNum}}</td>
                             <td>{{$cars->user_id}}</td>
-                            <td>{{$cars->brand}}</td>
-                            <td>{{$cars->brand}}</td>
+                            <td>{{CarBrandById($cars->brand_id)}}</td>
+                            <td>{{$cars->number_plate}}</td>
                             <td>{{$cars->model}}</td>
+                            <td>{{$cars->fuel}}</td>
                             <td>
                                 <a href="{{route('admin.approve.car').'/'.$cars->id}}"
                                    class="btn btn-sm btn-success">View</a>
