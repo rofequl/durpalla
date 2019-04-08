@@ -26,17 +26,18 @@
                 </button>
             </div>
             <div class="card-body">
+                <div class="table-responsive">
                 <table class="table table-striped table-hover" cellspacing="0" id="DataTable">
                     <thead>
                     <tr>
                         <th>Sl.</th>
                         <th>Brand</th>
                         <th>Model</th>
-                        <th>Image</th>
+                        <th>Number Plate</th>
+                        <th>Image Front</th>
+                        <th>Image Back</th>
                         <th>Fuel type</th>
                         <th>Kilometers run</th>
-                        <th>Registration Year</th>
-                        <th>Model Year</th>
                         <th>Car type</th>
                         <th>Status</th>
                         <th>Action</th>
@@ -49,11 +50,13 @@
                             <td>{{$listNum}}</td>
                             <td>{{CarBrandById($cars->brand_id)}}</td>
                             <td>{{$cars->model}}</td>
-                            <td><img src="{{asset('storage/car/'.$cars->car_image)}}" class="img-thumbnail img-size-64"></td>
+                            <td>{{$cars->number_plate}}</td>
+                            <td><img src="{{asset('storage/car/'.$cars->car_image1)}}" class="img-thumbnail img-size-64">
+                            </td>
+                            <td><img src="{{asset('storage/car/'.$cars->car_image2)}}" class="img-thumbnail img-size-64">
+                            </td>
                             <td>{{$cars->fuel}}</td>
                             <td>{{$cars->kilometers}}</td>
-                            <td>{{$cars->registration_year}}</td>
-                            <td>{{$cars->model_year}}</td>
                             <td>{{$cars->car_type}}</td>
                             <td>
                                 @if($cars->status == 0)
@@ -73,6 +76,7 @@
 
                     </tbody>
                 </table>
+                </div>
             </div>
         </div>
     </div>
@@ -108,11 +112,24 @@
                                 <input type="text" class="form-control" name="modal" id="modal" placeholder="Model">
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label for="inputPassword" class="col-md-3 col-form-label">Car Number Plate:</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" name="car_number" id="modal"
+                                       placeholder="Car Number Plate">
+                            </div>
+                        </div>
 
                         <div class="form-group row">
-                            <label for="inputPassword" class="col-md-3 col-form-label">Car Image</label>
+                            <label for="inputPassword" class="col-md-3 col-form-label">Car Image Front</label>
                             <div class="col-md-9">
-                                <input type="file" name="car_image" id="modal" placeholder="Model">
+                                <input type="file" name="car_image1" id="modal" placeholder="Model">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputPassword" class="col-md-3 col-form-label">Car Image Back</label>
+                            <div class="col-md-9">
+                                <input type="file" name="car_image2" id="modal" placeholder="Model">
                             </div>
                         </div>
 

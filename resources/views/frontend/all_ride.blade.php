@@ -145,7 +145,7 @@
                                                     @if(empty($tracking) || in_array($ride->tracking, $tracking))
                                                         <?php
                                                         $s_location = explode(",", PostRideAddress($ride->post_id, $ride->going, 'location'));
-                                                        $e_location = explode(",",PostRideAddress($ride->post_id, $ride->target, 'location'));
+                                                        $e_location = explode(",", PostRideAddress($ride->post_id, $ride->target, 'location'));
                                                         $s_lat = PostRideAddress($ride->post_id, $ride->going, 'lat');
                                                         $s_lng = PostRideAddress($ride->post_id, $ride->going, 'lng');
                                                         $e_lat = PostRideAddress($ride->post_id, $ride->target, 'lat');
@@ -155,8 +155,8 @@
                                                         <li onclick="location.href='{{route('booking.index',$ride->tracking)}}';">
 
                                                             <div class="row text-center">
-                                                                <div class="col-12 col-sm-4 col-md-2 dateShow lh-1-3">
-                                                                    <p class="my-0">{{$ride->time}}
+                                                                <div class="col-12 col-sm-4 col-md-2 dateShow lh-1-3 my-auto text-left text-justify">
+                                                                    <p class="my-0">Time: {{$ride->time}}
                                                                         :00 {{$ride->time2}}</p>
                                                                     <?php  $dist = GetDrivingDistance($s_lat, $s_lng, $e_lat, $e_lng); ?>
                                                                     <p class="my-0">Distance: {{$dist['distance']}}</p>
@@ -170,17 +170,17 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-11 col-sm-4 col-md location text-left">
-                                                                    <h4>@for($x = count($s_location)-2; $x < count($s_location); $x++)
+                                                                    <h4 class="fs-13">@for($x = count($s_location)-2; $x < count($s_location); $x++)
                                                                             {{$s_location[$x].','}}
                                                                         @endfor</h4>
                                                                     <p>@for($x = 0; $x < count($s_location)-2; $x++)
-                                                                        {{$s_location[$x].','}}
-                                                                    @endfor</p>
+                                                                            {{$s_location[$x].','}}
+                                                                        @endfor</p>
 
-                                                                    <h4>@for($x = count($e_location)-2; $x < count($e_location); $x++)
+                                                                    <h4 class="fs-13">@for($x = count($e_location)-2; $x < count($e_location); $x++)
                                                                             {{$e_location[$x].','}}
                                                                         @endfor</h4>
-                                                                    <p>@for($x = 0; $x < count($e_location)-2; $x++)
+                                                                    <p class="mb-0">@for($x = 0; $x < count($e_location)-2; $x++)
                                                                             {{$e_location[$x].','}}
                                                                         @endfor</p>
 
@@ -188,7 +188,8 @@
                                                                 <div class="col-12 col-sm-4 col-md-2 p-0">
 
                                                                     <aside class="single_sidebar_widget author_widget text-center lh-1-1">
-                                                                        <img class="author_img w-25 rounded-circle"
+                                                                        <img class="author_img rounded-circle"
+                                                                             width="60px" height="60px"
                                                                              src="{{userInformation(getRide($ride->post_id)->user_id,'image')}}"
                                                                              alt=""><br>
                                                                         <h5 class="my-0">{{userInformation(getRide($ride->post_id)->user_id,'name')}}</h5>
@@ -210,11 +211,16 @@
                                                                     <div class="price my-2 text-bold fs-18 text-black">
                                                                         ৳ {{$ride->price}}</div>
                                                                     @if(seat($ride->going,$ride->target,$ride->post_id,$ride->date) > 0)
-                                                                        @for($i=1;$i<=seat($ride->going,$ride->target,$ride->post_id,$ride->date);$i++)
-                                                                            <span class="fa-2x fas fa-male checked"
-                                                                                  data-toggle="tooltip"
-                                                                                  data-placement="bottom"
-                                                                                  title="{{seat($ride->going,$ride->target,$ride->post_id,$ride->date)}} Seat"></span>
+                                                                        @for($i=1;$i<=getRide($ride->post_id)->seat;$i++)
+                                                                            @if($i > getRide($ride->post_id)->seat - seat($ride->going,$ride->target,$ride->post_id,$ride->date))
+                                                                                <span class="fa-2x fas fa-male checked"
+                                                                                      data-toggle="tooltip"
+                                                                                      data-placement="bottom"></span>
+                                                                            @else
+                                                                                <span class="fa-2x fas fa-male"
+                                                                                      data-toggle="tooltip"
+                                                                                      data-placement="bottom"></span>
+                                                                            @endif
                                                                         @endfor
                                                                     @else
                                                                         {{"Booked"}}

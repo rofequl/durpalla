@@ -32,6 +32,8 @@ Route::group(['middleware' => 'CheckUserLogin','namespace' => 'frontend'], funct
     Route::get('/sp-car', 'SpController@Car')->name('sp.car');
     Route::post('/sp-add-car', 'SpController@AddCar')->name('sp.addcar');
     Route::get('/sp-delete-car', 'SpController@DeleteCar')->name('sp.deletecar');
+    Route::get('/remove-car', 'SpController@RemoveCar')->name('sp.remove.car');
+    Route::get('/sp-restore-car', 'SpController@RestoreCar')->name('sp.restore.car');
 
     Route::get('/sp-verification', 'VerificationController@SpVerification')->name('sp.verification');
     Route::post('/sp-verification', 'VerificationController@SpVerificationPost')->name('sp.verification');
@@ -39,6 +41,8 @@ Route::group(['middleware' => 'CheckUserLogin','namespace' => 'frontend'], funct
     Route::get('/resource', 'ResourceController@Index')->name('resource.index');
     Route::post('/resource-store', 'ResourceController@Store')->name('resource.store');
     Route::get('/resource-delete/{data}', 'ResourceController@Delete')->name('resource.delete');
+    Route::get('/resource-remove', 'ResourceController@ResourceRemove')->name('resource.remove.index');
+    Route::get('/resource-restore/{data}', 'ResourceController@RestoreRestore')->name('resource.restore');
 
     Route::get('/current-booking/{data?}', 'BookingController@CurrentBooking')->name('current.booking');
     Route::get('/booking-preview/{data?}', 'BookingController@BookingPreviewIndex')->name('booking.preview.index');
@@ -63,6 +67,7 @@ Route::group(['middleware' => 'CheckUserLogin','namespace' => 'frontend'], funct
     Route::get('/request-next', 'RequestController@RequestNext')->name('request.ride.next');
 
     Route::get('/notification', 'NotificationController@notification')->name('notification');
+    Route::get('/notification-show', 'NotificationController@NotificationShow')->name('notification.show');
     Route::get('/notification-preview/{data}', 'NotificationController@NotificationPreview')->name('notification.preview');
 });
 

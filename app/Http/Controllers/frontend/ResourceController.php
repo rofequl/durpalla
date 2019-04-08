@@ -9,37 +9,24 @@ use App\Http\Controllers\Controller;
 
 class ResourceController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function Index()
     {
-        $resource = resource::where('user_id',Session('userId'))->get();
-        return view('frontend.sp_panel.resource',compact('resource'));
+        $resource = resource::where('user_id',Session('userId'))->where('status','!=',3)->get();
+        return view('frontend.sp_panel.resource.resource',compact('resource'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function ResourceRemove()
     {
-        //
+        $resource = resource::where('user_id',Session('userId'))->where('status','=',3)->get();
+        return view('frontend.sp_panel.resource.restore_resource',compact('resource'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function Store(Request $request)
     {
         $request->validate([
-            'phone' => 'required|max:15',
+            'phone' => 'required|max:15|unique:resources',
             'name' => 'required|max:35',
             'national_id' => 'required|max:50|unique:resources',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:5000',
@@ -122,9 +109,20 @@ class ResourceController extends Controller
     public function Delete($id)
     {
         $delete = resource::find($id);
-        $delete->delete();
+        $delete->status = 3;
+        $delete->save();
 
         Session::flash('message', 'Resource Delete Successfully');
+        return redirect('resource');
+    }
+
+    public function RestoreRestore($id)
+    {
+        $delete = resource::find($id);
+        $delete->status = 0;
+        $delete->save();
+
+        Session::flash('message', 'Resource Restore Successfully');
         return redirect('resource');
     }
 }

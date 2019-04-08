@@ -17,7 +17,9 @@ class CreateCarsTable extends Migration
             $table->increments('id');
             $table->string('brand_id');
             $table->string('model');
-            $table->string('car_image');
+            $table->string('number_plate');
+            $table->string('car_image1');
+            $table->string('car_image2');
             $table->string('fuel');
             $table->string('kilometers');
             $table->string('car_type')->nullable();

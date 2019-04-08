@@ -22,6 +22,7 @@ class CreateResourcesTable extends Migration
             $table->string('nid_image1')->nullable();
             $table->string('nid_image2')->nullable();
             $table->integer('resource_id');
+            $table->boolean('status')->default(0);
             $table->integer('user_id');
             $table->timestamps();
         });

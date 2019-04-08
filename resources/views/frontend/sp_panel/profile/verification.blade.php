@@ -66,14 +66,14 @@
                                             <div class="custom-file">
                                                 <input type="file" class="custom-file-input w-25" name="nidImage1" id="inputGroupFile01"
                                                        aria-describedby="inputGroupFileAddon01">
-                                                <label class="custom-file-label" for="inputGroupFile01">NID 1st Image</label>
+                                                <label class="custom-file-label" for="inputGroupFile01">NID Front Image</label>
                                             </div>
                                         </div>
                                         <div class="col-6 mt-2">
                                             <div class="custom-file">
                                                 <input type="file" class="custom-file-input w-25" name="nidImage2" id="inputGroupFile02"
                                                        aria-describedby="inputGroupFileAddon02">
-                                                <label class="custom-file-label" for="inputGroupFile02">NID 2nd Image</label>
+                                                <label class="custom-file-label" for="inputGroupFile02">NID Back Image</label>
                                             </div>
                                         </div>
                                         <div class="col-6 mt-2">
@@ -120,14 +120,14 @@
                                             <div class="custom-file">
                                                 <input type="file" class="custom-file-input w-25" name="passportImage1" id="inputGroupFile03"
                                                        aria-describedby="inputGroupFileAddon03">
-                                                <label class="custom-file-label" for="inputGroupFile03">Passport 1st Image</label>
+                                                <label class="custom-file-label" for="inputGroupFile03">Passport Front Image</label>
                                             </div>
                                         </div>
                                         <div class="col-6 mt-2">
                                             <div class="custom-file">
                                                 <input type="file" class="custom-file-input w-25" name="passportImage2" id="inputGroupFile04"
                                                        aria-describedby="inputGroupFileAddon04">
-                                                <label class="custom-file-label" for="inputGroupFile04">Passport 2nd Image</label>
+                                                <label class="custom-file-label" for="inputGroupFile04">Passport Back Image</label>
                                             </div>
                                         </div>
                                         <div class="col-6 mt-2">
@@ -174,14 +174,14 @@
                                             <div class="custom-file">
                                                 <input type="file" class="custom-file-input w-25" name="drivingImage1" id="inputGroupFile05"
                                                        aria-describedby="inputGroupFileAddon05">
-                                                <label class="custom-file-label" for="inputGroupFile05">Driving 1st Image</label>
+                                                <label class="custom-file-label" for="inputGroupFile05">Driving Front Image</label>
                                             </div>
                                         </div>
                                         <div class="col-6 mt-2">
                                             <div class="custom-file">
                                                 <input type="file" class="custom-file-input w-25" name="drivingImage2" id="inputGroupFile06"
                                                        aria-describedby="inputGroupFileAddon06">
-                                                <label class="custom-file-label" for="inputGroupFile06">Driving 2nd Image</label>
+                                                <label class="custom-file-label" for="inputGroupFile06">Driving Back Image</label>
                                             </div>
                                         </div>
                                         <div class="col-6 mt-2">

@@ -51,7 +51,7 @@
                                                 {{$dist['distance']}}
                                             </div>
                                             <div class="col-12 col-sm-4 col-md-2 reviewStar my-auto">
-                                                <div class="price">{{$stopovers->price}}$</div>
+                                                <div class="price">৳ {{$stopovers->price}}</div>
                                             </div>
                                         </div>
                                     </li>

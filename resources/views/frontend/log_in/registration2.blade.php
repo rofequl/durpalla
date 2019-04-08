@@ -16,15 +16,25 @@
                           novalidate="novalidate">
                         {{ csrf_field() }}
                         <div class="form-group">
-                            <input type="number" class="form-control {{ $errors->has('phone') ? ' is-invalid' : '' }}"
-                                   id="name" name="phone"
-                                   placeholder="Enter your phone number" onfocus="this.placeholder = ''"
-                                   onblur="this.placeholder = 'Enter your name'">
-                            @if ($errors->has('phone'))
-                                <div class="invalid-feedback">
-                                    {{ $errors->first('phone') }}
+                            <div class="row">
+                                <div class="col-2 pr-0">
+<div class="bg-white p-1 pt-2" style="height: 36px;margin-top: 1px">
+    <img src="{{asset('img/icon/flag-bd.png')}}" class="img-fluid" style="margin-top: -5px" width="35%"> +880
+</div>
                                 </div>
-                            @endif
+                                <div class="col-10 pl-0">
+                                    <input type="number" class="form-control {{ $errors->has('phone') ? ' is-invalid' : '' }}"
+                                           id="name" name="phone"
+                                           placeholder="Enter your phone number" onfocus="this.placeholder = ''"
+                                           onblur="this.placeholder = 'Enter your name'">
+                                    @if ($errors->has('phone'))
+                                        <div class="invalid-feedback">
+                                            {{ $errors->first('phone') }}
+                                        </div>
+                                    @endif
+                                </div>
+                            </div>
+
                         </div>
                         <div class="form-group">
                             <input type="text" class="form-control {{ $errors->has('name') ? ' is-invalid' : '' }}"

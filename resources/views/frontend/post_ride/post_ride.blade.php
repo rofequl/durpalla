@@ -31,7 +31,7 @@
                             <p>After booking you can chat with your Tasker, agree on a exact time.</p>
                         </div>
                     </div>
-                    <form method="post" id="upload_form" action="{{route('post.ride')}}">
+                    <form method="post" id="upload_form" action="{{route('post.ride')}}" autocomplete="off">
                         {{csrf_field()}}
                         <div class="card">
                             <div class="card-header bg-paste text-white py-1">
@@ -63,21 +63,20 @@
                                     <input type="hidden" name="location2" id="location2">
                                 </div>
                                 @if(Session::get('userId') != null && Session::get('token') != null)
-                                    <div class="row">
-                                        <div class="col">
-                                            <label for="basic-url">Car selection</label>
-                                            <div class="input-group mb-3">
-                                                <select name="car">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Car selection:</label>
+                                            <div class="input-group mb-3 col-sm-8">
+                                                <select name="car" class="w-50" aria-invalid="false">
                                                     @foreach(car(Session::get('userId')) as $categorys)
                                                         <option value="{{$categorys->id}}">{{$categorys->model}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col">
-                                            <label for="basic-url">Driver selection</label>
-                                            <div class="input-group mb-3">
-                                                <select name="driver">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Driver selection:</label>
+                                            <div class="input-group mb-3 col-sm-8">
+                                                <select name="driver" class="w-50" aria-invalid="false">
                                                     <option value="SP" selected>{{userInformation(Session::get('userId'),'name')}}</option>
                                                     @foreach(resource(Session::get('userId')) as $categorys)
                                                         <option value="{{$categorys->id}}">{{$categorys->name}}</option>
@@ -85,7 +84,6 @@
                                                 </select>
                                             </div>
                                         </div>
-                                    </div>
                                 @endif
                                 <h4 class="my-0 mt-5">
                                     Stopovers <i class="fa fa-question-circle" aria-hidden="true"></i>

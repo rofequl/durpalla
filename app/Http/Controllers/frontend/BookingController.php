@@ -19,6 +19,7 @@ class BookingController extends Controller
     public function Index($data, $data2 = false)
     {
         $singleStopovers = stopover::where('tracking', $data)->first();
+        $booking = booking::where('tracking',$singleStopovers->tracking)->where('status',1)->get();
         $post = post_ride::where('id', $singleStopovers->post_id)->first();
         $car = car::where('user_id', $post->user_id)->where('id', $post->car_id)->first();
         if ($data2) {
@@ -27,10 +28,10 @@ class BookingController extends Controller
                 return redirect('login');
             }
             $show = 2;
-            return view('frontend.booking.book', compact('singleStopovers', 'post', 'car', 'show'));
+            return view('frontend.booking.book', compact('singleStopovers', 'post', 'car', 'show','booking'));
 
         }
-        return view('frontend.booking.book', compact('singleStopovers', 'post', 'car'));
+        return view('frontend.booking.book', compact('singleStopovers', 'post', 'car','booking'));
 
     }
 

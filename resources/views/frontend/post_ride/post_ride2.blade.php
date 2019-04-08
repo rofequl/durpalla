@@ -72,7 +72,7 @@
                                     <span class="input-group-text" id="basic-addon1"><i class="fa fa-car"
                                                                                         aria-hidden="true"></i></span>
                                         </div>
-                                        <input type="text" class="form-control seat" value="01" name="seat">
+                                        <input type="text" class="form-control seat" value="1" name="seat">
                                         <div class="input-group-append">
                                     <span class="input-group-text plus" id="basic-addon1"><i class="fas fa-plus"></i></span>
                                         </div>

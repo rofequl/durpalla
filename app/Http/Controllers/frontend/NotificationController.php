@@ -14,10 +14,12 @@ class NotificationController extends Controller
         return view('frontend.notification.notification',compact('notification'));
     }
 
+    public function NotificationShow(){
+        notification::where('status', 0)->update(['status'=>1]);
+    }
+
     public function NotificationPreview($data){
         $notification = notification::find($data);
-        $notification->status = 1;
-        $notification->save();
         $notifications = explode(",",$notification->matching);
         $rides = stopover::whereIn('tracking',$notifications)->get();
         return view('frontend.notification.notification_preview',compact('rides'));

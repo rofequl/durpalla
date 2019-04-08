@@ -600,6 +600,12 @@ margin-top: 5px;
     color: white;
 }
 
+.notification-menu{
+    margin-top: 25px;
+    width: 320px;
+    max-height: 500px;
+}
+
 /*=======================================
         responsive css
 =========================================*/

@@ -49,18 +49,18 @@
             </div>
             <div class="card-body">
                 Find a ride Km search:{{$data->search}}<br>
-                Price per Co-traveller Min and max money:{{$data->min_price}}<br>
+                Price per Co-traveller Min and max money: ৳ {{$data->min_price}}<br>
                 <h3 class="mt-5">Booking cancel user fine percent:</h3>
                 Canceled within 6 hours: {{$data->fine_6h}}%<br>
                 Canceled within 12 hours: {{$data->fine_12h}}%<br>
                 Cancel after more than 12 hours: {{$data->fine_12_upper}}%<br>
                 <h3 class="mt-5">Standard Car:</h3>
-                First {{$data->km_1st}} Km, Per Km price: {{$data->price}}$<br>
-                Second per Km price: {{$data->price2}}$
+                First {{$data->km_1st}} Km, Per Km price: ৳ {{$data->price}}<br>
+                Second per Km price: ৳ {{$data->price2}}
 
                 <h3 class="mt-5">Premier Car:</h3>
-                First {{$data->pkm_1st}} Km, Per Km price: {{$data->pprice}}$<br>
-                Second per Km price: {{$data->pprice2}}$
+                First {{$data->pkm_1st}} Km, Per Km price: ৳ {{$data->pprice}}<br>
+                Second per Km price: ৳ {{$data->pprice2}}
             </div>
         </div>
     </div>

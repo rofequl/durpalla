@@ -97,7 +97,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="inputPassword" class="col-md-3 col-form-label">Image:</label>
+                            <label for="inputPassword" class="col-md-3 col-form-label">User Image:</label>
                             <div class="col-md-9">
                                 <input type="file" name="image" id="image" placeholder="User Image">
                             </div>
@@ -110,13 +110,13 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="inputPassword" class="col-md-3 col-form-label">National Id image1:</label>
+                            <label for="inputPassword" class="col-md-3 col-form-label">National Id Front Image:</label>
                             <div class="col-md-9">
                                 <input type="file" name="nid_image1" id="phone" placeholder="Enter Phone Number">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="inputPassword" class="col-md-3 col-form-label">National Id image2:</label>
+                            <label for="inputPassword" class="col-md-3 col-form-label">National Id Back Image:</label>
                             <div class="col-md-9">
                                 <input type="file" name="nid_image2" id="phone" placeholder="Enter Phone Number">
                             </div>

@@ -98,7 +98,7 @@
                                 <div class="row mt-4 mb-2">
                                     <div class="col-6">
                                         <h5>Car Information:</h5>
-                                        <img src="{{asset('storage/car/'.$car->car_image)}}"
+                                        <img src="{{asset('storage/car/'.$car->car_image1)}}"
                                              class="img-thumbnail w-75" alt="...">
                                     </div>
                                     <div class="col-6">
@@ -151,6 +151,15 @@
                                     </tbody>
                                 </table>
 
+                                <h4>Ride already Booking:</h4>
+                                @foreach($booking as $bookings)
+
+                                   Name: {{UserName($bookings->user_id)}}<br>
+                                   Seat: {{$bookings->seat}}
+
+                                @endforeach
+
+
                             </div>
 
 
@@ -162,15 +171,15 @@
                 <div class="col-4">
                     <div class="blog_right_sidebar">
                         <aside class="single_sidebar_widget author_widget">
-                        <?php
-                        if ($post->driver == 'SP'){
-                            $image  = userInformation($post->user_id,'image');
-                            $name = userInformation($post->user_id,'name');
-                        }else{
-                            $image  = asset('storage/resource/'.getResourceById($post->driver)->image);
-                            $name = getResourceById($post->driver)->name;
-                        }
-                        ?>
+                            <?php
+                            if ($post->driver == 'SP') {
+                                $image = userInformation($post->user_id, 'image');
+                                $name = userInformation($post->user_id, 'name');
+                            } else {
+                                $image = asset('storage/resource/' . getResourceById($post->driver)->image);
+                                $name = getResourceById($post->driver)->name;
+                            }
+                            ?>
 
                             <img class="author_img rounded-circle" src="{{$image}}"
                                  width="100px" height="100px"
