@@ -136,26 +136,24 @@ function seat($going, $target, $post, $date)
             if ($querys->serial < $going) {
                 $seat -= DB::table('stopovers')->where('post_id', $post)->where('date', $date)->where('going', $querys->serial)->where('target', '>', $going)->sum('stopovers.seat');
             } elseif ($querys->serial == $going) {
-                $seat -= DB::table('stopovers')->where('post_id', $post)->where('date', $date)->where('going', $going)->where('target', '>=', $target)->sum('stopovers.seat');
+                $seat -= DB::table('stopovers')->where('post_id', $post)->where('date', $date)->where('going', $going)->sum('stopovers.seat');
             } else {
-                $seat -= DB::table('stopovers')->where('post_id', $post)->where('date', $date)->where('going', '>=', $querys->serial)->where('target', '<=', $target)->sum('stopovers.seat');
+                $seat -= DB::table('stopovers')->where('post_id', $post)->where('date', $date)->where('going', '=', $querys->serial)->where('target', '<=', $target)->sum('stopovers.seat');
             }
         }
         return $seat;
     } else {
         foreach ($query as $querys){
             if ($querys->serial > $going){
-                $seat -= DB::table('stopovers')->where('post_id', $post)->where('date', $date)->where('going', '<', $querys->serial)->where('target','<',$going)->sum('stopovers.seat');
+                $seat -= DB::table('stopovers')->where('post_id', $post)->where('date', $date)->where('going', $querys->serial)->where('target','>',$going)->sum('stopovers.seat');
             }elseif ($querys->serial == $going){
                 $seat -= DB::table('stopovers')->where('post_id', $post)->where('date', $date)->where('going', $going)->sum('stopovers.seat');
             }else{
-                $seat -= DB::table('stopovers')->where('post_id', $post)->where('going','<=', $going)->where('target','>=',$target)->sum('stopovers.seat');
+                $seat -= DB::table('stopovers')->where('post_id', $post)->where('date', $date)->where('going','=', $querys->serial)->where('target','>=',$target)->sum('stopovers.seat');
             }
         }
         return $seat;
     }
-
-
 }
 
 function ride_price($lat1, $lon1, $lat2, $lon2, $car)
@@ -239,7 +237,7 @@ function CorporateById($id = false)
 function notificationAdd()
 {
     $requests = request_ride::where('user_id', Session('userId'))->get();
-    $ride = stopover::where('date', '>=', date("m/d/Y"))->get();
+    $ride = stopover::where('date', '>=', date("m/d/Y"))->where('user_id', '!=', Session('userId'))->get();
     $satting = ride_setting::first();
     if ($satting) {
         $satting = $satting->search;
