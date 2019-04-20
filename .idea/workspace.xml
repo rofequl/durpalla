@@ -1,72 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="da129dba-5424-41b2-9a1a-948ec50ac2ab" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/frontend/NotificationController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Middleware/Notification.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/notification.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2019_04_05_143908_create_notifications_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/admin1.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/img/icon/flag-bd.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/backend/close_account_list.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/backend/promo_code/expired_promo_code.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/frontend/notification/notification.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/frontend/notification/notification_preview.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/frontend/request_congrates.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/frontend/sp_panel/car/remove_car.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/frontend/sp_panel/resource/restore_resource.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/durpalla.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/durpalla.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/backend/CarController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/backend/CarController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/backend/PromoCodeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/backend/PromoCodeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/backend/RideSettingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/backend/RideSettingController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/backend/SpAccountController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/backend/SpAccountController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/frontend/BookingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/frontend/BookingController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/frontend/PostController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/frontend/PostController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/frontend/RequestController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/frontend/RequestController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/frontend/ResourceController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/frontend/ResourceController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/frontend/SpController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/frontend/SpController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/homeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/homeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Kernel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/helpers.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/helpers.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_02_21_062226_create_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_02_21_062226_create_users_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_02_24_104118_create_cars_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_02_24_104118_create_cars_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_03_01_032831_create_ride_settings_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_03_01_032831_create_ride_settings_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_03_07_174107_create_resources_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_03_07_174107_create_resources_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/custom/frontend/mainIndex.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/custom/frontend/mainIndex.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/admin.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/admin.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend/car/approve.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/car/approve.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend/car/pending.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/car/pending.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend/close_account.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/close_account.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend/inc/aside.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/inc/aside.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend/post-ride/pending.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/post-ride/pending.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend/post-ride/ride_profile.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/post-ride/ride_profile.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend/promo_code.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/promo_code/promo_code.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backend/ride_setting.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backend/ride_setting.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/frontend/all_ride.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/all_ride.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/frontend/booking/book.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/booking/book.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/frontend/find_ride.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/find_ride.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/frontend/inc/header.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/inc/header.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/frontend/log_in/registration2.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/log_in/registration2.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/frontend/post_ride/post_ride.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/post_ride/post_ride.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/frontend/post_ride/post_ride2.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/post_ride/post_ride2.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/frontend/post_ride/post_ride3.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/post_ride/post_ride3.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/frontend/request.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/request.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/frontend/request2.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/request2.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/frontend/sp_panel/add_car.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/sp_panel/car/add_car.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/frontend/sp_panel/booking/current_book.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/sp_panel/booking/current_book.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/frontend/sp_panel/booking/history.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/sp_panel/booking/history.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/frontend/sp_panel/booking/preview.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/sp_panel/booking/preview.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/frontend/sp_panel/inc/aside.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/sp_panel/inc/aside.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/frontend/sp_panel/inc/header.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/sp_panel/inc/header.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/frontend/sp_panel/profile/inc/aside.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/sp_panel/profile/inc/aside.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/frontend/sp_panel/profile/verification.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/sp_panel/profile/verification.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/frontend/sp_panel/resource.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/sp_panel/resource/resource.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/frontend/sp_panel/rides_offered/preview.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/frontend/sp_panel/rides_offered/preview.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
-    </list>
+    <list default="true" id="da129dba-5424-41b2-9a1a-948ec50ac2ab" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,17 +12,7 @@
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/helpers.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="389">
-              <caret line="266" column="20" lean-forward="true" selection-start-line="266" selection-start-column="20" selection-end-line="266" selection-end-column="20" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -237,23 +162,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="durpalla" type="b2602c69:ProjectViewProjectNode" />
-              <item name="durpalla" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="durpalla" type="b2602c69:ProjectViewProjectNode" />
-              <item name="durpalla" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
       <pane id="Scope" />
+      <pane id="ProjectPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -302,11 +212,12 @@
       <workItem from="1554295356856" duration="84000" />
       <workItem from="1554296107218" duration="2772000" />
       <workItem from="1554726521101" duration="5877000" />
+      <workItem from="1554896806905" duration="18000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="44160000" />
+    <option name="totallyTimeSpent" value="44178000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
@@ -369,13 +280,7 @@
     <entry file="file://$PROJECT_DIR$/resources/views/backend/complain.blade.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/frontend/sp_panel/resource.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="562">
-          <caret line="39" column="27" selection-start-line="39" selection-start-column="27" selection-end-line="39" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/frontend/sp_panel/resource.blade.php" />
     <entry file="file://$PROJECT_DIR$/app/Http/Middleware/EncryptCookies.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -468,16 +373,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/backend/promo_code.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="422">
-          <caret line="202" column="10" lean-forward="true" selection-start-line="202" selection-start-column="10" selection-end-line="202" selection-end-column="10" />
-          <folding>
-            <element signature="e#10785#17654#0#HTML" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/backend/promo_code.blade.php" />
     <entry file="file://$PROJECT_DIR$/resources/views/backend/all_ridepost.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-738" />
@@ -596,7 +492,7 @@
     <entry file="file://$PROJECT_DIR$/app/helpers.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="389">
-          <caret line="266" column="20" lean-forward="true" selection-start-line="266" selection-start-column="20" selection-end-line="266" selection-end-column="20" />
+          <caret line="266" column="20" selection-start-line="266" selection-start-column="20" selection-end-line="266" selection-end-column="20" />
         </state>
       </provider>
     </entry>
