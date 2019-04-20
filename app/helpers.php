@@ -156,12 +156,12 @@ function seat($going, $target, $post, $date)
     }
 }
 
-function ride_price($lat1, $lon1, $lat2, $lon2, $car)
+function ride_price($distance, $car)
 {
     //$km = distance($lat1, $lon1, $lat2, $lon2, 'K');
-    $dist = GetDrivingDistance($lat1, $lon1, $lat2, $lon2);
 
-    $km = number_format((float)($dist['distance']), 1, '.', '');
+
+    $km = number_format((float)($distance), 1, '.', '');
 
     $query = DB::table('ride_settings')->first();
 
@@ -237,8 +237,7 @@ function CorporateById($id = false)
 function notificationAdd()
 {
     $requests = request_ride::where('user_id', Session('userId'))->get();
-    $ride = stopover::where('date', '>=', date("m/d/Y"))->where('user_id', '!=', Session('userId'))->get();
-    $satting = ride_setting::first();
+    $ride = stopover::where('date', '>=', date("m/d/Y"))->get();    $satting = ride_setting::first();
     if ($satting) {
         $satting = $satting->search;
     } else {

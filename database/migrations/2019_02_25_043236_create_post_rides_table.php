@@ -31,6 +31,8 @@ class CreatePostRidesTable extends Migration
             $table->string('condition')->nullable();
             $table->integer('car_id');
             $table->string('driver');
+            $table->string('distance');
+            $table->string('duration');
             $table->integer('user_id');
             $table->boolean('status')->default(0);
             $table->timestamps();

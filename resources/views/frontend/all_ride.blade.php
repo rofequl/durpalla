@@ -146,10 +146,6 @@
                                                         <?php
                                                         $s_location = explode(",", PostRideAddress($ride->post_id, $ride->going, 'location'));
                                                         $e_location = explode(",", PostRideAddress($ride->post_id, $ride->target, 'location'));
-                                                        $s_lat = PostRideAddress($ride->post_id, $ride->going, 'lat');
-                                                        $s_lng = PostRideAddress($ride->post_id, $ride->going, 'lng');
-                                                        $e_lat = PostRideAddress($ride->post_id, $ride->target, 'lat');
-                                                        $e_lng = PostRideAddress($ride->post_id, $ride->target, 'lng');
                                                         ?>
 
                                                         <li onclick="location.href='{{route('booking.index',$ride->tracking)}}';">
@@ -158,9 +154,8 @@
                                                                 <div class="col-12 col-sm-4 col-md-2 dateShow lh-1-3 my-auto text-left text-justify">
                                                                     <p class="my-0">Time: {{$ride->time}}
                                                                         :00 {{$ride->time2}}</p>
-                                                                    <?php  $dist = GetDrivingDistance($s_lat, $s_lng, $e_lat, $e_lng); ?>
-                                                                    <p class="my-0">Distance: {{$dist['distance']}}</p>
-                                                                    <p class="my-0">Duration: {{$dist['time']}}</p>
+                                                                    <p class="my-0">Distance: {{$ride->distance}}</p>
+                                                                    <p class="my-0">Duration: {{$ride->duration}}</p>
                                                                 </div>
                                                                 <div style="width: 10px">
                                                                     <div class="relative">

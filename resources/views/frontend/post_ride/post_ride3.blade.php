@@ -49,10 +49,6 @@
                                     <?php
                                     $s_location = PostRideAddress($stopovers->post_id,$stopovers->going,'location');
                                     $e_location = PostRideAddress($stopovers->post_id,$stopovers->target,'location');
-                                    $s_lat = PostRideAddress($stopovers->post_id,$stopovers->going,'lat');
-                                    $s_lng = PostRideAddress($stopovers->post_id,$stopovers->going,'lng');
-                                    $e_lat = PostRideAddress($stopovers->post_id,$stopovers->target,'lat');
-                                    $e_lng = PostRideAddress($stopovers->post_id,$stopovers->target,'lng');
                                     ?>
                                     <li>
                                         <div class="row text-center">
@@ -63,11 +59,10 @@
                                                 {{$e_location}}
                                             </div>
                                             <div class="col-12 col-sm-4 col-md-2 p-0">
-                                                <?php  $dist = GetDrivingDistance($s_lat, $s_lng, $e_lat, $e_lng); ?>
-                                                    {{$dist['distance']}}
+                                                    {{$stopovers->distance}}
                                             </div>
                                             <div class="col-12 col-sm-4 col-md-2 reviewStar my-auto">
-                                                <div class="price">৳{{$stopovers->price}}</div>
+                                                <div class="price">৳ {{$stopovers->price}}</div>
                                             </div>
                                         </div>
                                     </li>

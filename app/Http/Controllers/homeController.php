@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\landing_image;
+use App\stopover;
 use App\user;
 use App\verification;
 use Illuminate\Support\Facades\Session;
@@ -10,18 +11,23 @@ use Laravel\Socialite\Facades\Socialite;
 use Redirect;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Carbon\Carbon;
+use DateTime;
 
 class homeController extends Controller
 {
-    public function homepage(){
+    public function homepage()
+    {
 
-        $landingPage = landing_image::where('approve',1)->first();
-        if($landingPage){
-            $landingPage =  $landingPage->image;
-        }else{
-            $landingPage =  false;
+        $landingPage = landing_image::where('approve', 1)->first();
+        if ($landingPage) {
+            $landingPage = $landingPage->image;
+        } else {
+            $landingPage = false;
         }
-        return view('frontend.index',compact('landingPage'));
+
+        $rides = stopover::where('date', '>=', date("m/d/Y"))->limit(10)->get();
+        return view('frontend.index', compact('landingPage', 'rides'));
     }
 
     public function UserLogin(Request $request)
@@ -35,12 +41,12 @@ class homeController extends Controller
         if (!empty($admin)) {
             if ($admin && Hash::check($request->password, $admin->password)) {
 
-                if ($request->remember_me){
+                if ($request->remember_me) {
                     setcookie('userId', $admin->user_id, time() + (86400 * 30), "/");
                     setcookie('token', $admin->token, time() + (86400 * 30), "/");
                     Session::put('token', $admin->token);
                     Session::put('userId', $admin->user_id);
-                }else{
+                } else {
                     Session::put('token', $admin->token);
                     Session::put('userId', $admin->user_id);
                 }
@@ -70,15 +76,17 @@ class homeController extends Controller
 
         $userId = time();
 
+        $phone = '0' . $request->phone;
+
         $user = new user;
-        $user->phone = $request->phone;
+        $user->phone = $phone;
         $user->name = $request->name;
         $user->day = $request->day;
         $user->month = $request->month;
         $user->year = $request->year;
         $user->user_id = $userId;
         $user->gender = $request->gender;
-        $user->image = \URL::to('').'/images/admin.jpg';
+        $user->image = \URL::to('') . '/images/admin.jpg';
         $user->password = Hash::make($request->password);
         $user->token = $request->_token;
         $user->save();
@@ -127,10 +135,9 @@ class homeController extends Controller
 
     public function language(Request $request)
     {
-        if(!\Session::has('locale'))
-        {
+        if (!\Session::has('locale')) {
             \Session::put('locale', $request->lng);
-        }else{
+        } else {
             Session::put('locale', $request->lng);
         }
 

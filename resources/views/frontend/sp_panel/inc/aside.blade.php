@@ -58,6 +58,10 @@
                 <li class="">
                     <a href="{{route('request.ride.next')}}"> <i class="menu-icon fas fa-box"></i>Request a ride</a>
                 </li>
+
+                <li class="">
+                    <a href="{{route('sp.transition')}}"> <i class="menu-icon fas fa-box"></i>Transition</a>
+                </li>
                 {{--<li class="">--}}
                     {{--<a href="{{route('sp.complain')}}"> <i class="menu-icon fas fa-hands-helping"></i>Complain</a>--}}
                 {{--</li>--}}

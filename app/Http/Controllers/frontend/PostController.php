@@ -7,6 +7,7 @@ use App\post_ride_address;
 use App\ride_setting;
 use App\stopover;
 use App\verification;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Session;
@@ -24,9 +25,39 @@ class PostController extends Controller
         $insert->save();
     }
 
+    public function GetPlaceDisTime($going, $target, $id)
+    {
+        $s_lat = PostRideAddress($id, $going, 'lat');
+        $s_lng = PostRideAddress($id, $going, 'lng');
+        $e_lat = PostRideAddress($id, $target, 'lat');
+        $e_lng = PostRideAddress($id, $target, 'lng');
+
+        $url = "https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=" . $s_lat . "," . $s_lng . "&destinations=" . $e_lat . "," . $e_lng . "&key=AIzaSyCMfl6pAmNv3T6PoDRy7ESSJRZLLSFf2jI";
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_PROXYPORT, 3128);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+        $response = curl_exec($ch);
+        curl_close($ch);
+        $response_a = json_decode($response, true);
+        $dist = $response_a['rows'][0]['elements'][0]['distance']['text'];
+        $time = $response_a['rows'][0]['elements'][0]['duration']['text'];
+
+        return array('distance' => $dist, 'time' => $time);
+    }
+
     public function RidePost(Request $request)
     {
 
+//        $input = $request->departure.' '.$request->d_time.' '.$request->d_time2;
+//        $date = Carbon::createFromFormat('m/d/Y h A', $input);
+//        $placeInfo = GetDrivingDistance($request->lat,$request->lng,$request->lat2,$request->lng2);
+//        echo $placeInfo['time'];
+//        echo date_add($date, date_interval_create_from_date_string($placeInfo['time']));
+//
+//        die();
         if (Session::get('userId') == null && Session::get('phone') == null) {
             Session::flash('message', 'Submit this form Login first.');
             return redirect('post-ride');
@@ -70,6 +101,9 @@ class PostController extends Controller
             $insert->r_time2 = $request->r_time2;
             $return = 1;
         }
+        $placeInfo = GetDrivingDistance($request->lat,$request->lng,$request->lat2,$request->lng2);
+        $insert->distance = $placeInfo['distance'];
+        $insert->duration = $placeInfo['time'];
         $insert->car_id = $request->car;
         $insert->driver = $request->driver;
         $insert->user_id = Session('userId');
@@ -156,7 +190,18 @@ class PostController extends Controller
                 $ride_id = post_ride::all()->count();
                 $ride_id = "R". rand(100, 999) . str_pad($ride_id, 3, "0", STR_PAD_LEFT);
                 $insert1->tracking = $ride_id;
+                $placeInfo = $this->GetPlaceDisTime($postCode[$i],$postCode[$l],$insert->id);
+                $insert1->distance = $placeInfo['distance'];
+                $insert1->duration = $placeInfo['time'];
+                $input = $request->departure.' '.$request->d_time.' '.$request->d_time2;
+                $date = Carbon::createFromFormat('m/d/Y h A', $input, 'Asia/Dhaka');
+                date_add($date, date_interval_create_from_date_string($placeInfo['time']));
+                $insert1->edate = date_format($date, 'm/d/Y');
+                $insert1->etime = date_format($date, 'h');
+                $insert1->etime2 = date_format($date, 'A');
                 $insert1->save();
+
+
             }
         }
 
@@ -190,6 +235,13 @@ class PostController extends Controller
         $stopover = stopover::where('post_id', $data)->get();
         $setting = ride_setting::first();
         return view('frontend.post_ride.post_ride2', compact('stopover', 'post','setting'));
+    }
+
+    public function RidePostRemove($data)
+    {
+        $stopover = stopover::find($data);
+        $stopover->delete();
+        return redirect()->back();
     }
 
     public function RidePostPrice(Request $request)

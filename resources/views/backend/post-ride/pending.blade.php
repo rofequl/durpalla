@@ -25,9 +25,8 @@
                                     <td>
                                         <p class="my-0 fs-12 lh-1-2">{{date("l F-d", strtotime($rides->departure))}}</p>
                                         <p class="my-0 fs-12 lh-1-2">{{$rides->d_time}}:00 {{$rides->d_time2}}</p>
-                                        <?php $dist = GetDrivingDistance($rides->s_lat, $rides->s_lng, $rides->e_lat, $rides->e_lng); ?>
-                                        <p class="my-0 fs-12 lh-1-2">Distance: {{$dist['distance']}}</p>
-                                        <p class="my-0 fs-12 lh-1-2">Duration: {{$dist['time']}}</p>
+                                        <p class="my-0 fs-12 lh-1-2">Distance: {{$rides->distance}}</p>
+                                        <p class="my-0 fs-12 lh-1-2">Duration: {{$rides->duration}}</p>
                                     </td>
                                     <td>
                                         <h6>Departure</h6>
