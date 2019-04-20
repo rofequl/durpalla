@@ -19,10 +19,17 @@ class CreateStopoversTable extends Migration
             $table->integer('target');
             $table->integer('price')->nullable();
             $table->integer('seat')->nullable();
+            $table->integer('post_id');
             $table->string('date');
             $table->string('time');
             $table->string('time2');
-            $table->integer('post_id');
+            $table->string('distance');
+            $table->string('duration');
+            $table->string('edate')->nullable();
+            $table->string('etime')->nullable();
+            $table->string('etime2')->nullable();
+            $table->string('status')->default(0);
+            $table->string('payment')->default(0);
             $table->string('tracking');
             $table->timestamps();
         });

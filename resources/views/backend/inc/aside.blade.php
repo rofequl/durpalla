@@ -18,6 +18,9 @@
                 <li class="">
                     <a href="{{route('admin.ride.setting')}}"> <i class="menu-icon fas fa-sliders-h"></i> Ride Setting</a>
                 </li>
+                <li class="">
+                    <a href="{{route('admin.transition')}}"> <i class="menu-icon fas fa-sliders-h"></i> Transition</a>
+                </li>
                 <li class="menu-item-has-children dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fas fa-car"></i>Car management</a>
                     <ul class="sub-menu children dropdown-menu">

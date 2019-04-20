@@ -69,6 +69,9 @@ Route::group(['middleware' => 'CheckUserLogin','namespace' => 'frontend'], funct
     Route::get('/notification', 'NotificationController@notification')->name('notification');
     Route::get('/notification-show', 'NotificationController@NotificationShow')->name('notification.show');
     Route::get('/notification-preview/{data}', 'NotificationController@NotificationPreview')->name('notification.preview');
+
+    Route::get('/sp-transition', 'TransitionController@Transition')->name('sp.transition');
+
 });
 
 Route::get('/request', function () {return view('frontend.request');})->name('request.ride');
@@ -80,6 +83,8 @@ Route::get('/post-ride2/{data}', 'frontend\PostController@RidePost2')->name('pos
 Route::post('/post-ride2', 'frontend\PostController@RidePostPrice')->name('post.ride2');
 Route::get('/post-ride3/{data}', 'frontend\PostController@RidePost3')->name('post.ride3');
 Route::post('/post-ride3', 'frontend\PostController@RidePostCondition')->name('post.ride3');
+Route::get('/post-ride-remove/{data}', 'frontend\PostController@RidePostRemove')->name('post.ride.remove');
+
 
 Route::get('/all-ride', 'frontend\RideController@Ride')->name('all.ride');
 Route::post('/all-ride-search', 'frontend\RideController@RideSearch')->name('all.ride.search');
@@ -229,6 +234,9 @@ Route::group(['middleware' => 'CheckAdmin','namespace' => 'backend'], function (
     Route::get('/admin-landing-image', 'LandingImageController@index')->name('admin.landing.image');
     Route::post('/admin-landing-image-store', 'LandingImageController@store')->name('admin.landing.image.store');
     Route::get('/admin-landing-image-update', 'LandingImageController@Update')->name('admin.landing.image.update');
+
+    Route::get('/admin-transition', 'TransitionController@transition')->name('admin.transition');
+    Route::get('/admin-transition-update', 'TransitionController@TransitionUpdate')->name('admin.transition.update');
 });
 
 

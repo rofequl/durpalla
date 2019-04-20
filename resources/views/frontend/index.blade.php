@@ -8,7 +8,7 @@
     </style>
     <!--================ Start Home Banner Area =================-->
     <section class="overlay">
-<img src="{{$landingPage? asset('storage/landing_page/'.$landingPage) : "img/landing_page.jpg"}}" id="img">
+        <img src="{{$landingPage? asset('storage/landing_page/'.$landingPage) : "img/landing_page.jpg"}}" id="img">
     </section>
     <!--================ End Home Banner Area =================-->
 
@@ -19,37 +19,50 @@
                 <h3 class="text-white my-0 ml-md-5">
                     {{__('file.index1')}}
                 </h3>
-                <form class="pr-md-5">
+                <form class="pr-md-5" method="post" action="{{route('all.ride.search')}}">
+                    {{csrf_field()}}
                     <div class="form-row">
                         <div class="col-6 col-md">
                             <div class="input-group-icon mt-10">
                                 <div class="icon"><i class="fa fa-thumb-tack" aria-hidden="true"></i></div>
-                                <input type="text" name="address" placeholder="Leaving from..."
+                                <input type="text" id="start" name="address" placeholder="Leaving from..."
                                        onfocus="this.placeholder = ''"
                                        onblur="this.placeholder = 'Leaving from...'" required=""
                                        class="single-input circle">
+                                <input type="hidden" name="lat" id="lat"
+                                       value="@if(isset($userLat)) {{$userLat}} @endif">
+                                <input type="hidden" name="lng" id="lng"
+                                       value="@if(isset($userLng)) {{$userLng}} @endif">
+                                <input type="hidden" name="location" id="location"
+                                       value="@if(isset($userLoca)) {{$userLoca}} @endif">
                             </div>
                         </div>
                         <div class="col-6 col-md">
                             <div class="input-group-icon mt-10">
                                 <div class="icon"><i class="fa fa-thumb-tack" aria-hidden="true"></i></div>
-                                <input type="text" name="address" placeholder="Going to..."
+                                <input type="text" id="end" name="address" placeholder="Going to..."
                                        onfocus="this.placeholder = ''"
                                        onblur="this.placeholder = 'Going to...'" required=""
                                        class="single-input circle">
+                                <input type="hidden" name="lat2" id="lat2"
+                                       value="@if(isset($userLat2)) {{$userLat2}} @endif">
+                                <input type="hidden" name="lng2" id="lng2"
+                                       value="@if(isset($userLng2)) {{$userLng2}} @endif">
+                                <input type="hidden" name="location2" id="location2"
+                                       value="@if(isset($userLoca2)) {{$userLoca2}} @endif">
                             </div>
                         </div>
                         <div class="col-6 col-md">
                             <div class="input-group-icon mt-10">
                                 <div class="icon"><i class="far fa-clock"></i></div>
-                                <input type="text" name="address" placeholder="Travel date"
+                                <input type="text" name="date" placeholder="Travel date"
                                        onfocus="this.placeholder = ''"
                                        onblur="this.placeholder = 'Travel date'" required=""
-                                       class="single-input circle">
+                                       class="single-input circle datepicker">
                             </div>
                         </div>
                         <div class="col-6 col-md">
-                            <a href="#" class="genric-btn info circle mt-2">Find a ride</a>
+                            <button type="submit" class="genric-btn info circle mt-2">Find a ride</button>
                         </div>
                     </div>
                 </form>
@@ -115,107 +128,54 @@
         <div class="container">
             <div class="row justify-content-center">
 
-                <div class="col-lg-6 video-right mt-0">
+                <div class="col-lg-7 video-right mt-0">
                     <p class="driver-prompt ml-4">
                         Driver?<span><a href="#"> Post your ride now!</a></span></p>
                     <div class="news-feed-container pb-2">
-                        <ul class="list-unstyled">
-                            <li>
-                                <div class="row">
-                                    <div class="col-2 dateShow">
-                                        <div class="dateShowS1">FEB</div>
-                                        <div class="dateShowS2">18</div>
+                        <ul class="list-unstyled" id="ulLatestNews">
+
+                            @foreach($rides as $ride)
+                                <?php
+                                $s_location = explode(",", PostRideAddress($ride->post_id, $ride->going, 'location'));
+                                $e_location = explode(",", PostRideAddress($ride->post_id, $ride->target, 'location'));
+                                $s_lat = PostRideAddress($ride->post_id, $ride->going, 'lat');
+                                $s_lng = PostRideAddress($ride->post_id, $ride->going, 'lng');
+                                $e_lat = PostRideAddress($ride->post_id, $ride->target, 'lat');
+                                $e_lng = PostRideAddress($ride->post_id, $ride->target, 'lng');
+                                ?>
+                                <li onclick="location.href='{{route('booking.index',$ride->tracking)}}';">
+                                    <div class="row">
+                                        <div class="col-2 dateShow">
+                                            <div class="dateShowS1">{{date("M", strtotime($ride->date))}}</div>
+                                            <div class="dateShowS2">{{date("d", strtotime($ride->date))}}</div>
+                                        </div>
+                                        <div class="col-4 location">
+                                            <h4 class="fs-13">@for($x = count($s_location)-2; $x < count($s_location); $x++)
+                                                    {{$s_location[$x].','}}
+                                                @endfor</h4>
+                                            <p>@for($x = 0; $x < count($s_location)-2; $x++)
+                                                    {{$s_location[$x].','}}
+                                                @endfor</p>
+                                        </div>
+                                        <div class="col-4 location">
+                                            <h4 class="fs-13">@for($x = count($e_location)-2; $x < count($e_location); $x++)
+                                                    {{$e_location[$x].','}}
+                                                @endfor</h4>
+                                            <p class="mb-0">@for($x = 0; $x < count($e_location)-2; $x++)
+                                                    {{$e_location[$x].','}}
+                                                @endfor</p>
+                                        </div>
+                                        <div class="col-2 reviewStar">
+                                            <div class="price"> ৳ {{$ride->price}}</div>
+                                            <span class="fa fa-star checked"></span>
+                                            <span class="fa fa-star checked"></span>
+                                            <span class="fa fa-star checked"></span>
+                                            <span class="fa fa-star"></span>
+                                            <span class="fa fa-star"></span>
+                                        </div>
                                     </div>
-                                    <div class="col-4 location">
-                                        <h4>Gatineau</h4>
-                                        <p>McDonald's, corner of Alumettières and Maison..</p>
-                                    </div>
-                                    <div class="col-4 location">
-                                        <h4>Gatineau</h4>
-                                        <p>McDonald's, corner of Alumettières and Maison..</p>
-                                    </div>
-                                    <div class="col-2 reviewStar">
-                                        <div class="price">90$</div>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star"></span>
-                                        <span class="fa fa-star"></span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="row">
-                                    <div class="col-2 dateShow">
-                                        <div class="dateShowS1">FEB</div>
-                                        <div class="dateShowS2">18</div>
-                                    </div>
-                                    <div class="col-4 location">
-                                        <h4>Gatineau</h4>
-                                        <p>McDonald's, corner of Alumettières and Maison..</p>
-                                    </div>
-                                    <div class="col-4 location">
-                                        <h4>Gatineau</h4>
-                                        <p>McDonald's, corner of Alumettières and Maison..</p>
-                                    </div>
-                                    <div class="col-2 reviewStar">
-                                        <div class="price">90$</div>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star"></span>
-                                        <span class="fa fa-star"></span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="row">
-                                    <div class="col-2 dateShow">
-                                        <div class="dateShowS1">FEB</div>
-                                        <div class="dateShowS2">18</div>
-                                    </div>
-                                    <div class="col-4 location">
-                                        <h4>Gatineau</h4>
-                                        <p>McDonald's, corner of Alumettières and Maison..</p>
-                                    </div>
-                                    <div class="col-4 location">
-                                        <h4>Gatineau</h4>
-                                        <p>McDonald's, corner of Alumettières and Maison..</p>
-                                    </div>
-                                    <div class="col-2 reviewStar">
-                                        <div class="price">90$</div>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star"></span>
-                                        <span class="fa fa-star"></span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="row">
-                                    <div class="col-2 dateShow">
-                                        <div class="dateShowS1">FEB</div>
-                                        <div class="dateShowS2">18</div>
-                                    </div>
-                                    <div class="col-4 location">
-                                        <h4>Gatineau</h4>
-                                        <p>McDonald's, corner of Alumettières and Maison..</p>
-                                    </div>
-                                    <div class="col-4 location">
-                                        <h4>Gatineau</h4>
-                                        <p>McDonald's, corner of Alumettières and Maison..</p>
-                                    </div>
-                                    <div class="col-2 reviewStar">
-                                        <div class="price">90$</div>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star"></span>
-                                        <span class="fa fa-star"></span>
-                                    </div>
-                                </div>
-                            </li>
+                                </li>
+                            @endforeach
                         </ul>
                     </div>
 
@@ -261,7 +221,8 @@
                             <div class="row text-center">
                                 <div class="col-4">
                                     <aside class="single_sidebar_widget author_widget">
-                                        <img class="author_img img-fluid rounded-circle" src="img/people1.jpg" alt=""><br>
+                                        <img class="author_img img-fluid rounded-circle" src="img/people1.jpg"
+                                             alt=""><br>
                                     </aside>
                                 </div>
                                 <div class="col-8">
@@ -290,7 +251,8 @@
                             <div class="row text-center">
                                 <div class="col-4">
                                     <aside class="single_sidebar_widget author_widget">
-                                        <img class="author_img img-fluid rounded-circle" src="img/people2.jpg" alt=""><br>
+                                        <img class="author_img img-fluid rounded-circle" src="img/people2.jpg"
+                                             alt=""><br>
                                     </aside>
                                 </div>
                                 <div class="col-8">
@@ -318,7 +280,8 @@
                             <div class="row text-center">
                                 <div class="col-4">
                                     <aside class="single_sidebar_widget author_widget">
-                                        <img class="author_img img-fluid rounded-circle" src="img/people3.jpg" alt=""><br>
+                                        <img class="author_img img-fluid rounded-circle" src="img/people3.jpg"
+                                             alt=""><br>
                                     </aside>
                                 </div>
                                 <div class="col-8">
@@ -347,7 +310,8 @@
                             <div class="row text-center">
                                 <div class="col-4">
                                     <aside class="single_sidebar_widget author_widget">
-                                        <img class="author_img img-fluid rounded-circle" src="img/people4.jpg" alt=""><br>
+                                        <img class="author_img img-fluid rounded-circle" src="img/people4.jpg"
+                                             alt=""><br>
                                     </aside>
                                 </div>
                                 <div class="col-8">
@@ -376,7 +340,11 @@
     </section>
     <!--================ Real people section Start ================-->
 
+    <div id="map">
+
+    </div>
     <script>
+
         function initMap() {
             var map = new google.maps.Map(document.getElementById('map'), {
                 center: {
@@ -384,7 +352,164 @@
                 },
                 zoom: 6.5
             });
+            var input = (document.getElementById('start'));
+            var input2 = (document.getElementById('end'));
+
+
+            var autocomplete = new google.maps.places.Autocomplete(input);
+            var autocomplete2 = new google.maps.places.Autocomplete(input2);
+            autocomplete.bindTo('bounds', map);
+            autocomplete2.bindTo('bounds', map);
+
+            var infowindow = new google.maps.InfoWindow();
+            var marker = new google.maps.Marker({
+                map: map,
+                anchorPoint: new google.maps.Point(0, -29)
+            });
+
+            autocomplete.addListener('place_changed', function () {
+                infowindow.close();
+                marker.setVisible(false);
+                var place = autocomplete.getPlace();
+
+                if (!place.geometry) {
+                    window.alert("No details available for input: '" + place.name + "'");
+                    return;
+                }
+
+                // If the place has a geometry, then present it on a map.
+                if (place.geometry.viewport) {
+                    map.fitBounds(place.geometry.viewport);
+                } else {
+                    map.setCenter(place.geometry.location);
+                    map.setZoom(17);  // Why 17? Because it looks good.
+                }
+                marker.setIcon(/** @type {google.maps.Icon} */({
+                    url: place.icon,
+                    size: new google.maps.Size(71, 71),
+                    origin: new google.maps.Point(0, 0),
+                    anchor: new google.maps.Point(17, 34),
+                    scaledSize: new google.maps.Size(35, 35)
+                }));
+                marker.setPosition(place.geometry.location);
+                marker.setVisible(true);
+                var item_Lat = place.geometry.location.lat()
+                var item_Lng = place.geometry.location.lng()
+                var item_Location = place.formatted_address;
+                //alert("Lat= " + item_Lat + "_____Lang=" + item_Lng + "_____Location=" + item_Location);
+                $("#lat").val(item_Lat);
+                $("#lng").val(item_Lng);
+                $("#location").val(item_Location);
+
+
+                var address = '';
+                if (place.address_components) {
+                    address = [
+                        (place.address_components[0] && place.address_components[0].short_name || ''),
+                        (place.address_components[1] && place.address_components[1].short_name || ''),
+                        (place.address_components[2] && place.address_components[2].short_name || '')
+                    ].join(' ');
+                }
+
+                infowindowContent.children['place-icon'].src = place.icon;
+                infowindowContent.children['place-name'].textContent = place.name;
+                infowindowContent.children['place-address'].textContent = address;
+                infowindow.open(map, marker);
+            });
+
+            autocomplete2.addListener('place_changed', function () {
+                infowindow.close();
+                marker.setVisible(false);
+                var place = autocomplete2.getPlace();
+
+                if (!place.geometry) {
+                    window.alert("No details available for input: '" + place.name + "'");
+                    return;
+                }
+
+                // If the place has a geometry, then present it on a map.
+                if (place.geometry.viewport) {
+                    map.fitBounds(place.geometry.viewport);
+                } else {
+                    map.setCenter(place.geometry.location);
+                    map.setZoom(17);  // Why 17? Because it looks good.
+                }
+                marker.setIcon(/** @type {google.maps.Icon} */({
+                    url: place.icon,
+                    size: new google.maps.Size(71, 71),
+                    origin: new google.maps.Point(0, 0),
+                    anchor: new google.maps.Point(17, 34),
+                    scaledSize: new google.maps.Size(35, 35)
+                }));
+                marker.setPosition(place.geometry.location);
+                marker.setVisible(true);
+                var item_Lat = place.geometry.location.lat()
+                var item_Lng = place.geometry.location.lng()
+                var item_Location = place.formatted_address;
+                //alert("Lat= " + item_Lat + "_____Lang=" + item_Lng + "_____Location=" + item_Location);
+                $("#lat2").val(item_Lat);
+                $("#lng2").val(item_Lng);
+                $("#location2").val(item_Location);
+
+
+                var address = '';
+                if (place.address_components) {
+                    address = [
+                        (place.address_components[0] && place.address_components[0].short_name || ''),
+                        (place.address_components[1] && place.address_components[1].short_name || ''),
+                        (place.address_components[2] && place.address_components[2].short_name || '')
+                    ].join(' ');
+                }
+
+                infowindowContent.children['place-icon'].src = place.icon;
+                infowindowContent.children['place-name'].textContent = place.name;
+                infowindowContent.children['place-address'].textContent = address;
+                infowindow.open(map, marker);
+            });
+
+            // Sets a listener on a radio button to change the filter type on Places
+            // Autocomplete.
+            function setupClickListener(id, types) {
+                var radioButton = document.getElementById(id);
+                radioButton.addEventListener('click', function () {
+                    autocomplete.setTypes(types);
+                });
+            }
+
+            setupClickListener('changetype-all', []);
+            setupClickListener('changetype-address', ['address']);
+            setupClickListener('changetype-establishment', ['establishment']);
+            setupClickListener('changetype-geocode', ['geocode']);
+
+            document.getElementById('use-strict-bounds')
+                .addEventListener('click', function () {
+                    console.log('Checkbox clicked! New state=' + this.checked);
+                    autocomplete.setOptions({strictBounds: this.checked});
+                });
         }
+
+        $(document).ready(function () {
+            $('#upload_form').on('submit', function () {
+                if ($('#start').val() == "" || $('#end').val() == "" || $('#after').val() == "") {
+                    event.preventDefault();
+                }
+            });
+        });
+
+        $(document).ready(function () {
+            function run() {
+                $("#ulLatestNews li:first").slideUp(1000, function () {
+                    $(this).appendTo($("#ulLatestNews")).slideDown();
+                });
+            }
+
+            var timer = setInterval(run, 2000);
+            $('#ulLatestNews').hover(function (ev) {
+                clearInterval(timer);
+            }, function (ev) {
+                timer = setInterval(run, 2000);
+            });
+        });
     </script>
 
 @endsection

@@ -32,20 +32,16 @@
                                 Price per Co-traveller
                             </div>
                             <div class="card-body bg-light">
-
+                                <?php $listnum = 1; ?>
                                 @foreach($stopover as $stopovers)
 
                                     <?php
                                     $s_location = PostRideAddress($stopovers->post_id,$stopovers->going,'location');
                                     $e_location = PostRideAddress($stopovers->post_id,$stopovers->target,'location');
-                                    $s_lat = PostRideAddress($stopovers->post_id,$stopovers->going,'lat');
-                                    $s_lng = PostRideAddress($stopovers->post_id,$stopovers->going,'lng');
-                                    $e_lat = PostRideAddress($stopovers->post_id,$stopovers->target,'lat');
-                                    $e_lng = PostRideAddress($stopovers->post_id,$stopovers->target,'lng');
                                     ?>
 
                                     <div class="row">
-                                        <div class="col-8">{{$s_location}} <span
+                                        <div class="col-7"><b class="text-muted">{{$listnum}}. </b>{{$s_location}} <span
                                                     class="lnr lnr-arrow-right"></span> {{$e_location}}</div>
                                         <div class="col-4">
 
@@ -53,12 +49,18 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text" id="basic-addon1">৳</span>
                                                 </div>
-                                                <?php $price = ride_price($s_lat, $s_lng, $e_lat, $e_lng, $post->car_id); ?>
+                                                <?php $price = ride_price($stopovers->distance, $post->car_id); ?>
                                                 <input type="number" value="{{$price}}" class="form-control" placeholder="00000"
                                                        name="price[]" max="{{$price+$setting->min_price}}" min="{{$price-$setting->min_price}}" autofocus>
                                             </div>
                                         </div>
+                                        <div class="col-1 px-0">
+                                            <a href="{{route('post.ride.remove',$stopovers->id)}}" class="btn btn-danger fs-12 p-1 mx-1 pt-1 shadow-none"
+                                                    title="Remove Input"><i
+                                                        class="fas fa-minus-circle"></i></a>
+                                        </div>
                                     </div>
+                                        <?php $listnum++; ?>
                                 @endforeach
 
                             </div>
@@ -101,12 +103,10 @@
                                 {{date("l, F-d", strtotime($post->return))}}  {{$post->r_time}}:00{{$post->r_time2}}<br>
                             @endif
                             Distance:
-                            <?php
-                            $dist = GetDrivingDistance($post->s_lat, $post->s_lng, $post->e_lat, $post->e_lng);
-                            echo $dist['distance'];
-                            ?><br>
+                            {{$post->distance}}
+                            <br>
                             Driving time:
-                            {{$dist['time']}}<br>
+                            {{$post->duration}}<br>
                         </div>
                     </div>
                 </div>
