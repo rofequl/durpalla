@@ -1,10 +1,14 @@
 <?php
 
 
+use App\booking;
 use App\notification;
+use App\popular_ride;
+use App\post_ride;
 use App\request_ride;
 use App\ride_setting;
 use App\stopover;
+use App\user_rating;
 
 function distance($lat1, $lon1, $lat2, $lon2, $unit)
 {
@@ -143,13 +147,13 @@ function seat($going, $target, $post, $date)
         }
         return $seat;
     } else {
-        foreach ($query as $querys){
-            if ($querys->serial > $going){
-                $seat -= DB::table('stopovers')->where('post_id', $post)->where('date', $date)->where('going', $querys->serial)->where('target','>',$going)->sum('stopovers.seat');
-            }elseif ($querys->serial == $going){
+        foreach ($query as $querys) {
+            if ($querys->serial > $going) {
+                $seat -= DB::table('stopovers')->where('post_id', $post)->where('date', $date)->where('going', $querys->serial)->where('target', '>', $going)->sum('stopovers.seat');
+            } elseif ($querys->serial == $going) {
                 $seat -= DB::table('stopovers')->where('post_id', $post)->where('date', $date)->where('going', $going)->sum('stopovers.seat');
-            }else{
-                $seat -= DB::table('stopovers')->where('post_id', $post)->where('date', $date)->where('going','=', $querys->serial)->where('target','>=',$target)->sum('stopovers.seat');
+            } else {
+                $seat -= DB::table('stopovers')->where('post_id', $post)->where('date', $date)->where('going', '=', $querys->serial)->where('target', '>=', $target)->sum('stopovers.seat');
             }
         }
         return $seat;
@@ -237,7 +241,8 @@ function CorporateById($id = false)
 function notificationAdd()
 {
     $requests = request_ride::where('user_id', Session('userId'))->get();
-    $ride = stopover::where('date', '>=', date("m/d/Y"))->get();    $satting = ride_setting::first();
+    $ride = stopover::where('date', '>=', date("m/d/Y"))->get();
+    $satting = ride_setting::first();
     if ($satting) {
         $satting = $satting->search;
     } else {
@@ -258,16 +263,16 @@ function notificationAdd()
             }
         }
 
-        if (sizeof($tracking) > 0){
-            $notification_check = notification::where('user_post', $request->id)->where('user_id',Session('userId')) ->first();
+        if (sizeof($tracking) > 0) {
+            $notification_check = notification::where('user_post', $request->id)->where('user_id', Session('userId'))->first();
             if ($notification_check) {
-                $notification_check->matching = implode(",",$tracking);
+                $notification_check->matching = implode(",", $tracking);
                 $notification_check->save();
             } else {
                 $notification = new notification;
                 $notification->type = 'request';
                 $notification->user_post = $request->id;
-                $notification->matching = implode(",",$tracking);
+                $notification->matching = implode(",", $tracking);
                 $notification->user_id = Session('userId');
                 $notification->save();
             }
@@ -280,26 +285,25 @@ function notificationAdd()
 function notification()
 {
     notificationAdd();
-    $notification_check = notification::where('user_id',Session('userId'))->where('status', 0)->get();
+    $notification_check = notification::where('user_id', Session('userId'))->where('status', 0)->get();
     return $notification_check->count();
 
 }
 
 function notificationList()
 {
-    $notification_check = notification::where('user_id',Session('userId'))->get();
+    $notification_check = notification::where('user_id', Session('userId'))->get();
     return $notification_check;
 }
 
 
-
 function convertNumber($num = false)
 {
-    $num = str_replace(array(',', ''), '' , trim($num));
-    if(! $num) {
+    $num = str_replace(array(',', ''), '', trim($num));
+    if (!$num) {
         return false;
     }
-    $num = (int) $num;
+    $num = (int)$num;
     $words = array();
     $list1 = array('', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven',
         'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'
@@ -310,33 +314,64 @@ function convertNumber($num = false)
         'quindecillion', 'sexdecillion', 'septendecillion', 'octodecillion', 'novemdecillion', 'vigintillion'
     );
     $num_length = strlen($num);
-    $levels = (int) (($num_length + 2) / 3);
+    $levels = (int)(($num_length + 2) / 3);
     $max_length = $levels * 3;
     $num = substr('00' . $num, -$max_length);
     $num_levels = str_split($num, 3);
     for ($i = 0; $i < count($num_levels); $i++) {
         $levels--;
-        $hundreds = (int) ($num_levels[$i] / 100);
-        $hundreds = ($hundreds ? ' ' . $list1[$hundreds] . ' hundred' . ( $hundreds == 1 ? '' : '' ) . ' ' : '');
-        $tens = (int) ($num_levels[$i] % 100);
+        $hundreds = (int)($num_levels[$i] / 100);
+        $hundreds = ($hundreds ? ' ' . $list1[$hundreds] . ' hundred' . ($hundreds == 1 ? '' : '') . ' ' : '');
+        $tens = (int)($num_levels[$i] % 100);
         $singles = '';
-        if ( $tens < 20 ) {
-            $tens = ($tens ? ' and ' . $list1[$tens] . ' ' : '' );
+        if ($tens < 20) {
+            $tens = ($tens ? ' and ' . $list1[$tens] . ' ' : '');
         } elseif ($tens >= 20) {
             $tens = (int)($tens / 10);
             $tens = ' and ' . $list2[$tens] . ' ';
-            $singles = (int) ($num_levels[$i] % 10);
+            $singles = (int)($num_levels[$i] % 10);
             $singles = ' ' . $list1[$singles] . ' ';
         }
-        $words[] = $hundreds . $tens . $singles . ( ( $levels && ( int ) ( $num_levels[$i] ) ) ? ' ' . $list3[$levels] . ' ' : '' );
+        $words[] = $hundreds . $tens . $singles . (($levels && ( int )($num_levels[$i])) ? ' ' . $list3[$levels] . ' ' : '');
     } //end for loop
     $commas = count($words);
     if ($commas > 1) {
         $commas = $commas - 1;
     }
-    $words = implode(' ',  $words);
-    $words = preg_replace('/^\s\b(and)/', '', $words );
+    $words = implode(' ', $words);
+    $words = preg_replace('/^\s\b(and)/', '', $words);
     $words = trim($words);
     $words = ucfirst($words);
     return $words;
+}
+
+function PopularPostCheck($data)
+{
+    $post = popular_ride::where('tracking',$data)->first();
+    if ($post) {
+        return true;
+    }else{
+        return false;
+    }
+}
+
+function ratinguser(){
+    $booking = booking::where('user_id', Session('userId'))->orderBy('id','DESC')->first();
+    if ($booking){
+        $check = stopover::where('tracking',$booking->tracking)->where('status','!=',0)->first();
+        if ($check){
+            $rating = user_rating::where('tracking',$booking->tracking)->first();
+            if ($rating){
+                $rate = json_decode($rating->rating,true);
+                if (array_key_exists(Session('userId'), $rate)) {
+                    return false;
+                }else{
+                    return $booking;
+                }
+            }else{
+                return $booking;
+            }
+        }
+    }
+    return false;
 }

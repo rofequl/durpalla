@@ -77,6 +77,9 @@
                     </ul>
                 </li>
                 <li class="">
+                    <a href="{{route('admin.popular.ride')}}"> <i class="menu-icon fas fa-user"></i>Popular Ride</a>
+                </li>
+                <li class="">
                     <a href="{{route('admin.resourceList')}}"> <i class="menu-icon fas fa-user"></i>Resource List</a>
                 </li>
                 <li class="">

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\frontend;
 
 use App\post_ride;
+use App\ride_setting;
 use App\stopover;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -20,7 +21,7 @@ class TransitionController extends Controller
         foreach ($post as $posts) {
             array_push($postId, $posts->id);
         }
-        $stopover = stopover::whereIn('post_id', $postId)->whereNotIn('status',[2,4])->get();
+        $stopover = stopover::whereIn('post_id', $postId)->whereNotIn('status',[2,3,4])->get();
 
         foreach ($stopover as $stopovers) {
             $timezone = 'Asia/Dhaka';
@@ -43,7 +44,7 @@ class TransitionController extends Controller
             }
         }
         $stopover = stopover::whereIn('post_id', $postId)->get();
-
-        return view('frontend.sp_panel.transition', compact('stopover'));
+        $setting = ride_setting::all()->pluck('commission')->first();
+        return view('frontend.sp_panel.transition', compact('stopover','setting'));
     }
 }

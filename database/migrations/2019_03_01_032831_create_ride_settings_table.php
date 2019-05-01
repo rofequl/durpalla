@@ -17,6 +17,7 @@ class CreateRideSettingsTable extends Migration
             $table->increments('id');
             $table->integer('search')->default(0);
             $table->integer('min_price')->default(0);
+            $table->integer('commission')->default(0);
             $table->integer('fine_6h')->default(0);
             $table->integer('fine_12h')->default(0);
             $table->integer('fine_12_upper')->default(0);

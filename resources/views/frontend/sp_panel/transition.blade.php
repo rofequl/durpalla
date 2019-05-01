@@ -35,7 +35,8 @@
                         <div class="col-2 text-left">
                             <i class="far fa-calendar-alt"></i> {{date("l F-d", strtotime($stopovers->date))}}
                             <br> {{$stopovers->time}}:{{$stopovers->time2}}<br>
-                            <i class="fas fa-wheelchair"></i> {{$stopovers->seat}} seat
+                            <i class="fas fa-wheelchair"></i> {{$stopovers->seat}} seat<br>
+                            Tracking: {{$stopovers->tracking}}
                         </div>
                         <div class="col-4 text-left">
                             <h4 class="my-0">@for($x = count($s_location)-2; $x < count($s_location); $x++)
@@ -53,13 +54,13 @@
                                 @endfor</p>
                         </div>
                         <div class="col border-left">
-                            000
+                            {{$stopovers->payment}}
                         </div>
                         <div class="col">
-                            000
+                            {{($stopovers->payment*$setting)/100}}
                         </div>
                         <div class="col">
-                            000
+                            {{$stopovers->payment-(($stopovers->payment*$setting)/100)}}
                         </div>
                         <div class="col">
                             @if($stopovers->status == 0)

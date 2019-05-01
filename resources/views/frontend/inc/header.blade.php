@@ -32,6 +32,9 @@
                         <li class="nav-item mr-lg-3 mr-xl-4 my-1 ml-1 my-lg-0"><a href="{{route('all.ride')}}">
                                 <button class="cupid-blue">{{__('file.header4')}}</button>
                             </a></li>
+                        <li class="nav-item mr-lg-3 mr-xl-4 my-1 ml-1 my-lg-0"><a href="{{route('popular.ride')}}">
+                                <button class="cupid-blue">Popular Ride</button>
+                            </a></li>
                     </ul>
                     <ul class="nav navbar-nav ml-auto">
                         <div class="social-icons d-flex align-items-center">
@@ -133,7 +136,33 @@
     </div>
 </header>
 
+@if(Session::has('userId') && ratinguser())
+    @php
+        $rating = ratinguser();
+    @endphp
+<div class="modal fade in" id="myModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Rating this ride</h5>
+            </div>
+            <div class="modal-body text-center">
+                <a href="{{route('sp.driver.rating','rating='.base64_encode($rating->tracking.'_1'))}}" title="1 Star"><span class="fa fa-star"></span></a>
+                <a href="{{route('sp.driver.rating','rating='.base64_encode($rating->tracking.'_2'))}}" title="2 Star"><span class="fa fa-star"></span></a>
+                <a href="{{route('sp.driver.rating','rating='.base64_encode($rating->tracking.'_3'))}}" title="3 Star"><span class="fa fa-star"></span></a>
+                <a href="{{route('sp.driver.rating','rating='.base64_encode($rating->tracking.'_4'))}}" title="4 Star"><span class="fa fa-star"></span></a>
+                <a href="{{route('sp.driver.rating','rating='.base64_encode($rating->tracking.'_5'))}}" title="5 Star"><span class="fa fa-star"></span></a>
+            </div>
+        </div>
+    </div>
+</div>
+@endif
+
 <script>
+
+    $(window).on('load',function(){
+        $('#myModal').modal('show');
+    });
 
     $(document).on('click', '.notishow', function () {
         $.ajax({

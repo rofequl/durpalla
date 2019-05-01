@@ -16,6 +16,8 @@
                                                      placeholder="Enter Km to search find ride"><br>
                         Price per Co-traveller Min and max money:<input type="number" value="{{$data->min_price}}" name="min_price" class="form-control"
                                                      placeholder="Enter Min & Max price"><br>
+                        Durpalla Ride Commission:<input type="number" value="{{$data->commission}}" name="commission" class="form-control"
+                                                     placeholder="Durpalla Ride Commission"><br>
                         <h3>Booking Cancel fine percent:</h3>
                         Canceled within 6 hours <input type="number" value="{{$data->fine_6h}}" name="fine" class="form-control"
                                                      placeholder="Canceled within 6 hours"><br>
@@ -50,6 +52,7 @@
             <div class="card-body">
                 Find a ride Km search:{{$data->search}}<br>
                 Price per Co-traveller Min and max money: ৳ {{$data->min_price}}<br>
+                Durpalla Ride Commission:  {{$data->commission}} %<br>
                 <h3 class="mt-5">Booking cancel user fine percent:</h3>
                 Canceled within 6 hours: {{$data->fine_6h}}%<br>
                 Canceled within 12 hours: {{$data->fine_12h}}%<br>

@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers\backend;
 
+use App\booking;
+use App\popular_ride;
 use App\post_ride;
+use App\ride_setting;
 use App\stopover;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -12,9 +15,30 @@ class TransitionController extends Controller
 {
     public function Transition(Request $request)
     {
-        $postId = [];
+
         if ($request->userId && $request->userId != "") {
-            $post = post_ride::where('status', 1)->where('user_id', $request->userId)->get();
+            $userId = $request->userId;
+        } else {
+            $userId = "";
+        }
+
+        if ($request->tracking && $request->tracking != "") {
+            $tracking = $request->tracking;
+        } else {
+            $tracking = "";
+        }
+
+        if ($request->filter && $request->filter == 4) {
+            $filter = 4;
+        } elseif ($request->filter && $request->filter != "") {
+            $filter = $request->filter;
+        } else {
+            $filter = "";
+        }
+
+        $postId = [];
+        if ($userId != "") {
+            $post = post_ride::where('status', 1)->where('user_id', $userId)->get();
         } else {
             $post = post_ride::where('status', 1)->get();
         }
@@ -43,18 +67,24 @@ class TransitionController extends Controller
                 $update->status = 2;
                 $update->save();
             }
-        }
-        if ($request->tracking && $request->tracking != ""){
-        $stopover = stopover::whereIn('post_id', $postId)->where()->get();
-    }else if ($request->tracking && $request->tracking != "") {
-        $stopover = stopover::whereIn('post_id', $postId)->get();
-    } else if ($request->tracking && $request->tracking != "") {
-        $stopover = stopover::whereIn('post_id', $postId)->get();
-    } else {
-        $stopover = stopover::whereIn('post_id', $postId)->get();
-    }
 
-        return view('backend.transition', compact('stopover'));
+        }
+
+
+        if ($tracking != "" && $filter != "") {
+            $stopover = stopover::whereIn('post_id', $postId)->where('tracking', $tracking)->where('status', $filter)->get();
+        } elseif ($tracking != "") {
+            $stopover = stopover::whereIn('post_id', $postId)->where('tracking', $tracking)->get();
+        } elseif ($filter == 4) {
+            $stopover = stopover::whereIn('post_id', $postId)->where('status', 0)->get();
+        } elseif ($filter != "") {
+            $stopover = stopover::whereIn('post_id', $postId)->where('status', $filter)->get();
+        } else {
+            $stopover = stopover::whereIn('post_id', $postId)->get();
+        }
+
+        $setting = ride_setting::all()->pluck('commission')->first();
+        return view('backend.transition', compact('stopover', 'userId', 'tracking', 'filter', 'setting'));
     }
 
     public function TransitionUpdate(Request $request)
@@ -65,4 +95,34 @@ class TransitionController extends Controller
 
         return redirect('admin-transition');
     }
+
+    public function PopularRide(Request $request)
+    {
+        $ride = post_ride::where('status', 1)->get();
+        return view('backend.popular_ride', compact('ride'));
+    }
+
+    public function PendingPostProfile($data)
+    {
+
+        $post = post_ride::find($data);
+        $stopover = stopover::where('post_id', $data)->get();
+        return view('backend.popular_ride2', compact('stopover', 'post'));
+
+    }
+
+    public function PendingPostUpdate(Request $request)
+    {
+        if ($request->add) {
+            $insert = new popular_ride;
+            $insert->tracking = base64_decode($request->add);
+            $insert->save();
+            return redirect()->back();
+        } else if ($request->remove) {
+            popular_ride::where('tracking',base64_decode($request->remove))->delete();
+            return redirect()->back();
+        }
+
+    }
+
 }

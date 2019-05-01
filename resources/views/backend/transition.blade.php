@@ -1,4 +1,4 @@
-@extends('frontend.sp_panel.layout.app')
+@extends('backend.layout.app')
 
 @section('content')
 
@@ -8,15 +8,15 @@
         <form class="mt-2" method="get" action="{{route('admin.transition')}}">
             <div class="form-row align-items-center">
                 <div class="col-auto">
-                    <input type="text" name="userId" class="form-control mb-2" id="inlineFormInput" placeholder="User Id">
+                    <input type="text" name="userId" value="{{$userId}}" class="form-control mb-2" id="inlineFormInput" placeholder="User Id">
                 </div>
                 <div class="col-auto">
-                    <input type="text" name="tracking" class="form-control mb-2" id="inlineFormInput" placeholder="Ride Tracking No">
+                    <input type="text" name="tracking" value="{{$tracking}}" class="form-control mb-2" id="inlineFormInput" placeholder="Ride Tracking No">
                 </div>
                 <div class="col-auto">
                     <select class="custom-select mb-2" name="filter" id="inlineFormCustomSelect">
-                        <option selected disabled>Choose...</option>
-                        <option value="0">Upcoming</option>
+                        <option selected value="">Choose...</option>
+                        <option value="4">Upcoming</option>
                         <option value="1">Ongoing</option>
                         <option value="2">End Ride</option>
                         <option value="3">Complete Ride</option>
@@ -57,7 +57,9 @@
                         <div class="col-2 text-left">
                             <i class="far fa-calendar-alt"></i> {{date("l F-d", strtotime($stopovers->date))}}
                             <br> {{$stopovers->time}}:{{$stopovers->time2}}<br>
-                            <i class="fas fa-wheelchair"></i> {{$stopovers->seat}} seat
+                            <i class="fas fa-wheelchair"></i> {{$stopovers->seat}} seat<br>
+                            Tracking: {{$stopovers->tracking}}
+
                         </div>
                         <div class="col-4 text-left">
                             <h4 class="my-0">@for($x = count($s_location)-2; $x < count($s_location); $x++)
@@ -75,13 +77,13 @@
                                 @endfor</p>
                         </div>
                         <div class="col border-left">
-                            000
+                            {{$stopovers->payment}}
                         </div>
                         <div class="col">
-                            000
+                            {{($stopovers->payment*$setting)/100}}
                         </div>
                         <div class="col">
-                            000
+                            {{$stopovers->payment-(($stopovers->payment*$setting)/100)}}
                         </div>
                         <div class="col">
                             @if($stopovers->status == 0)

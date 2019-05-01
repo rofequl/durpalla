@@ -32,6 +32,7 @@ class RideSettingController extends Controller
 
         $insert->search = $request->search;
         $insert->min_price = $request->min_price;
+        $insert->commission = $request->commission;
         $insert->fine_6h = $request->fine;
         $insert->fine_12h = $request->fine2;
         $insert->fine_12_upper = $request->fine3;

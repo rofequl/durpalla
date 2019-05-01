@@ -7,6 +7,8 @@ use App\booking_cancel;
 use App\corporate;
 use App\promo_code;
 use App\ride_setting;
+use App\user_rating;
+use PHPUnit\Util\RegularExpression;
 use Session;
 use App\car;
 use App\post_ride;
@@ -106,6 +108,9 @@ class BookingController extends Controller
         $seat = $insert2->seat;
         $seat += $request->seat;
         $insert2->seat = $seat;
+        $amount = $insert2->payment;
+        $amount += $request->amount;
+        $insert2->payment = $amount;
         $insert2->save();
 
         if ($request->fine > 0) {
@@ -125,6 +130,15 @@ class BookingController extends Controller
 
     public function CurrentBooking($data = false)
     {
+        $booking = booking::where('user_id', Session('userId'))->where('status', 1)->get();
+        foreach($booking as $bookings){
+            $stopover = stopover::where('tracking',$bookings->tracking)->first();
+            if ($stopover->status != 0){
+                $insert = booking::find($bookings->id);
+                $insert->status = 2;
+                $insert->save();
+            }
+        }
         $booking = booking::where('user_id', Session('userId'))->where('status', 1)->get();
         $cancel = "";
         if ($data) {
@@ -181,7 +195,7 @@ class BookingController extends Controller
 
     public function HistoryBooking($data = false)
     {
-        $booking = booking::where('user_id', Session('userId'))->where('status', 1)->get();
+        $booking = booking::where('user_id', Session('userId'))->where('status', 2)->get();
         $cancel = "";
         if ($data) {
             $bookingsingle = booking::find($data);
@@ -192,4 +206,24 @@ class BookingController extends Controller
 
 
     }
+
+    public function DriverRating(Request $request)
+    {
+        $rating = explode("_",base64_decode($request->rating));
+        $stopover = stopover::where('tracking',$rating[0])->first();
+        $driver = post_ride::find($stopover->post_id)->user_id;
+        $check = user_rating::where('tracking',$rating[0])->first();
+        if ($check){
+
+        }else{
+            $existing = array(Session('userId')=>$rating[1]);
+            $insert = new user_rating;
+            $insert->user_id = $driver;
+            $insert->tracking = $rating[0];
+            $insert->rating = json_encode($existing);
+            $insert->save();
+            return redirect()->back();
+        }
+    }
+
 }

@@ -72,6 +72,9 @@ Route::group(['middleware' => 'CheckUserLogin','namespace' => 'frontend'], funct
 
     Route::get('/sp-transition', 'TransitionController@Transition')->name('sp.transition');
 
+    Route::get('/sp-driver-rating', 'BookingController@DriverRating')->name('sp.driver.rating');
+
+
 });
 
 Route::get('/request', function () {return view('frontend.request');})->name('request.ride');
@@ -98,7 +101,8 @@ Route::get('/preview', 'frontend\BookingController@PreviewIndex')->name('preview
 Route::post('/preview', 'frontend\BookingController@PreviewStore')->name('preview.store');
 Route::get('/booking-congrate', 'frontend\BookingController@congrate')->name('booking.congrate');
 
-
+Route::get('/popular-ride', 'frontend\RideController@PopularRide')->name('popular.ride');
+Route::get('/popular-ride-Show/{data}', 'frontend\RideController@PopularRideShow')->name('popular.ride.Show');
 
 Route::get('/map', function () {
     return view('frontend.map2');
@@ -237,6 +241,12 @@ Route::group(['middleware' => 'CheckAdmin','namespace' => 'backend'], function (
 
     Route::get('/admin-transition', 'TransitionController@transition')->name('admin.transition');
     Route::get('/admin-transition-update', 'TransitionController@TransitionUpdate')->name('admin.transition.update');
+
+    Route::get('/admin-popular-ride', 'TransitionController@PopularRide')->name('admin.popular.ride');
+    Route::get('/admin-popular-ride-profile/{data}', 'TransitionController@PendingPostProfile')->name('admin.popular.ride.profile');
+    Route::get('/admin-popular-ride-update', 'TransitionController@PendingPostUpdate')->name('admin.popular.ride.update');
+
+
 });
 
 
