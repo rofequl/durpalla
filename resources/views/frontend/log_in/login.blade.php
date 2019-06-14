@@ -3,60 +3,54 @@
 
 
     <section class="pb-5 py-4" id="section1">
+
         <div class="container">
             <div class="row">
-                <div class="col-md-10 col-lg-10 col-xl-8 mx-auto fbf7f7 p-3 border radius">
-                    <h2 class="text-center">You want to Log in?</h2>
-                    @if ($errors->any())
-                        @foreach ($errors->all() as $error)
-                            <div class="alert alert-danger alert-dismissible">
-                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                                {{$error}}
-                            </div>
-                        @endforeach
-                    @endif
-                    @if(session()->has('message'))
-                        <div class="alert alert-success alert-dismissible">
-                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                            {{ session()->get('message') }}
-                        </div>
-                    @endif
-
-                    <form class="login100-form validate-form contact_form" method="post" action="{{route('sp.login')}}">
+                <div class="col-md-8 col-lg-6 col-xl-4 mx-auto">
+                    <h2 class="text-center Helvetica-Bold text-black">Join Us</h2>
+                    <form class="form-signin" method="post" action="{{route('sp.login')}}">
                         {{csrf_field()}}
-                        <div class="wrap-input100 validate-input m-b-26" data-validate="Username is required">
-                            <span class="label-input100">Phone No.</span>
-                            <input class="input100" type="text" name="phone" placeholder="Enter phone number">
-                            <span class="focus-input100"></span>
-                        </div>
-
-                        <div class="wrap-input100 validate-input m-b-18" data-validate="Password is required">
-                            <span class="label-input100">Password</span>
-                            <input class="input100" type="password" name="password" placeholder="Enter password">
-                            <span class="focus-input100"></span>
-                        </div>
-
-                        <div class="flex-sb-m w-full p-b-30">
-                            <div class="contact100-form-checkbox">
-                                <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember_me">
-                                <label class="label-checkbox100" for="ckb1">
-                                    Remember me
-                                </label>
+                        <p class="text-black fs-12 my-3"><img src="{{asset('PNG/Shape2.png')}}" class="mr-5" alt="" width="15" height="25"
+                                                   align="left"> Continue with Your Phone</p>
+                        <button type="button" class="btn btn-outline-secondary"><img src="{{asset('PNG/Layer17.png')}}"
+                                                                                     width="25px" height="25px">
+                            facebook
+                        </button>
+                        <button type="button" class="btn btn-outline-secondary float-right"><img
+                                    src="{{asset('PNG/Layer18.png')}}" width="25px" height="25px"> Google
+                        </button>
+                        <p class="my-3 text-center text-black fs-18">Or</p>
+                        <p class="mb-3 text-center text-black fs-18 Helvetica-Bold">Use Phone Number</p>
+                        @if ($errors->any())
+                            @foreach ($errors->all() as $error)
+                                <div class="alert alert-danger alert-dismissible">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                    {{$error}}
+                                </div>
+                            @endforeach
+                        @endif
+                        @if(session()->has('message'))
+                            <div class="alert alert-success alert-dismissible">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                {{ session()->get('message') }}
                             </div>
-
-                            <div>
-                                <a href="#" class="txt1">
-                                    Forgot Password?
-                                </a>
-                            </div>
+                        @endif
+                        <label for="inputEmail" class="sr-only">Email address</label>
+                        <input type="number" id="inputEmail" name="phone" class="form-control shadow-none" placeholder="Phone Number"
+                               required
+                               autofocus>
+                        <label for="inputPassword" class="sr-only">Password</label>
+                        <input type="password" name="password" id="inputPassword" class="form-control shadow-none"
+                               placeholder="Password" required>
+                        <div class="checkbox mb-3">
+                            <label class="forget-password">
+                                <a href="{{route('forgot.password')}}" class="text-black">Forget your password?</a>
+                            </label>
                         </div>
-
-                        <div class="container-login100-form-btn">
-                            <button type="submit" value="submit" class="primary-btn text-uppercase">Login</button>
-                            <a href="" value="submit" class="primary-btn text-uppercase mx-0 mx-lg-5"><i
-                                    class="fab fa-facebook-f mr-2"></i> Login in Facebook
-                            </a>
-                        </div>
+                        <button class="btn btn-lg btn-primary btn-block border-0" style="background-color: #6f7283"
+                                type="submit">Log in
+                        </button>
+                        <p class="mt-3 mb-3 text-black fs-17">New to Durpalla? Create account now</p>
                     </form>
                 </div>
             </div>

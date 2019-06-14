@@ -206,7 +206,10 @@ class BookingController extends Controller
 
 
     }
-
+    public function array_push_assoc($array, $key, $value){
+        $array[$key] = $value;
+        return $array;
+    }
     public function DriverRating(Request $request)
     {
         $rating = explode("_",base64_decode($request->rating));
@@ -214,7 +217,11 @@ class BookingController extends Controller
         $driver = post_ride::find($stopover->post_id)->user_id;
         $check = user_rating::where('tracking',$rating[0])->first();
         if ($check){
-
+            $rate = json_decode($check->rating,true);
+            $rate = $this->array_push_assoc($rate, Session('userId'), $rating[1]);
+            $check->rating = json_encode($rate);
+            $check->save();
+            return redirect()->back();
         }else{
             $existing = array(Session('userId')=>$rating[1]);
             $insert = new user_rating;

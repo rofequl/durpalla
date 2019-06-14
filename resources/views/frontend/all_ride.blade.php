@@ -188,13 +188,16 @@
                                                                              src="{{userInformation(getRide($ride->post_id)->user_id,'image')}}"
                                                                              alt=""><br>
                                                                         <h5 class="my-0">{{userInformation(getRide($ride->post_id)->user_id,'name')}}</h5>
-                                                                        <a href="#" class="fs-8 my-0">
-                                                                            <span class="fa fa-star checked"></span>
-                                                                            <span class="fa fa-star checked"></span>
-                                                                            <span class="fa fa-star checked"></span>
-                                                                            <span class="fa fa-star"></span>
-                                                                            <span class="fa fa-star"></span>
-                                                                        </a><br>
+                                                                        <p class="fs-8 my-0">
+                                                                            @for($i=1;$i<=5;$i++)
+                                                                                @if($i>rating(getRide($ride->post_id)->user_id))
+                                                                                    <span class="fa fa-star"></span>
+                                                                                @else
+                                                                                    <span class="fa fa-star checked"></span>
+                                                                                @endif
+                                                                            @endfor
+
+                                                                        </p><br>
                                                                         <a href="#"
                                                                            class="btn btn-success small circle my-1 fs-10">View
                                                                             profile/Preview</a>

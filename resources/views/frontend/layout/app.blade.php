@@ -17,7 +17,8 @@
     <link rel="stylesheet" href="{{asset('vendors/nice-select/css/nice-select.css')}}">
     <link rel="stylesheet" href="{{asset('vendors/animate-css/animate.css')}}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css" rel="stylesheet" />
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/shards-ui@latest/dist/css/shards.min.css">
     <!-- main css -->
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
     <link rel="stylesheet" href="{{asset('custom/frontend/mainIndex.css')}}">
@@ -39,7 +40,7 @@
 <script src="{{asset('js/popper.js')}}"></script>
 <script src="{{asset('js/bootstrap.min.js')}}"></script>
 <script src="{{asset('js/stellar.js')}}"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 <script src="{{asset('js/jquery.magnific-popup.min.js')}}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
 <script src="{{asset('vendors/lightbox/simpleLightbox.min.js')}}"></script>
@@ -50,6 +51,7 @@
 <script src="{{asset('vendors/counter-up/jquery.counterup.js')}}"></script>
 <script src="{{asset('js/mail-script.js')}}"></script>
 <script src="{{asset('js/script.js')}}"></script>
+<script src="https://unpkg.com/shards-ui@latest/dist/js/shards.min.js"></script>
 <!--gmaps Js-->
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCMfl6pAmNv3T6PoDRy7ESSJRZLLSFf2jI&libraries=places&callback=initMap"
         async defer></script>

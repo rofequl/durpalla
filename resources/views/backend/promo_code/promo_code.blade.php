@@ -11,7 +11,7 @@
                         Add Promo Code Information
                     </div>
                     <div class="card-body">
-                        <form method="post" action="{{route('promo_code.store')}}">
+                        <form method="post" action="{{route('promo_code.store')}}" autocomplete="off">
                             {{csrf_field()}}
                             <div class="modal-body">
 

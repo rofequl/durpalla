@@ -9,8 +9,16 @@
 
     <section class="mb-5 overlay">
         <div class="container postRide-container">
+            <div class="row mt-3">
+                <div class="text-center w-100">
+                    <h3 class="text-black Helvetica-Bold">Post a Ride</h3>
+                    <div class="w-100 fef610 p-2">
+                    <p class="mb-0 fff611 p-2">Enter your departure destination and stops you're willing to pick up and drop
+                        off passengers along the way.</p></div>
+                </div>
+            </div>
             <div class="row mt-5">
-                <div class="col-lg-6 border p-3 radius fbf7f7">
+                <div class="col-lg-6">
                     @if ($errors->any())
                         @foreach ($errors->all() as $error)
                             <div class="alert alert-danger alert-dismissible">
@@ -25,21 +33,15 @@
                             {{ session()->get('message') }}
                         </div>
                     @endif
-                    <div class="row mt-3">
-                        <div class="text-center mx-auto">
-                            <h2>Offer a ride on your next long journey</h2>
-                            <p>After booking you can chat with your Tasker, agree on a exact time.</p>
-                        </div>
-                    </div>
                     <form method="post" id="upload_form" action="{{route('post.ride')}}" autocomplete="off">
                         {{csrf_field()}}
                         <div class="card">
-                            <div class="card-header bg-paste text-white py-1">
+                            <div class="card-header py-1 bg-white text-black fs-15">
                                 Pick-up and drop-off points
                             </div>
-                            <div class="card-body bg-light">
-                                <label for="basic-url">Pick-up</label>
-                                <div class="input-group mb-3">
+                            <div class="card-body px-2 f1f1f1">
+                                <label for="basic-url" class="text-black">Pick-up</label>
+                                <div class="input-group mb-3 input-group-seamless">
                                     <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon3"><i class="fa fa-circle-o"
                                                                                         aria-hidden="true"></i></span>
@@ -50,8 +52,8 @@
                                     <input type="hidden" name="lng" id="lng">
                                     <input type="hidden" name="location" id="location">
                                 </div>
-                                <label for="basic-url">Drop-off</label>
-                                <div class="input-group mb-3">
+                                <label for="basic-url" class="text-black">Drop-off</label>
+                                <div class="input-group mb-3 input-group-seamless">
                                     <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon3"><i class="fa fa-circle-o"
                                                                                         aria-hidden="true"></i></span>
@@ -85,12 +87,12 @@
                                             </div>
                                         </div>
                                 @endif
-                                <h4 class="my-0 mt-5">
-                                    Stopovers <i class="fa fa-question-circle" aria-hidden="true"></i>
+                                <h4 class="my-0 mt-5 Helvetica-Bold">
+                                    Stopovers <i class="fa fa-question-circle fef610_text" aria-hidden="true"></i>
                                 </h4>
-                                <label for="basic-url">Now add your stopover points - offering to pick up and drop off
+                                <label for="basic-url" class="text-black">Now add your stopover points - offering to pick up and drop off
                                     co-travellers along the way is a sure way to fill your car.</label>
-                                <div class="input-group mb-3" style="width:89%">
+                                <div class="input-group mb-3 input-group-seamless" style="width:89%">
                                     <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon3"><i class="fa fa-circle-o"
                                                                                         aria-hidden="true"></i></span>
@@ -103,7 +105,7 @@
                                     <input type="hidden" name="alocation" id="alocation">
                                 </div>
                                 <div class="form-inline w-100 display-none getinput1">
-                                    <div class="input-group mb-1 passDisplayBlockdiv" style="width:89%">
+                                    <div class="input-group mb-1 passDisplayBlockdiv input-group-seamless" style="width:89%">
                                         <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon3"><i class="fa fa-circle-o"
                                                                                         aria-hidden="true"></i></span>
@@ -121,7 +123,7 @@
                                                 class="fas fa-minus-circle"></i></button>
                                 </div>
                                 <div class="form-inline w-100 display-none getinput2">
-                                    <div class="input-group mb-1 passDisplayBlockdiv" style="width:89%">
+                                    <div class="input-group mb-1 passDisplayBlockdiv input-group-seamless" style="width:89%">
                                         <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fa fa-circle-o"
                                                                       aria-hidden="true"></i></span>
@@ -139,7 +141,7 @@
                                                 class="fas fa-minus-circle"></i></button>
                                 </div>
                                 <div class="form-inline w-100 display-none getinput3">
-                                    <div class="input-group mb-1 passDisplayBlockdiv" style="width:89%">
+                                    <div class="input-group mb-1 passDisplayBlockdiv input-group-seamless" style="width:89%">
                                         <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fa fa-circle-o"
                                                                       aria-hidden="true"></i></span>
@@ -157,7 +159,7 @@
                                                 class="fas fa-minus-circle"></i></button>
                                 </div>
                                 <div class="form-inline w-100 display-none getinput4">
-                                    <div class="input-group mb-1 passDisplayBlockdiv" style="width:89%">
+                                    <div class="input-group mb-1 passDisplayBlockdiv input-group-seamless" style="width:89%">
                                         <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fa fa-circle-o"
                                                                       aria-hidden="true"></i></span>
@@ -175,7 +177,7 @@
                                                 class="fas fa-minus-circle"></i></button>
                                 </div>
                                 <div class="form-inline w-100 display-none getinput5">
-                                    <div class="input-group mb-1 passDisplayBlockdiv" style="width:89%">
+                                    <div class="input-group mb-1 passDisplayBlockdiv input-group-seamless" style="width:89%">
                                         <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fa fa-circle-o"
                                                                       aria-hidden="true"></i></span>
@@ -193,7 +195,7 @@
                                                 class="fas fa-minus-circle"></i></button>
                                 </div>
                                 <div class="form-inline w-100 display-none getinput6">
-                                    <div class="input-group mb-1 passDisplayBlockdiv" style="width:89%">
+                                    <div class="input-group mb-1 passDisplayBlockdiv input-group-seamless" style="width:89%">
                                         <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fa fa-circle-o"
                                                                       aria-hidden="true"></i></span>
@@ -211,7 +213,7 @@
                                                 class="fas fa-minus-circle"></i></button>
                                 </div>
                                 <div class="form-inline w-100 display-none getinput7">
-                                    <div class="input-group mb-1 passDisplayBlockdiv" style="width:89%">
+                                    <div class="input-group mb-1 passDisplayBlockdiv input-group-seamless" style="width:89%">
                                         <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fa fa-circle-o"
                                                                       aria-hidden="true"></i></span>
@@ -229,7 +231,7 @@
                                                 class="fas fa-minus-circle"></i></button>
                                 </div>
                                 <div class="form-inline w-100 display-none getinput8">
-                                    <div class="input-group mb-1 passDisplayBlockdiv" style="width:89%">
+                                    <div class="input-group mb-1 passDisplayBlockdiv input-group-seamless" style="width:89%">
                                         <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fa fa-circle-o"
                                                                       aria-hidden="true"></i></span>
@@ -247,7 +249,7 @@
                                                 class="fas fa-minus-circle"></i></button>
                                 </div>
                                 <div class="form-inline w-100 display-none getinput9">
-                                    <div class="input-group mb-1 passDisplayBlockdiv" style="width:89%">
+                                    <div class="input-group mb-1 passDisplayBlockdiv input-group-seamless" style="width:89%">
                                         <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fa fa-circle-o"
                                                                       aria-hidden="true"></i></span>
@@ -267,21 +269,28 @@
                             </div>
                         </div>
                         <div class="card mt-5">
-                            <div class="card-header bg-paste text-white py-1">
+                            <div class="card-header py-1 bg-white text-black fs-15">
                                 Date and time
+                                <div class="custom-control custom-checkbox mb-0 float-right">
+                                    <input type="checkbox" class="custom-control-input" id="ckb1">
+                                    <label class="custom-control-label" for="ckb1">Round trip</label>
+                                </div>
                             </div>
-                            <div class="card-body bg-light">
-                                <label for="basic-url">Departure date:</label>
+                            <div class="card-body px-2 f1f1f1">
+                                <label for="basic-url">Departure date and time:</label>
                                 <div class="row" style="width: auto">
-                                    <div class="col-7 input-group mb-3">
-                                        <div class="input-group-prepend">
+                                    <div class="col-7">
+                                        <div class="input-group mb-3 input-group-seamless">
+                                            <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon3"><i class="fa fa-calendar-alt"
                                                                                         aria-hidden="true"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control datepicker" name="departure"
+                                                   id="basicurl"
+                                            >
                                         </div>
-                                        <input type="text" class="form-control datepicker" name="departure"
-                                               id="basicurl"
-                                        >
                                     </div>
+
                                     <div class="col-5 d-inline-flex">
                                         <select name="d_time" class="mx-2">
                                             @for($i=1;$i<=12;$i++)
@@ -295,16 +304,19 @@
                                     </div>
                                 </div>
                                 <div style="display: none" id="returndate">
-                                    <label for="basic-url">Return date:</label>
+                                    <label for="basic-url">Return date and time:</label>
                                     <div class="row">
-                                        <div class="col-7 input-group mb-3">
-                                            <div class="input-group-prepend">
+                                        <div class="col-7">
+                                            <div class="input-group mb-3 input-group-seamless">
+                                                <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon3"><i class="fa fa-calendar-alt"
                                                                                         aria-hidden="true"></i></span>
+                                                </div>
+                                                <input type="text" class="form-control datepicker" id="basicurl2"
+                                                       name="return">
                                             </div>
-                                            <input type="text" class="form-control datepicker" id="basicurl2"
-                                                   name="return">
                                         </div>
+
                                         <div class="col-5 d-inline-flex">
                                             <select name="r_time" class="mx-2">
                                                 @for($i=1;$i<=12;$i++)
@@ -318,9 +330,10 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group form-check">
-                                    <input type="checkbox" class="form-check-input" id="ckb1">
-                                    <label class="form-check-label" for="ckb1">Round trip</label>
+                                <div class="form-group row">
+                                    <div class="mx-auto mt-4">
+                                        <button type="submit" class="btn efeb42 fs-12 arrow">Continue</button>
+                                    </div>
                                 </div>
 
                             </div>
@@ -328,15 +341,12 @@
 
 
                         <div class="row mt-3 p-3">
-                            <div class="ml-auto">
-                                <button type="submit" class="btn btn-primary fs-12 circle arrow">Post my request<span
-                                            class="lnr lnr-arrow-right"></span></button>
-                            </div>
+
                         </div>
                     </form>
                 </div>
                 <div class="col-lg-6">
-                    <div class="card p-3 fbf7f7">
+                    <div class="card p-3 fbf7f7 shadow">
                         My ride summary
 
                         <div id="map" style="width: 100%; height: 500px;">
@@ -354,14 +364,16 @@
         @if(Session::get('userId') == null && Session::get('token') == null)
 
         $(document).ready(function () {
-            swal({
-                title: "You are not Login",
-                text: "If you click 'OK' you go login page.",
-                type: "warning",
-                showCancelButton: true
-            }, function () { // Redirect the user | linkURL is href url
-                window.location.href = "{{route('sp.login')}}";
-            });
+            {{--swal({--}}
+            {{--    title: "You are not Login",--}}
+            {{--    text: "If you click 'OK' you go login page.",--}}
+            {{--    type: "warning",--}}
+            {{--    showCancelButton: true--}}
+            {{--}, function () { // Redirect the user | linkURL is href url--}}
+            {{--    window.location.href = "{{route('sp.login')}}";--}}
+            {{--});--}}
+
+            window.location.href = "{{route('sp.login')}}";
         });
 
         @endif

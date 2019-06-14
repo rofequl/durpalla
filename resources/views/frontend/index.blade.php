@@ -2,129 +2,132 @@
 @section('content')
     <style>
         #img {
-            height: 70vh;
+            height: 65vh;
             width: 100%;
         }
     </style>
     <!--================ Start Home Banner Area =================-->
     <section class="overlay">
         <img src="{{$landingPage? asset('storage/landing_page/'.$landingPage) : "img/landing_page.jpg"}}" id="img">
+        <div class="card card-body AnyEvery ml-md-5">
+            <form method="post" action="{{route('all.ride.search')}}" autocomplete="off">
+                {{csrf_field()}}
+                <h4 class="Helvetica-Bold">Anywhere to Everywhere</h4>
+                <div class="row m-l-0">
+                    <div style="width: 10px">
+                        <div class="relative">
+                            <div class="absolute"></div>
+                            <div class="absolute2"></div>
+                            <div class="absolute3"></div>
+                        </div>
+                    </div>
+                    <div class="col" style="margin-left: -25px">
+                        <input type="text" name="address" id="start" class="AnyEveryInput mb-2" placeholder="Leaving From">
+                        <input type="hidden" name="lat" id="lat"
+                               value="@if(isset($userLat)) {{$userLat}} @endif">
+                        <input type="hidden" name="lng" id="lng"
+                               value="@if(isset($userLng)) {{$userLng}} @endif">
+                        <input type="hidden" name="location" id="location"
+                               value="@if(isset($userLoca)) {{$userLoca}} @endif">
+                        <input type="text" name="address" id="end" class="AnyEveryInput" placeholder="Going to">
+                        <input type="hidden" name="lat2" id="lat2"
+                               value="@if(isset($userLat2)) {{$userLat2}} @endif">
+                        <input type="hidden" name="lng2" id="lng2"
+                               value="@if(isset($userLng2)) {{$userLng2}} @endif">
+                        <input type="hidden" name="location2" id="location2"
+                               value="@if(isset($userLoca2)) {{$userLoca2}} @endif">
+                    </div>
+                </div>
+                <p class="mb-0">Date and time</p>
+                <div class="form-inline">
+                    <i class="fas fa-calendar-alt"></i>
+                    <div class="form-group">
+                        <input type="text" name="date" id="datePicker" readonly class="form-control-plaintext datepicker" style="outline: 0"
+                               placeholder="06/11/2019">
+                    </div>
+                    <button type="submit" class="btn btn-light btn-pill border"><i class="fas fa-search mr-2"></i> Search</button>
+                </div>
+            </form>
+        </div>
     </section>
     <!--================ End Home Banner Area =================-->
 
-    <!--================ Start Features Area =================-->
-    <section class="mb-5 row ml-0" id="StartFeaturesArea">
-        <div class="pageBanner col-12 col-lg-8 ml-lg-5 mt-0">
-            <div class="container-fluid">
-                <h3 class="text-white my-0 ml-md-5">
-                    {{__('file.index1')}}
-                </h3>
-                <form class="pr-md-5" method="post" action="{{route('all.ride.search')}}">
-                    {{csrf_field()}}
-                    <div class="form-row">
-                        <div class="col-6 col-md">
-                            <div class="input-group-icon mt-10">
-                                <div class="icon"><i class="fa fa-thumb-tack" aria-hidden="true"></i></div>
-                                <input type="text" id="start" name="address" placeholder="Leaving from..."
-                                       onfocus="this.placeholder = ''"
-                                       onblur="this.placeholder = 'Leaving from...'" required=""
-                                       class="single-input circle">
-                                <input type="hidden" name="lat" id="lat"
-                                       value="@if(isset($userLat)) {{$userLat}} @endif">
-                                <input type="hidden" name="lng" id="lng"
-                                       value="@if(isset($userLng)) {{$userLng}} @endif">
-                                <input type="hidden" name="location" id="location"
-                                       value="@if(isset($userLoca)) {{$userLoca}} @endif">
+    <!--================ Popular Rides Area =================-->
+    <section id="PopularRide">
+        <div class="container-fluid p-3">
+            <h3 class="text-center text-white my-3 Helvetica-Bold">Popular Rides</h3>
+            <div class="row justify-content-center">
+                @foreach ($popular as $populars)
+                    <?php $ride = getSingleStopover($populars->tracking); ?>
+                    @if(getRide($ride->post_id)->status == 1)
+                        @if(empty($tracking) || in_array($ride->tracking, $tracking))
+                            <?php
+                            $s_location = explode(",", PostRideAddress($ride->post_id, $ride->going, 'location'));
+                            $e_location = explode(",", PostRideAddress($ride->post_id, $ride->target, 'location'));
+                            ?>
+                            <div class="col-lg-3 col-md-6 col-sm-6 bg-white rounded mx-2">
+                                <i class="far fa-circle"></i>
                             </div>
-                        </div>
-                        <div class="col-6 col-md">
-                            <div class="input-group-icon mt-10">
-                                <div class="icon"><i class="fa fa-thumb-tack" aria-hidden="true"></i></div>
-                                <input type="text" id="end" name="address" placeholder="Going to..."
-                                       onfocus="this.placeholder = ''"
-                                       onblur="this.placeholder = 'Going to...'" required=""
-                                       class="single-input circle">
-                                <input type="hidden" name="lat2" id="lat2"
-                                       value="@if(isset($userLat2)) {{$userLat2}} @endif">
-                                <input type="hidden" name="lng2" id="lng2"
-                                       value="@if(isset($userLng2)) {{$userLng2}} @endif">
-                                <input type="hidden" name="location2" id="location2"
-                                       value="@if(isset($userLoca2)) {{$userLoca2}} @endif">
-                            </div>
-                        </div>
-                        <div class="col-6 col-md">
-                            <div class="input-group-icon mt-10">
-                                <div class="icon"><i class="far fa-clock"></i></div>
-                                <input type="text" name="date" placeholder="Travel date"
-                                       onfocus="this.placeholder = ''"
-                                       onblur="this.placeholder = 'Travel date'" required=""
-                                       class="single-input circle datepicker">
-                            </div>
-                        </div>
-                        <div class="col-6 col-md">
-                            <button type="submit" class="genric-btn info circle mt-2">Find a ride</button>
-                        </div>
-                    </div>
-                </form>
+                        @endif
+                    @endif
+                @endforeach
             </div>
-
+            <div class="row justify-content-center">
+                <div class="col-lg-3 col-md-6 col-sm-6 offset-lg-7">
+                    <p class="mt-3"><a href="{{route('popular.ride')}}" class="text-white fs-12">Click to see all Popular
+                            rides</a>
+                    </p>
+                </div>
+            </div>
         </div>
     </section>
     <!--================ End Features Area =================-->
 
-    <!--================ Start Features Area =================-->
-    <section class="mt-5" id="">
-        <div class="container border">
-            <div class="row counter_wrapper text-center">
-                <!-- single feature -->
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="single_feature">
-                        <div class="info-content">
-                            <i class="fas fa-3x text-black fa-car-side"></i>
-                            <h5>{{__('file.index2')}}</h5>
-                            <p>Qualified Drivers</p>
 
+    <!--================ Long distance ride section Start ================-->
+    <section class="about-area mt-0 pb-5" id="longDistance">
+        <div class="container pt-5">
+            <div class="about-inner">
+                <div class="row justify-content-center">
+                    <div class="col-md-8 row">
+                        <div class="col-lg-3 col-md-3 mb-3">
+                            <div class="BackDiv">
+                                <img src="{{asset('PNG/LONG DISTANCE RIDE SHARING/Layer 7.png')}}">
+                            </div>
+                            <h4 class="text-center mb-0">Sign up for free</h4>
+                            <p class="text-center">Qualified Drivers</p>
                         </div>
-                    </div>
-                </div>
-                <!-- single feature -->
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="single_feature">
-                        <div class="info-content">
-                            <i class="fas fa-3x text-black fa-user-circle"></i>
-                            <h5>{{__('file.index3')}}</h5>
-                            <p>Service Provider</p>
+                        <div class="col-lg-3 col-md-3 mb-3">
+                            <div class="BackDiv">
+                                <img src="{{asset('PNG/LONG DISTANCE RIDE SHARING/Layer 5.png')}}">
+                            </div>
+                            <h4 class="text-center mb-0">Daily commute</h4>
+                            <p class="text-center">Service Provider</p>
                         </div>
-                    </div>
-                </div>
-                <!-- single feature -->
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="single_feature">
-                        <div class="info-content">
-                            <i class="fas fa-3x text-black fa-map-marked-alt"></i>
-                            <h5>{{__('file.index4')}}</h5>
-                            <p>Trusted Clients</p>
+                        <div class="col-lg-3 col-md-3 mb-3">
+                            <div class="BackDiv">
+                                <img src="{{asset('PNG/LONG DISTANCE RIDE SHARING/Layer 8.png')}}">
+                            </div>
+                            <h4 class="text-center mb-0">Long distance</h4>
+                            <p class="text-center"></p>
                         </div>
-                    </div>
-                </div>
-                <!-- single feature -->
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="single_feature">
-                        <div class="info-content">
-                            <i class="fas fa-3x text-black fa-money-bill"></i>
-                            <h5>{{__('file.index5')}}</h5>
-                            <p>Achievements</p>
+                        <div class="col-lg-3 col-md-3 mb-3">
+                            <div class="BackDiv">
+                                <img src="{{asset('PNG/LONG DISTANCE RIDE SHARING/Layer 6.png')}}">
+                            </div>
+                            <h4 class="text-center mb-0">Online payment</h4>
+                            <p class="text-center"></p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!--================ End Features Area =================-->
+    <!--================ Long distance ride section Start ================-->
 
 
     <!--================ Start Video Area =================-->
-    <section class="video-sec-area section_gap_top mb-5" id="about">
+    <section class="video-sec-area section_gap_top mb-5 pt-0" id="about">
         <div class="container">
             <div class="row justify-content-center">
 
@@ -189,11 +192,30 @@
             </div>
         </div>
     </section>
-
     <!--================ End video Area =================-->
 
 
+    <!--================ Join the family section Start ================-->
+    <section class="about-area mt-0 pb-5" id="JoinFamily">
+        <div class="container pt-5">
+            <h2 class="text-center text-capitalize text-bold mb-4 Helvetica-Bold">Join the family!</h2>
+            <p class="text-center mx-md-5 text-black fs-16">Contribute to a worldwide network of long distance ride
+                sharing.We're Climbers, environment lists,
+                surfers, poets, adventures backpackers and wanderlast driven individual working toward a world where
+                travel anywhere is possible, sustainable and friendly.</p>
+            <div class="about-inner">
+                <div class="row justify-content-center m-0 JoinFamilyDiv">
+                    <div class="col-lg-6 col-md-6 mb-3">
 
+                    </div>
+                    <div class="col-lg-6 col-md-6 JoinFamilyDiv2 mb-0">
+                        <p>Current Network Map - 176 trips available - click on them or scroll down for more</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--================ Join the family section Start ================-->
 
     <!--================ Start CTA Area =================-->
     <div class="cta-area section_gap overlay my-5">
@@ -209,136 +231,6 @@
     </div>
     <!--================ End CTA Area =================-->
 
-
-    <!--================ Real people section Start ================-->
-    <section class="about-area mt-0 pb-5" id="realPeople">
-        <div class="container pt-5">
-            <h2 class="text-center text-capitalize">{{__('file.index7')}}</h2>
-            <div class="about-inner">
-                <div class="row">
-                    <div class="col-lg-6 col-md-6">
-                        <div class="single-success py-3">
-                            <div class="row text-center">
-                                <div class="col-4">
-                                    <aside class="single_sidebar_widget author_widget">
-                                        <img class="author_img img-fluid rounded-circle" src="img/people1.jpg"
-                                             alt=""><br>
-                                    </aside>
-                                </div>
-                                <div class="col-8">
-                                    <div class="blog_info">
-
-                                        <ul class="blog_meta list text-left">
-                                            <li><p class="text-justify">
-                                                    Using TaskRabbit to have a new bookcase built
-                                                    was a great choice! Rick did wonderful work with a job that was much
-                                                    bigger than we anticipated.
-                                                </p></li>
-                                            <li class="text-right">
-                                                <p class="font-weight-bold fs-16">Biplab Banik</p>
-                                                <p>Dhanmondi Dhaka</p>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                    <!-- single success -->
-                    <div class="col-lg-6 col-md-6">
-                        <div class="single-success py-3">
-                            <div class="row text-center">
-                                <div class="col-4">
-                                    <aside class="single_sidebar_widget author_widget">
-                                        <img class="author_img img-fluid rounded-circle" src="img/people2.jpg"
-                                             alt=""><br>
-                                    </aside>
-                                </div>
-                                <div class="col-8">
-                                    <div class="blog_info">
-
-                                        <ul class="blog_meta list text-left">
-                                            <li><p class="text-justify">
-                                                    I finally have expertly installed shelves and additional storage in
-                                                    my tiny apartment, all thanks to my Tasker.
-                                                </p></li>
-                                            <li class="text-right">
-                                                <p class="font-weight-bold fs-16">Lein Chang</p>
-                                                <p>Gulshan 2.. Dhaka</p>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                    <!-- single success -->
-                    <div class="col-lg-6 col-md-6">
-                        <div class="single-success py-3">
-                            <div class="row text-center">
-                                <div class="col-4">
-                                    <aside class="single_sidebar_widget author_widget">
-                                        <img class="author_img img-fluid rounded-circle" src="img/people3.jpg"
-                                             alt=""><br>
-                                    </aside>
-                                </div>
-                                <div class="col-8">
-                                    <div class="blog_info">
-
-                                        <ul class="blog_meta list text-left">
-                                            <li><p class="text-justify">
-                                                    I'd been agonizing over how to get my new flat screen mounted to my
-                                                    wall. In comes Nick on the same day. He arrived with all the tools
-                                                    for the job and was just a super nice guy.
-                                                </p></li>
-                                            <li class="text-right">
-                                                <p class="font-weight-bold fs-16">Rea Joe</p>
-                                                <p>Gulshan 2.. Dhaka</p>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                    <!-- single success -->
-                    <div class="col-lg-6 col-md-6">
-                        <div class="single-success py-3">
-                            <div class="row text-center">
-                                <div class="col-4">
-                                    <aside class="single_sidebar_widget author_widget">
-                                        <img class="author_img img-fluid rounded-circle" src="img/people4.jpg"
-                                             alt=""><br>
-                                    </aside>
-                                </div>
-                                <div class="col-8">
-                                    <div class="blog_info">
-
-                                        <ul class="blog_meta list text-left">
-                                            <li><p class="text-justify">
-                                                    TaskRabbit makes moving into your new apartment a 1 hr job instead
-                                                    of 1 day job! Moving my belongings from Manhattan to Queens was
-                                                    seamless.
-                                                </p></li>
-                                            <li class="text-right">
-                                                <p class="font-weight-bold fs-16">Riardo Pillar</p>
-                                                <p>Uttara 2.. Dhaka</p>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!--================ Real people section Start ================-->
 
     <div id="map">
 

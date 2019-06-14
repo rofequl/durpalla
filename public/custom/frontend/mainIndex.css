@@ -21,6 +21,28 @@
     src: url('../../fonts/poppins/Poppins-SemiBold.ttf');
 }
 
+@font-face {
+    font-family: Helvetica;
+    src: url('../../fonts/Helvetica.ttf');
+}
+
+@font-face {
+    font-family: Helvetica-Bold;
+    src: url('../../fonts/Helvetica-Bold.ttf');
+}
+
+body {
+    font-family: "Helvetica", sans-serif;
+}
+
+.Helvetica {
+    font-family: "Helvetica", sans-serif;
+}
+
+.Helvetica-Bold {
+    font-family: "Helvetica-Bold", sans-serif;
+}
+
 .bg-light {
     background-color: #f0f0f0 !important;
 }
@@ -29,11 +51,29 @@
     background-color: #31c6ee !important;
 }
 
-.fbf7f7{
-    background-color: #fcfcfc;
+.f1f1f1 {
+    background-color: #f1f1f1 !important;
 }
 
-.b3c9cb{
+.a176d9d {
+    color: #176d9d !important;
+}
+
+.efeb42 {
+    background-color: #efeb42;
+    color: black;
+}
+
+.fff611 {
+    background-color: #fff611;
+    color: black;
+}
+
+.fef610_text {
+    color: #fef610;
+}
+
+.b3c9cb {
     background-color: #e09cb5;
 }
 
@@ -125,6 +165,154 @@
     color: #999999;
 }
 
+#longDistance .BackDiv {
+    background-image: url(../../PNG/LONG%20DISTANCE%20RIDE%20SHARING/Ellipse%201%20copy%202.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100px;
+    background-size: contain;
+    height: 100px;
+    position: relative;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#longDistance .BackDiv img {
+    position: absolute;
+    margin: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 70px;
+    height: 70px;
+}
+
+#JoinFamily .JoinFamilyDiv {
+    background-image: url(../../PNG/JOIN%20THE%20FAMILY/Layer%2010.png);
+    background-position: center;
+    width: 100%;
+    background-size: contain;
+    height: 220px;
+}
+
+#JoinFamily .JoinFamilyDiv2 {
+    background-color: #f9f93ae3;
+}
+
+#JoinFamily .JoinFamilyDiv2 p {
+    color: black;
+    width: 223px;
+    text-align: left;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 68px;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.btn22 {
+    display: inline-block;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    border: 0;
+    outline: 0;
+    padding: 0;
+    transition: all 200ms ease-in;
+    cursor: pointer;
+}
+
+.btn--primary {
+    background: #ebcf7b;
+    color: #000;
+    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.1);
+    border-radius: 34px;
+    padding: 2px 14px;
+}
+
+.btn--primary:hover {
+    background: #dab959;
+}
+
+.btn--primary:active {
+    background: #dab959;
+    box-shadow: inset 0 0 10px 2px rgba(0, 0, 0, 0.2);
+}
+
+.btn--inside {
+    margin-left: -74px;
+}
+
+.form__field {
+    width: 90%;
+    background: #fff;
+    color: #a3a3a3;
+    font: inherit;
+    box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.1);
+    border: 0;
+    outline: 0;
+    padding: 10px 10px;
+    border-radius: 33px;
+}
+
+#PopularRide {
+    background-color: #585858;
+}
+
+.overlay .AnyEvery {
+    position: absolute !important;
+    bottom: 22%;
+    box-shadow: 3px 1px 12px 4px rgba(0, 0, 0, 0.48);
+}
+
+
+.overlay .AnyEvery div.relative {
+    position: relative;
+    width: 28px;
+    height: 70px;
+    border: 0;
+    z-index: 1;
+}
+
+.overlay .AnyEvery div.absolute {
+    position: absolute;
+    top: 9px;
+    left: 9px;
+    padding: 6px;
+    border-radius: 10px;
+    border: 2px solid #5494a3;
+}
+
+.overlay .AnyEvery div.absolute2 {
+    position: absolute;
+    top: 23px;
+    left: 16px;
+    height: 30px;
+    border: 1px solid #666565;
+}
+
+.overlay .AnyEvery div.absolute3 {
+    position: absolute;
+    top: 51px;
+    left: 9px;
+    padding: 6px;
+    border-radius: 10px;
+    border: 2px solid #db6150;
+}
+
+.overlay .AnyEvery .AnyEveryInput {
+    width: 100%;
+    background: #e9e7e8;
+    color: #595252;
+    font: inherit;
+    border: 1px solid #d9d3d6;
+    outline: 0;
+    padding: 4px 10px 4px 32px;
+    border-radius: 12px;
+}
+
 /*//////////////////////////////////////////////////////////////////
 [ login ]*/
 
@@ -197,7 +385,7 @@
     height: 100%;
     top: 0;
     left: 0;
-    background-color: rgba(54,84,99,0.7);
+    background-color: rgba(54, 84, 99, 0.7);
 }
 
 
@@ -489,7 +677,7 @@ input.input100 {
 
 .publication-container h1 {
     color: #054752;
-    font-family: gt-eesti,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: gt-eesti, "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 26px;
     margin-bottom: 20px;
     margin-top: 20px;
@@ -513,6 +701,7 @@ input.input100 {
     padding: 0;
     text-align: center;
 }
+
 .publication-breadcrumb li span, .publication-breadcrumb li a {
     display: block;
     width: 250px;
@@ -534,7 +723,7 @@ input.input100 {
 .mainmenu:hover .submenu {
     display: block;
     max-height: 200px;
-margin-top: 5px;
+    margin-top: 5px;
 }
 
 .submenu {
@@ -545,27 +734,28 @@ margin-top: 5px;
     border-radius: 4px;
 }
 
-.submenu li{
-    border-bottom: 0!important;
+.submenu li {
+    border-bottom: 0 !important;
     cursor: pointer;
     padding: 2px 8px;
 }
-.submenu li:hover{
+
+.submenu li:hover {
     background-color: #e4e4e4;
 }
 
 
 .user-submenu li:hover,
-.user-submenu li:hover .user-link{
+.user-submenu li:hover .user-link {
     background-color: #d0deee;
     color: #4b626e;
 }
 
-.user-submenu li{
+.user-submenu li {
     border: 1px solid #d7e5f5;
 }
 
-.user-submenu li .user-link{
+.user-submenu li .user-link {
     color: #607d8b;
     display: block;
     font-size: 13px;
@@ -573,7 +763,7 @@ margin-top: 5px;
     padding: 5px 0;
 }
 
-.user-submenu li .user-link i{
+.user-submenu li .user-link i {
     margin-right: 10px;
 }
 
@@ -600,19 +790,78 @@ margin-top: 5px;
     color: white;
 }
 
-.notification-menu{
+.notification-menu {
     margin-top: 25px;
     width: 320px;
     max-height: 500px;
 }
 
+
+/*=======================================
+        Login page css
+=========================================*/
+.form-signin {
+    width: 100%;
+    max-width: 330px;
+    padding: 15px;
+    margin: auto;
+}
+
+.nice-select .list {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.form-signin .forget-password {
+    font-weight: 400;
+    color: black;
+    cursor: pointer;
+}
+
+.form-signin .form-control {
+    position: relative;
+    box-sizing: border-box;
+    height: auto;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.form-signin .form-control:focus {
+    z-index: 2;
+}
+
+.form-signin input[type="text"] {
+    margin-bottom: -2px;
+    color: black;
+    border: 1px solid black;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="number"] {
+    margin-bottom: -2px;
+    color: black;
+    border: 1px solid black;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+    margin-bottom: 10px;
+    color: black;
+    border: 1px solid black;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+
 /*=======================================
         responsive css
 =========================================*/
 
-@media (max-width: 991px){
+@media (max-width: 991px) {
     .pro-droupdown {
-        margin-left: 0!important;
+        margin-left: 0 !important;
     }
 }
 

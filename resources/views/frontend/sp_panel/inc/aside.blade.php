@@ -25,9 +25,9 @@
                         <li><i class="fa fa-trash-alt"></i><a href="{{route('resource.remove.index')}}">Remove Trash</a></li>
                     </ul>
                 </li>
-                {{--<li class="">--}}
-                    {{--<a href="{{route('sp.reference')}}"> <i class="menu-icon fas fa-hands-helping"></i>Reference</a>--}}
-                {{--</li>--}}
+                <li class="">
+                    <a href="{{route('sp.reference')}}"> <i class="menu-icon fas fa-hands-helping"></i>Reference</a>
+                </li>
                 <li class="menu-item-has-children dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fas fa-car"></i>Car</a>
                     <ul class="sub-menu children dropdown-menu">

@@ -25,6 +25,10 @@ Route::post('/login', 'homeController@UserLogin')->name('sp.login');
 Route::post('/UserRegister', 'homeController@UserRegister');
 Route::get('/logout', 'homeController@LogoutUser')->name('sp.logout');
 
+Route::get('/forgot-password', 'homeController@ForgotPassword')->name('forgot.password');
+Route::post('/forgot-password', 'homeController@ForgotPasswordPost')->name('forgot.password');
+Route::post('/forgot-password-change', 'homeController@ForgotPasswordChange')->name('forgot.password.change');
+
 Route::group(['middleware' => 'CheckUserLogin','namespace' => 'frontend'], function () {
 
     Route::get('/sp-panel', 'SpController@index')->name('sp.home');
@@ -73,6 +77,9 @@ Route::group(['middleware' => 'CheckUserLogin','namespace' => 'frontend'], funct
     Route::get('/sp-transition', 'TransitionController@Transition')->name('sp.transition');
 
     Route::get('/sp-driver-rating', 'BookingController@DriverRating')->name('sp.driver.rating');
+
+    Route::get('/sp-reference', 'SpController@Reference')->name('sp.reference');
+    Route::post('/sp-reference-add', 'SpController@ReferenceAdd')->name('sp.reference.add');
 
 
 });

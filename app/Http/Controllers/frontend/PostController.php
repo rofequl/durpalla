@@ -70,6 +70,10 @@ class PostController extends Controller
                 Session::flash('message', 'Submit this form verifications NID, Passport and Driving licence.');
                 return redirect('post-ride');
             }
+            if ($validation->phone == null) {
+                Session::flash('message', 'Submit this form verifications Phone Number.');
+                return redirect('post-ride');
+            }
         }else{
             Session::flash('message', 'Submit this form verifications NID, Passport and Driving licence.');
             return redirect('post-ride');

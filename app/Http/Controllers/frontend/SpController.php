@@ -4,6 +4,7 @@ namespace App\Http\Controllers\frontend;
 
 use App\car;
 use App\car_brand;
+use App\reference;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Session;
@@ -92,5 +93,31 @@ class SpController extends Controller
             Session::flash('message', 'Car RestoreCar');
             return redirect('/sp-car');
         }
+    }
+
+    public function Reference()
+    {
+        $refer = reference::where('user_id',Session('userId'))->get();
+      return view('frontend.sp_panel.reference',compact('refer'));
+    }
+
+    public function ReferenceAdd(Request $request)
+    {
+        $request->validate([
+            'number' => 'required|max:15',
+            'address' => 'required|max:191',
+            'profession' => 'required|max:191',
+            'name' => 'required|max:191',
+        ]);
+        $insert = new reference;
+        $insert->name = $request->name;
+        $insert->profession = $request->profession;
+        $insert->address = $request->address;
+        $insert->phone = $request->number;
+        $insert->user_id = Session('userId');
+        $insert->save();
+
+        Session::flash('message', 'Reference add successfully');
+        return redirect('sp-reference');
     }
 }

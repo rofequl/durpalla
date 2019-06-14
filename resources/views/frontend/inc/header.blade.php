@@ -9,7 +9,8 @@
         <nav class="navbar navbar-expand-lg navbar-light">
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
-                <a class="navbar-brand logo_h" href="{{route('home')}}"><img src="{{asset('img/logo.png')}}" alt=""></a>
+                <a class="navbar-brand logo_h" href="{{route('home')}}"><img src="{{asset('img/logo.png')}}"
+                                                                             alt="durpalla logo" width="117px"></a>
                 <button class="navbar-toggler mr-2" type="button" data-toggle="collapse"
                         data-target="#navbarSupportedContent"
                         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -19,22 +20,27 @@
                 </button>
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
-                    <ul class="nav navbar-nav menu_nav ml-auto">
-                        <li class="nav-item mr-lg-3 mr-xl-4 my-1 ml-1 my-lg-0"><a href="{{route('find.ride')}}">
-                                <button class="cupid-blue">{{__('file.header1')}}</button>
+                    <ul class="nav navbar-nav menu_nav ml-auto Helvetica">
+                        <li class="nav-item mr-lg-3 mr-xl-4 my-1 ml-1 my-lg-0"><a href="{{route('find.ride')}}"
+                                                                                  style="color: #163659;">
+                                {{__('file.header1')}}
                             </a></li>
-                        <li class="nav-item mr-lg-3 mr-xl-4 my-1 ml-1 my-lg-0"><a href="{{route('post.ride')}}">
-                                <button class="cupid-blue">{{__('file.header2')}}</button>
+                        <li class="nav-item mr-lg-3 mr-xl-4 my-1 ml-1 my-lg-0"><a href="{{route('post.ride')}}"
+                                                                                  style="color: #163659;">
+                                {{__('file.header2')}}
                             </a></li>
-                        <li class="nav-item mr-lg-3 mr-xl-4 my-1 ml-1 my-lg-0"><a href="{{route('request.ride')}}">
-                                <button class="cupid-blue">{{__('file.header3')}}</button>
+                        <li class="nav-item mr-lg-3 mr-xl-4 my-1 ml-1 my-lg-0"><a href="{{route('request.ride')}}"
+                                                                                  style="color: #163659;">
+                                {{__('file.header3')}}
                             </a></li>
-                        <li class="nav-item mr-lg-3 mr-xl-4 my-1 ml-1 my-lg-0"><a href="{{route('all.ride')}}">
-                                <button class="cupid-blue">{{__('file.header4')}}</button>
+                        <li class="nav-item mr-lg-3 mr-xl-4 my-1 ml-1 my-lg-0"><a href="{{route('all.ride')}}"
+                                                                                  style="color: #163659;">
+                                {{__('file.header4')}}
                             </a></li>
-                        <li class="nav-item mr-lg-3 mr-xl-4 my-1 ml-1 my-lg-0"><a href="{{route('popular.ride')}}">
-                                <button class="cupid-blue">Popular Ride</button>
-                            </a></li>
+                        {{--                        <li class="nav-item mr-lg-3 mr-xl-4 my-1 ml-1 my-lg-0"><a href="{{route('popular.ride')}}"--}}
+                        {{--                                                                                  style="color: #163659;">--}}
+                        {{--                                Popular Ride--}}
+                        {{--                            </a></li>--}}
                     </ul>
                     <ul class="nav navbar-nav ml-auto">
                         <div class="social-icons d-flex align-items-center">
@@ -42,9 +48,10 @@
                                 <li>
 
                                     @if (App::getLocale() == 'en')
-                                        <a href="{{route('language','lng=bn')}}">বাংলা</a>
+                                        <a href="{{route('language','lng=bn')}}"
+                                           style="color: #163659!important;">বাংলা</a>
                                     @else
-                                        <a href="{{route('language','lng=en')}}">English</a>
+                                        <a href="{{route('language','lng=en')}}" style="color: #163659!important;">English</a>
                                     @endif
                                 </li>
                             </a>
@@ -97,12 +104,15 @@
 
 
                             @else
-                                <a href="{{route('sp.registration')}}">
+                                <a href="{{route('sp.registration')}}" class="genric-btn info-border radius"
+                                   style="line-height: 2;padding: 0 15px;color: #163659!important;">
                                     <li>{{__('file.header5')}}</li>
                                 </a>
-                                <a href="{{route('sp.login')}}">
+                                <a href="{{route('sp.login')}}" class="genric-btn info-border radius"
+                                   style="line-height: 2;padding: 0 15px;margin-left: 14px;color: #163659!important;">
                                     <li>{{__('file.header6')}}</li>
                                 </a>
+
                             @endif
                         </div>
                         @if (Session::has('userId'))
@@ -140,27 +150,32 @@
     @php
         $rating = ratinguser();
     @endphp
-<div class="modal fade in" id="myModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Rating this ride</h5>
-            </div>
-            <div class="modal-body text-center">
-                <a href="{{route('sp.driver.rating','rating='.base64_encode($rating->tracking.'_1'))}}" title="1 Star"><span class="fa fa-star"></span></a>
-                <a href="{{route('sp.driver.rating','rating='.base64_encode($rating->tracking.'_2'))}}" title="2 Star"><span class="fa fa-star"></span></a>
-                <a href="{{route('sp.driver.rating','rating='.base64_encode($rating->tracking.'_3'))}}" title="3 Star"><span class="fa fa-star"></span></a>
-                <a href="{{route('sp.driver.rating','rating='.base64_encode($rating->tracking.'_4'))}}" title="4 Star"><span class="fa fa-star"></span></a>
-                <a href="{{route('sp.driver.rating','rating='.base64_encode($rating->tracking.'_5'))}}" title="5 Star"><span class="fa fa-star"></span></a>
+    <div class="modal fade in" id="myModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Rating this ride</h5>
+                </div>
+                <div class="modal-body text-center">
+                    <a href="{{route('sp.driver.rating','rating='.base64_encode($rating->tracking.'_1'))}}"
+                       title="1 Star"><span class="fa fa-star"></span></a>
+                    <a href="{{route('sp.driver.rating','rating='.base64_encode($rating->tracking.'_2'))}}"
+                       title="2 Star"><span class="fa fa-star"></span></a>
+                    <a href="{{route('sp.driver.rating','rating='.base64_encode($rating->tracking.'_3'))}}"
+                       title="3 Star"><span class="fa fa-star"></span></a>
+                    <a href="{{route('sp.driver.rating','rating='.base64_encode($rating->tracking.'_4'))}}"
+                       title="4 Star"><span class="fa fa-star"></span></a>
+                    <a href="{{route('sp.driver.rating','rating='.base64_encode($rating->tracking.'_5'))}}"
+                       title="5 Star"><span class="fa fa-star"></span></a>
+                </div>
             </div>
         </div>
     </div>
-</div>
 @endif
 
 <script>
 
-    $(window).on('load',function(){
+    $(window).on('load', function () {
         $('#myModal').modal('show');
     });
 

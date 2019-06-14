@@ -375,3 +375,27 @@ function ratinguser(){
     }
     return false;
 }
+
+function rating($user){
+    $rating = user_rating::where('user_id',$user)->get();
+    $result = 0;
+    $user = 0;
+    if (!empty($rating)){
+        foreach ($rating as $ratings){
+            $rate = json_decode($ratings->rating,true);
+            foreach($rate as $x => $x_value) {
+                $result += $x_value;
+                $user++;
+            }
+        }
+		if($result==0){
+			return 0;
+		}else{
+			return round($result/$user);
+		}
+		
+        
+    }else{
+        return 0;
+    }
+}

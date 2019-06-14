@@ -5,24 +5,23 @@
     <hr class="mt-0">
     <section class="mb-5 overlay">
         <div class="container">
-            <a href="{{route('request.ride.next')}}" type="button"
-               class="btn bg-paste text-white font-weight-bold w-25 mx-auto">See your all request ride
-            </a>
-            <div class="row justify-content-center mt-3">
-                <div class="col-12 col-lg-6 px-0 mt-5 mt-lg-0 border p-3 radius fbf7f7">
-                    <div class="row mt-3">
-                        <div class="text-center mx-auto">
-                            <h2>Post a Request. <span class="text-primary">Get Alerts.</span></h2>
-                            <p>We'll notify you via email of every long distance rideshare that passes by you and your
-                                destination. Post your information for drivers to see.<span
-                                        class="font-weight-bold">Try it out!</span></p>
-                        </div>
+            <div class="row mt-3">
+                <div class="text-center w-100">
+                    <h3 class="text-black Helvetica">Post a Request. <span class="a176d9d">Get Alerts.</span></h3>
+                    <div class="w-100 fff611 p-2 my-2">
+                        <p class="mb-0">Post your request and get notify via sms and email of your destination. Post
+                            your information for Riders to see. Try it out!</p>
                     </div>
-                    <div class="card rounded mb-3 bg-light">
-                        <div class="card-header bg-paste text-white py-1">
-                            Where are you headed to?
+
+                </div>
+            </div>
+            <div class="row justify-content-center mt-3">
+                <div class="col-12 col-lg-6 mt-5 mt-lg-0">
+                    <div class="card rounded mb-3">
+                        <div class="card-header bg-white text-black fs-15 py-1">
+                            Post a Request. Get Alerts
                         </div>
-                        <div class="card-body px-2">
+                        <div class="card-body px-2 f1f1f1">
                             @if ($errors->any())
                                 @foreach ($errors->all() as $error)
                                     <div class="alert alert-danger alert-dismissible">
@@ -37,11 +36,12 @@
                                     {{ session()->get('message') }}
                                 </div>
                             @endif
-                            <form method="post" id="upload_form" action="{{route('request.ride.post')}}" autocomplete="off">
+                            <form method="post" id="upload_form" action="{{route('request.ride.post')}}"
+                                  autocomplete="off">
                                 {{csrf_field()}}
-                                <div class="input-group mb-3 px-0">
+                                <div class="input-group mb-3 px-0 input-group-seamless">
                                     <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon1"><i class="fa fa-map-marker"
+                                    <span class="input-group-text" id="basic-addon1"><i class="fa fa-circle-o"
                                                                                         aria-hidden="true"></i></span>
                                     </div>
                                     <input id="start" type="text" class="form-control"
@@ -51,9 +51,9 @@
                                     <input type="hidden" name="location" id="location">
 
                                 </div>
-                                <div class="input-group mb-3 px-0">
+                                <div class="input-group mb-3 px-0 input-group-seamless">
                                     <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon1"><i class="fa fa-map-marker"
+                                    <span class="input-group-text" id="basic-addon1"><i class="fa fa-circle-o"
                                                                                         aria-hidden="true"></i></span>
                                     </div>
                                     <input type="text" id="end" class="form-control"
@@ -64,7 +64,7 @@
                                 </div>
 
                                 <div class="row mx-1">
-                                    <div class="input-group input-group-sm mb-3 col-4 px-0 pr-1">
+                                    <div class="input-group input-group-sm mb-3 col-4 px-0 pr-1 input-group-seamless">
                                         <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1"><i class="fa fa-calendar"
                                                                                             aria-hidden="true"></i></span>
@@ -72,7 +72,7 @@
                                         <input type="text" id="after" name="after" class="form-control datepicker"
                                                placeholder="On or After">
                                     </div>
-                                    <div class="input-group input-group-sm mb-3 col-4 px-0 pr-1">
+                                    <div class="input-group input-group-sm mb-3 col-4 px-0 pr-1 input-group-seamless">
                                         <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1"><i class="fa fa-calendar"
                                                                                             aria-hidden="true"></i></span>
@@ -96,8 +96,9 @@
                                                         class="fas fa-minus"></i></span>
                                         </div>
                                     </div>
-                                    <div class="w-100">
-                                        <button type="submit" class="btn btn-primary float-right">Published My Ride</button>
+                                    <div class="mx-auto">
+                                        <button type="submit" class="btn btn-link bg-transparent" data-toggle="tooltip" data-placement="top" title="Published your ride"><img src="{{asset('PNG/Ellipse4.jpg')}}" class="rounded-circle" width="80px">
+                                        </button>
                                     </div>
                                 </div>
                             </form>
@@ -108,6 +109,7 @@
                 </div>
                 <div class="col-12 col-lg-6">
                     <div class="card p-3 fbf7f7">
+                        My ride summary
                         <div id="map" style="width: 100%; height: 500px;">
 
                         </div>
@@ -116,7 +118,6 @@
             </div>
         </div>
     </section>
-
 
     <script>
 
@@ -271,10 +272,10 @@
                         text: "Departure, Destination and Date must be fill-up.",
                         type: "warning",
                     });
-                }else{
-                    if($('#start').val().split(",").length <= 2)
+                } else {
+                    if ($('#start').val().split(",").length <= 2)
                         swal('Error', 'Departure address must be specific address', 'warning'), $('#start').val('');
-                    else if($('#end').val().split(",").length <= 2)
+                    else if ($('#end').val().split(",").length <= 2)
                         swal('Error', 'Destination address must be specific address', 'warning'), $('#end').val('');
                     else
                         return;
@@ -284,8 +285,8 @@
 
         });
 
-        $(function(){
-            $(".plus").click(function(e) {
+        $(function () {
+            $(".plus").click(function (e) {
                 e.preventDefault();
                 var $this = $(this);
                 var $input = $(".seat");
@@ -293,15 +294,14 @@
 
                 if (value < 12) {
                     value = value + 1;
-                }
-                else {
-                    value =1;
+                } else {
+                    value = 1;
                 }
 
                 $input.val(value);
             });
 
-            $(".minus").click(function(e) {
+            $(".minus").click(function (e) {
                 e.preventDefault();
                 var $this = $(this);
                 var $input = $(".seat");
@@ -309,9 +309,8 @@
 
                 if (value > 1) {
                     value = value - 1;
-                }
-                else {
-                    value =1;
+                } else {
+                    value = 1;
                 }
 
                 $input.val(value);
